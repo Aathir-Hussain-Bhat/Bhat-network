@@ -11,17 +11,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-web-app-title" content="BHAT NETWORK">
 
+<link rel="icon" type="image/png" href="https://res.cloudinary.com/prjgzqvy/image/upload/v1791482355/file_000000004eb861f79937c93d00e0ffe8_zyxoxf.png">
+<link rel="apple-touch-icon" href="https://res.cloudinary.com/prjgzqvy/image/upload/v1791482355/file_000000004eb861f79937c93d00e0ffe8_zyxoxf.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<!-- Supabase v2 (UMD build exposes window.supabase) -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
-/* ==========================================================
-   BHAT NETWORK — tokens
-   ========================================================== */
 :root{
   --navy:#092C35; --navy-2:#0C333E; --teal:#124852; --teal-soft:rgba(18,72,82,.08);
   --saffron:#E89A2B; --saffron-deep:#B0701A;
@@ -45,7 +42,6 @@ h1,h2,h3{line-height:1.22}
 .stack{display:flex;flex-direction:column;gap:14px}
 svg.ic{width:20px;height:20px;flex:none}
 
-/* Buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;padding:0 24px;border-radius:999px;border:1.5px solid transparent;font:700 15.5px var(--f-body);text-decoration:none;cursor:pointer;transition:background .18s ease,border-color .18s ease,transform .12s ease;touch-action:manipulation}
 .btn:active{transform:translateY(1px)}
 .btn[disabled]{opacity:.55;cursor:default;transform:none}
@@ -68,7 +64,6 @@ svg.ic{width:20px;height:20px;flex:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 :focus-visible{outline:3px solid rgba(232,154,43,.6);outline-offset:2px;border-radius:10px}
 
-/* Fields */
 .field{display:flex;flex-direction:column;gap:7px}
 .field label{font:700 14px var(--f-body);color:var(--ink)}
 .field input,.field select,.field textarea{width:100%;min-height:54px;padding:13px 16px;border:1.5px solid var(--line);border-radius:15px;background:var(--surface);font-size:16px;font-weight:500;color:var(--ink);transition:border-color .15s ease,box-shadow .15s ease}
@@ -89,7 +84,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .checkrow input{width:22px;height:22px;accent-color:var(--teal)}
 .checkrow label{font-weight:700;font-size:14.5px;cursor:pointer}
 
-/* Dark auth fields */
 .field-dark label{color:rgba(247,243,234,.72)}
 .field-dark input{background:rgba(247,243,234,.06);border-color:rgba(247,243,234,.22);color:#F7F3EA}
 .field-dark input::placeholder{color:rgba(247,243,234,.38)}
@@ -98,7 +92,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .field-dark .pw-toggle{color:rgba(247,243,234,.6)}
 .field-dark .pw-toggle:hover{background:rgba(247,243,234,.08)}
 
-/* Wordmark */
 .wordmark{display:inline-flex;flex-direction:column;align-items:center;gap:7px}
 .wordmark .wm-ridge{width:58px;height:13px;color:var(--teal)}
 .wordmark .wm-text{font:800 15px var(--f-display);letter-spacing:.24em;color:var(--navy);white-space:nowrap}
@@ -106,11 +99,9 @@ svg.ic{width:20px;height:20px;flex:none}
 .wordmark.lg .wm-ridge{width:76px;height:17px}
 .wordmark.lg .wm-text{font-size:21px}
 
-/* Cards, chips, plate */
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
 .chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);font:700 12.5px var(--f-body);white-space:nowrap}
 .chip .ic{width:13px;height:13px}
-.chip-status i{width:7px;height:7px;border-radius:50%;background:var(--success)}
 .chip-glass{background:rgba(247,243,234,.16);color:#F7F3EA;backdrop-filter:blur(6px)}
 .chip-verified{background:rgba(46,125,91,.12);color:var(--success)}
 .chip-role.owner{background:rgba(232,154,43,.16);color:#8A5A14}
@@ -126,14 +117,12 @@ svg.ic{width:20px;height:20px;flex:none}
 .plate{display:inline-block;padding:4px 11px;border:1.5px solid var(--navy);border-radius:9px;background:var(--surface);color:var(--navy);font:700 13px/1.4 var(--f-display);letter-spacing:.08em}
 .plate-dark{border-color:rgba(247,243,234,.55);color:#F7F3EA;background:transparent}
 
-/* Splash */
 #splash{position:fixed;inset:0;z-index:100;background:var(--navy);display:grid;place-items:center;transition:opacity .3s ease,visibility .3s ease}
 #splash.is-hidden{opacity:0;visibility:hidden}
 .splash-inner{display:flex;flex-direction:column;align-items:center;gap:18px}
 .splash-ridge{width:210px;height:44px;color:#F7F3EA;animation:sunPulse 2.2s ease-in-out infinite}
 @keyframes sunPulse{50%{opacity:.7}}
 
-/* Views */
 .view{display:none}
 .view.is-active{display:block;animation:viewIn .22s ease}
 @keyframes viewIn{from{opacity:0;transform:translateY(6px)}}
@@ -145,7 +134,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .backrow .icon-btn{border:1px solid var(--line);background:var(--surface)}
 .backrow h1{font:700 24px/1.2 var(--f-display);color:var(--navy)}
 
-/* Welcome */
 .welcome{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;background:var(--bg)}
 .welcome-top{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:36px 24px 10px}
 .welcome-hi{font-size:14.5px;font-weight:600;color:var(--ink-2);letter-spacing:.04em}
@@ -159,7 +147,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .welcome-cta .alt{color:rgba(247,243,234,.85);font-size:14.5px;text-align:center;font-weight:600}
 .welcome-cta .alt a{color:#F0B45C;font-weight:800;text-underline-offset:3px}
 
-/* Auth pages */
 .authpage{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;background:linear-gradient(180deg,var(--navy-2) 0%,var(--navy) 100%)}
 .authpage-scene{position:relative;height:min(36vh,330px);min-height:250px;overflow:hidden;flex:none}
 .authpage-scene .scene{position:absolute;inset:0;width:100%;height:100%}
@@ -175,7 +162,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .auth-alt a{color:#F0B45C;font-weight:800;text-underline-offset:3px}
 .auth-fine{margin-top:16px;font-size:12.5px;color:rgba(247,243,234,.45);text-align:center;line-height:1.55}
 
-/* Role picker */
 .role-picker{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .role-option{position:relative;display:block}
 .role-option input{position:absolute;inset:0;opacity:0}
@@ -187,7 +173,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .role-option input:checked + .role-box .ic{color:var(--saffron)}
 .role-option input:focus-visible + .role-box{outline:3px solid rgba(232,154,43,.55);outline-offset:2px}
 
-/* Onboarding */
 .ob-wrap{max-width:520px;margin:0 auto;padding:30px 20px 48px;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
 .ob-top{text-align:center}
 .ob-progress{display:flex;align-items:center;gap:14px;max-width:320px;margin:20px auto 22px;width:100%}
@@ -199,7 +184,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .step-card h2{font:600 21px var(--f-display);color:var(--navy)}
 .step-card .sub{font-size:14px;color:var(--ink-2);margin:6px 0 20px;font-weight:500}
 
-/* App header */
 .home-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:26px}
 .hi-eyebrow{font-size:15px;font-weight:600;color:var(--ink-2)}
 .hi-name{font:700 clamp(28px,7.4vw,34px)/1.1 var(--f-display);color:var(--navy);margin-top:2px;letter-spacing:-.01em}
@@ -207,14 +191,13 @@ svg.ic{width:20px;height:20px;flex:none}
 .head-tools{display:flex;align-items:center;gap:8px}
 .bell{position:relative;border:1px solid var(--line);background:var(--surface)}
 .bell-badge{position:absolute;top:1px;right:1px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:var(--saffron);color:var(--navy);font:800 10.5px/17px var(--f-body);text-align:center}
-.home-avatar{width:48px;height:48px;border-radius:50%;background:var(--navy);color:var(--saffron);display:grid;place-items:center;font:700 18px var(--f-display);flex:none;box-shadow:0 0 0 2px var(--surface),0 0 0 3.5px var(--line-2);text-decoration:none;transition:transform .15s ease}
+.home-avatar{width:48px;height:48px;border-radius:50%;background:var(--navy);color:var(--saffron);display:grid;place-items:center;font:700 18px var(--f-display);flex:none;box-shadow:0 0 0 2px var(--surface),0 0 0 3.5px var(--line-2);text-decoration:none;transition:transform .15s ease;overflow:hidden}
 .home-avatar:hover{transform:scale(1.05)}
 .home-sec{margin-top:30px}
 .sec-label{font:800 13.5px var(--f-body);color:var(--ink);letter-spacing:.02em;margin-bottom:12px}
 .sec-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
 .sec-top .sec-label{margin-bottom:0}
 
-/* Featured card */
 .feat-card{position:relative;overflow:hidden;background:var(--navy);color:#F7F3EA;border-radius:24px;padding:22px;box-shadow:0 18px 40px -20px rgba(9,44,53,.5)}
 .feat-ridge{position:absolute;right:-18px;bottom:-4px;width:160px;height:36px;color:#F7F3EA;opacity:.13}
 .feat-top{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
@@ -227,16 +210,14 @@ svg.ic{width:20px;height:20px;flex:none}
 .quick-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 .quick-actions .btn{flex:1;min-width:140px}
 
-/* Tiles */
 .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.tile{flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 8px;text-decoration:none;transition:transform .16s ease}
+.tile{display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 8px;text-decoration:none;transition:transform .16s ease}
 .tile:hover{transform:translateY(-2px)}
 .tile-ic{width:50px;height:50px;border-radius:17px;background:var(--surface-2);color:var(--teal);display:grid;place-items:center}
 .tile-ic .ic{width:22px;height:22px}
 .tile-accent .tile-ic{background:rgba(232,154,43,.15);color:var(--saffron-deep)}
 .tile strong{font:700 13px var(--f-body);color:var(--ink);text-align:center}
 
-/* Stats */
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 @media(min-width:640px){.stats{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:960px){.stats{grid-template-columns:repeat(6,1fr)}}
@@ -244,7 +225,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .stat b{font:700 24px/1.1 var(--f-display);color:var(--navy);display:block}
 .stat span{display:block;font-size:12px;font-weight:700;color:var(--ink-2);margin-top:2px}
 
-/* Page tabs + segmented */
 .ptabs{display:flex;gap:4px;border-bottom:1.5px solid var(--line);margin:18px 0 20px;overflow-x:auto;scrollbar-width:none}
 .ptabs::-webkit-scrollbar{display:none}
 .ptabs button{flex:none;padding:11px 16px;font:700 14px var(--f-body);color:var(--ink-2);border-bottom:2.5px solid transparent;margin-bottom:-1.5px}
@@ -253,7 +233,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .seg button{flex:1;min-height:40px;border-radius:999px;font:700 13px var(--f-body);color:var(--ink-2);transition:background .16s ease,color .16s ease;padding:0 6px}
 .seg button[aria-pressed="true"]{background:var(--navy);color:#F7F3EA}
 
-/* Quiet / roadmap / empty */
 .quiet{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:19px 20px;flex-wrap:wrap}
 .quiet h3{font:700 15.5px var(--f-display);color:var(--ink)}
 .quiet p{font-size:13.5px;color:var(--ink-2);margin-top:3px;max-width:360px;font-weight:500}
@@ -274,7 +253,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .skeleton{height:104px;border-radius:20px;background:var(--surface-2);border:1px solid var(--line);animation:skel 1.3s ease-in-out infinite}
 @keyframes skel{50%{opacity:.5}}
 
-/* Vehicle cards */
 .veh-card{display:flex;align-items:flex-start;gap:14px;padding:17px;border-radius:22px;transition:transform .16s ease}
 .veh-card:hover{transform:translateY(-1px)}
 .veh-ic{width:46px;height:46px;border-radius:15px;background:var(--surface-2);color:var(--teal);display:grid;place-items:center;flex:none}
@@ -287,7 +265,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .veh-view .ic{width:15px;height:15px}
 .veh-view:hover{text-decoration:underline;text-underline-offset:3px}
 
-/* Search & filters */
 .searchbar{position:relative;margin-bottom:12px}
 .searchbar .ic{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--ink-2);width:18px;height:18px}
 .searchbar input{width:100%;min-height:52px;padding:12px 16px 12px 46px;border:1.5px solid var(--line);border-radius:999px;background:var(--surface);font-size:16px;font-weight:500}
@@ -305,7 +282,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .fchip{flex:none;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line-2);background:var(--surface);font:700 13.5px var(--f-body);color:var(--ink-2);transition:all .16s ease}
 .fchip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#F7F3EA}
 
-/* Workshop cards */
 .shop-card{display:flex;gap:14px;padding:15px;border-radius:22px;text-decoration:none;color:inherit;transition:transform .16s ease}
 .shop-card:hover{transform:translateY(-1px)}
 .shop-thumb{width:62px;height:62px;border-radius:16px;overflow:hidden;background:var(--surface-2);display:grid;place-items:center;color:var(--teal);flex:none}
@@ -320,7 +296,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .open-no{color:var(--danger)}
 .shop-dist{color:var(--saffron-deep)}
 
-/* Workshop detail */
 .detail-hero{position:relative;border-radius:24px;overflow:hidden;height:210px;background:var(--navy);margin-bottom:18px}
 .detail-hero img{width:100%;height:100%;object-fit:cover}
 .detail-hero .scene{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
@@ -344,7 +319,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .trust-note{display:flex;gap:9px;align-items:flex-start;padding:13px 16px;border-radius:14px;background:rgba(18,72,82,.06);font-size:13px;font-weight:600;color:var(--ink-2)}
 .trust-note .ic{color:var(--teal);width:17px;height:17px;margin-top:1px}
 
-/* Quick service */
 .issue-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .issue-card{display:flex;flex-direction:column;align-items:flex-start;gap:9px;padding:16px;border:1.5px solid var(--line);border-radius:18px;background:var(--surface);cursor:pointer;text-align:left;transition:all .16s ease;width:100%}
 .issue-card .ic{width:22px;height:22px;color:var(--teal)}
@@ -355,7 +329,6 @@ svg.ic{width:20px;height:20px;flex:none}
 .chipsel .fchip{min-height:46px}
 .note-em{font-size:13px;font-weight:600;color:var(--ink-2);background:var(--surface-2);border-radius:14px;padding:12px 15px;line-height:1.55}
 
-/* Request cards */
 .req-card{padding:17px;border-radius:20px}
 a.req-card{display:block;color:inherit;text-decoration:none}
 .req-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
@@ -366,7 +339,6 @@ a.req-card{display:block;color:inherit;text-decoration:none}
 .req-note{margin-top:10px;padding:10px 13px;background:var(--surface-2);border-radius:12px;font-size:13px;font-weight:500;color:var(--ink-2)}
 .notif-unread{border-left:3px solid var(--saffron)}
 
-/* Updates */
 .updates{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .upd{display:flex;gap:10px;padding:11px 13px;background:var(--surface-2);border-radius:13px}
 .upd .ic{color:var(--teal);width:16px;height:16px;margin-top:2px;flex:none}
@@ -374,7 +346,6 @@ a.req-card{display:block;color:inherit;text-decoration:none}
 .upd p{font-size:13px;color:var(--ink-2);font-weight:500;margin-top:1px}
 .upd time{font-size:12px;color:var(--ink-2);font-weight:600}
 
-/* Timeline */
 .timeline{list-style:none;display:flex;flex-direction:column;padding:4px 2px 0}
 .tl-item{display:flex;gap:13px;position:relative;padding:0 0 18px 0}
 .tl-item::before{content:'';position:absolute;left:7px;top:18px;bottom:0;width:2px;background:var(--line)}
@@ -387,13 +358,11 @@ a.req-card{display:block;color:inherit;text-decoration:none}
 .tl-item b{font-size:14.5px;display:block}
 .tl-item time{display:block;font-size:12.5px;color:var(--ink-2);font-weight:600;margin-top:1px}
 
-/* Booking summary */
 .bk-summary{background:var(--surface-2);border-radius:16px;padding:15px 17px;display:flex;flex-direction:column;gap:8px}
 .bk-summary .row{display:flex;justify-content:space-between;gap:14px;font-size:14px;font-weight:600}
 .bk-summary .row span:first-child{color:var(--ink-2);flex:none}
 .bk-summary .row span:last-child{text-align:right;overflow-wrap:anywhere}
 
-/* Service management rows */
 .svc-manage{display:flex;align-items:center;gap:12px;padding:14px 16px}
 .svc-manage + .svc-manage{border-top:1px solid var(--line)}
 .svc-manage .svc-info{flex:1;min-width:0}
@@ -402,7 +371,6 @@ a.req-card{display:block;color:inherit;text-decoration:none}
 .svc-manage.off strong,.svc-manage.off small{opacity:.5}
 .svc-manage .rowtools{display:flex;align-items:center;gap:4px;flex:none}
 
-/* Hours */
 .dayrow{display:flex;align-items:center;gap:12px;padding:12px 16px}
 .dayrow + .dayrow{border-top:1px solid var(--line)}
 .dayrow .dname{width:44px;font:700 14px var(--f-body);color:var(--ink)}
@@ -415,7 +383,6 @@ a.req-card{display:block;color:inherit;text-decoration:none}
 .switch[aria-checked="true"]{background:var(--success)}
 .switch[aria-checked="true"]::after{left:21px}
 
-/* Image picker */
 .imgpick{display:block;width:100%;border:1.5px dashed var(--line-2);border-radius:18px;padding:24px 18px;text-align:center;color:var(--ink-2);font-weight:700;cursor:pointer;background:var(--surface)}
 .imgpick small{display:block;font-weight:600;margin-top:4px}
 .imgpick.has{border-style:solid;padding:0;overflow:hidden;cursor:default}
@@ -423,8 +390,8 @@ a.req-card{display:block;color:inherit;text-decoration:none}
 .img-actions{display:flex;gap:10px;padding:12px;justify-content:center;flex-wrap:wrap}
 .img-actions .btn{min-height:44px;padding:0 18px;font-size:14px}
 
-/* Profile / workshop */
-.avatar{width:56px;height:56px;border-radius:50%;background:var(--navy);color:var(--saffron);display:grid;place-items:center;font:700 22px var(--f-display);flex:none}
+.avatar{width:56px;height:56px;border-radius:50%;background:var(--navy);color:var(--saffron);display:grid;place-items:center;font:700 22px var(--f-display);flex:none;overflow:hidden}
+.avatar img,.home-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}
 .profile-card{display:flex;gap:16px;padding:22px;border-radius:22px;align-items:flex-start}
 .profile-card h2{font:600 19px var(--f-display);color:var(--navy)}
 .pf-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:9px;font-size:13.5px;font-weight:500}
@@ -436,8 +403,10 @@ a.req-card{display:block;color:inherit;text-decoration:none}
 .row-btn.danger,.row-btn.danger .ic{color:var(--danger)}
 .row-btn:hover{background:#FBF7EC}
 .ws-form-note{font-size:13px;color:var(--ink-2);margin-top:14px;font-weight:500}
+.pf-pick{width:96px;height:96px;border-radius:50%;overflow:hidden;margin:0 auto;background:var(--surface-2);display:grid;place-items:center;color:var(--teal);border:1.5px dashed var(--line-2);cursor:pointer}
+.pf-pick.has{border-style:solid}
+.pf-pick img{width:100%;height:100%;object-fit:cover}
 
-/* Passport */
 .p-doc{position:relative;overflow:hidden;background:var(--navy);color:#F7F3EA;border-radius:24px;padding:24px;box-shadow:0 18px 40px -20px rgba(9,44,53,.5)}
 .p-doc .feat-ridge{opacity:.12}
 .p-doc h3{position:relative;font:600 22px var(--f-display);margin-top:12px}
@@ -454,7 +423,6 @@ a.p-row:hover{background:#FBF7EC}
 .p-cta{display:flex;gap:10px;flex-wrap:wrap}
 .p-cta .btn{flex:1;min-width:140px}
 
-/* Marketplace */
 .prod-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 @media(min-width:760px){.prod-grid{grid-template-columns:repeat(3,1fr)}}
 .prod-card{overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column;transition:transform .16s ease}
@@ -480,7 +448,6 @@ a.p-row:hover{background:#FBF7EC}
 .imgmini .rm{position:absolute;top:2px;right:2px;width:22px;height:22px;border-radius:50%;background:rgba(9,44,53,.65);color:#F7F3EA;display:grid;place-items:center}
 .imgmini .rm .ic{width:12px;height:12px}
 
-/* Tab bars */
 .tabbar{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:40;display:none;background:rgba(255,253,248,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:24px;box-shadow:0 10px 34px rgba(9,44,53,.14);padding:8px}
 body[data-shell="customer"] #tabbar-customer{display:flex}
 body[data-shell="owner"] #tabbar-owner{display:flex}
@@ -521,7 +488,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   .prod-grid{grid-template-columns:repeat(3,1fr)}
 }
 
-/* Sheet & dialog */
 .overlay{position:fixed;inset:0;z-index:50;display:flex;background:rgba(9,44,53,.5);opacity:0;transition:opacity .2s ease}
 .overlay.is-open{opacity:1}
 .dialog-panel{margin:auto;background:var(--surface);border-radius:22px;padding:24px;width:calc(100% - 40px);max-width:400px;box-shadow:0 24px 60px rgba(9,44,53,.35);transform:translateY(10px);transition:transform .2s ease}
@@ -536,9 +502,8 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
 .sheet-grab{width:42px;height:4px;border-radius:99px;background:var(--line-2);margin:4px auto 12px}
 .sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .sheet-head h2{font:600 20px var(--f-display);color:var(--navy)}
-#form-vehicle,#form-book,#form-service,#form-record,#form-intake,#form-extra,#form-listing,#form-adm{display:flex;flex-direction:column;gap:14px}
+#form-vehicle,#form-book,#form-service,#form-record,#form-intake,#form-extra,#form-listing,#form-adm,#form-profile,#form-edit-booking,#form-complete{display:flex;flex-direction:column;gap:14px}
 
-/* Toasts */
 #toasts{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(108px + env(safe-area-inset-bottom));z-index:60;display:flex;flex-direction:column;gap:8px;width:min(92vw,430px);pointer-events:none}
 .toast{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;border-radius:16px;background:var(--navy);color:#F7F3EA;font:600 14.5px/1.45 var(--f-body);box-shadow:0 12px 32px rgba(9,44,53,.35);animation:toastIn .22s ease;pointer-events:auto}
 .toast.out{opacity:0;transform:translateY(6px);transition:.22s ease}
@@ -558,7 +523,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
 <body data-shell="public">
 <noscript><p style="padding:24px;text-align:center">BHAT NETWORK needs JavaScript enabled to run.</p></noscript>
 
-<!-- ============ SVG library ============ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <linearGradient id="g-sky" x1="0" y1="0" x2="0" y2="1">
@@ -635,7 +599,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   </defs>
 </svg>
 
-<!-- ============ Splash ============ -->
 <div id="splash" role="status" aria-label="Loading BHAT NETWORK">
   <div class="splash-inner">
     <svg class="splash-ridge" aria-hidden="true"><use href="#ridge-line"/></svg>
@@ -645,7 +608,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
 
 <main id="app">
 
-  <!-- ============ WELCOME ============ -->
   <section class="view" id="view-landing">
     <div class="welcome">
       <div class="welcome-top">
@@ -666,7 +628,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ SIGN IN ============ -->
   <section class="view" id="view-signin">
     <div class="authpage">
       <div class="authpage-scene">
@@ -703,7 +664,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ SIGN UP ============ -->
   <section class="view" id="view-signup">
     <div class="authpage">
       <div class="authpage-scene">
@@ -767,7 +727,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ ONBOARDING ============ -->
   <section class="view" id="view-onboard">
     <div class="ob-wrap">
 
@@ -788,9 +747,10 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
                 <span class="field-error" aria-live="polite"></span>
               </div>
               <div class="field">
-                <label for="ob-c-phone">Phone <span class="muted">(optional)</span></label>
-                <input id="ob-c-phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="18" placeholder="6000000000">
+                <label for="ob-c-phone">Phone number</label>
+                <input id="ob-c-phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="18" placeholder="e.g. 6000000000">
                 <span class="field-error" aria-live="polite"></span>
+                <span class="hint">Required — workshops use it to reach you about your bookings.</span>
               </div>
             </div>
             <div class="form-actions"><button class="btn btn-primary" type="submit">Continue</button></div>
@@ -902,9 +862,10 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
                 <span class="field-error" aria-live="polite"></span>
               </div>
               <div class="field">
-                <label for="ob-o-phone">Phone <span class="muted">(optional)</span></label>
-                <input id="ob-o-phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="18" placeholder="6000000000">
+                <label for="ob-o-phone">Phone number</label>
+                <input id="ob-o-phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="18" placeholder="e.g. 6000000000">
                 <span class="field-error" aria-live="polite"></span>
+                <span class="hint">Required — customers use it to reach your workshop.</span>
               </div>
             </div>
             <div class="form-actions"><button class="btn btn-primary" type="submit">Continue</button></div>
@@ -973,7 +934,31 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ CUSTOMER · HOME ============ -->
+  <section class="view" id="view-complete">
+    <div class="ob-wrap">
+      <div class="ob-top">
+        <div class="wordmark"><svg class="wm-ridge" aria-hidden="true"><use href="#ridge-line"/></svg><span class="wm-text">BHAT <em>NETWORK</em></span></div>
+      </div>
+      <div class="card step-card" style="margin-top:22px">
+        <h2>One more thing</h2>
+        <p class="sub">Please add your phone number to finish setting up your account. Workshops use it to reach you about bookings and services.</p>
+        <form id="form-complete" novalidate>
+          <div class="field">
+            <label for="cp-phone">Phone number</label>
+            <input id="cp-phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="18" placeholder="e.g. 6000000000">
+            <span class="field-error" aria-live="polite"></span>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary btn-block" id="cp-submit" type="submit">Save and continue</button>
+          </div>
+        </form>
+      </div>
+      <p style="text-align:center;margin-top:18px">
+        <button type="button" class="btn btn-ghost" data-signout-here style="min-height:44px;padding:0 20px;font-size:14px">Sign out instead</button>
+      </p>
+    </div>
+  </section>
+
   <section class="view" id="view-home">
     <div class="page">
       <header class="home-head">
@@ -1026,7 +1011,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ CUSTOMER · VEHICLES ============ -->
   <section class="view" id="view-vehicles">
     <div class="page">
       <div class="page-head-row">
@@ -1040,7 +1024,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ CUSTOMER · VEHICLE DETAIL ============ -->
   <section class="view" id="view-vehicle-detail">
     <div class="page">
       <div class="backrow">
@@ -1051,7 +1034,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ VEHICLE PASSPORT ============ -->
   <section class="view" id="view-passport">
     <div class="page">
       <div class="backrow" id="passport-backrow">
@@ -1062,7 +1044,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ SERVICE RECORD DETAIL ============ -->
   <section class="view" id="view-record">
     <div class="page">
       <div class="backrow">
@@ -1073,7 +1054,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ CUSTOMER · NEARBY ============ -->
   <section class="view" id="view-nearby">
     <div class="page">
       <header class="page-head">
@@ -1102,7 +1082,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ CUSTOMER · WORKSHOP DETAIL ============ -->
   <section class="view" id="view-shop">
     <div class="page">
       <div class="backrow">
@@ -1113,7 +1092,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ CUSTOMER · QUICK SERVICE ============ -->
   <section class="view" id="view-quick">
     <div class="page">
       <div class="backrow">
@@ -1184,7 +1162,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ CUSTOMER · BOOKINGS ============ -->
   <section class="view" id="view-bookings">
     <div class="page">
       <header class="page-head">
@@ -1202,7 +1179,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ CUSTOMER · BOOKING DETAIL ============ -->
   <section class="view" id="view-cbooking">
     <div class="page">
       <div class="backrow">
@@ -1213,7 +1189,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ NOTIFICATIONS ============ -->
   <section class="view" id="view-notifications">
     <div class="page">
       <div class="backrow">
@@ -1224,7 +1199,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ MARKETPLACE ============ -->
   <section class="view" id="view-market">
     <div class="page">
       <header class="page-head">
@@ -1242,7 +1216,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ LISTING DETAIL ============ -->
   <section class="view" id="view-mlisting">
     <div class="page">
       <div class="backrow">
@@ -1253,7 +1226,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ ADMIN · OVERVIEW ============ -->
   <section class="view" id="view-admin">
     <div class="page">
       <header class="home-head">
@@ -1274,7 +1246,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ ADMIN · WORKSHOPS ============ -->
   <section class="view" id="view-admin-workshops">
     <div class="page">
       <div class="backrow">
@@ -1289,7 +1260,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ ADMIN · WORKSHOP REVIEW ============ -->
   <section class="view" id="view-admin-workshop">
     <div class="page">
       <div class="backrow">
@@ -1300,7 +1270,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ ADMIN · LISTINGS ============ -->
   <section class="view" id="view-admin-listings">
     <div class="page">
       <div class="backrow">
@@ -1311,7 +1280,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ ADMIN · USERS ============ -->
   <section class="view" id="view-admin-users">
     <div class="page">
       <div class="backrow">
@@ -1326,7 +1294,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ ADMIN · AUDIT ============ -->
   <section class="view" id="view-admin-audit">
     <div class="page">
       <div class="backrow">
@@ -1337,7 +1304,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ OWNER · DASHBOARD ============ -->
   <section class="view" id="view-dashboard">
     <div class="page">
       <header class="home-head">
@@ -1385,7 +1351,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ OWNER · BOOKINGS ============ -->
   <section class="view" id="view-wbookings">
     <div class="page">
       <header class="page-head">
@@ -1407,7 +1372,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ OWNER · BOOKING DETAIL ============ -->
   <section class="view" id="view-booking">
     <div class="page">
       <div class="backrow">
@@ -1418,7 +1382,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ OWNER · CUSTOMERS ============ -->
   <section class="view" id="view-wcustomers">
     <div class="page">
       <header class="page-head">
@@ -1437,7 +1400,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ OWNER · CUSTOMER DETAIL ============ -->
   <section class="view" id="view-wcustomer">
     <div class="page">
       <div class="backrow">
@@ -1448,7 +1410,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ OWNER · WORKSHOP ============ -->
   <section class="view" id="view-workshop">
     <div class="page">
       <header class="page-head">
@@ -1567,7 +1528,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ PROFILE (shared) ============ -->
   <section class="view" id="view-profile">
     <div class="page">
       <header class="page-head">
@@ -1588,6 +1548,11 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
           </div>
         </div>
         <div class="card list-rows">
+          <button class="row-btn" data-open-sheet="sheet-profile">
+            <svg class="ic" aria-hidden="true"><use href="#i-pencil"/></svg>
+            <span>Edit profile</span>
+            <svg class="ic chev" aria-hidden="true"><use href="#i-chev-r"/></svg>
+          </button>
           <button class="row-btn" id="pf-install" hidden data-install>
             <svg class="ic" aria-hidden="true"><use href="#i-download"/></svg>
             <span>Install app on this device</span>
@@ -1603,7 +1568,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
-  <!-- ============ ERROR ============ -->
   <section class="view" id="view-error">
     <div class="page">
       <div class="empty">
@@ -1620,7 +1584,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
 
 </main>
 
-<!-- ============ Tab bars ============ -->
 <nav id="tabbar-customer" class="tabbar" aria-label="Primary">
   <div class="rail-brand" aria-hidden="true">
     <svg class="rail-ridge"><use href="#ridge-line"/></svg>
@@ -1657,7 +1620,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   <a class="tab" href="#/admin-audit" data-route="admin-audit"><svg class="ic"><use href="#i-history"/></svg><span>Audit</span></a>
 </nav>
 
-<!-- ============ Add / edit vehicle sheet ============ -->
 <div class="overlay" id="sheet-vehicle" hidden>
   <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-vehicle-title">
     <div class="sheet-grab" aria-hidden="true"></div>
@@ -1746,7 +1708,40 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   </div>
 </div>
 
-<!-- ============ Booking sheet (customer) ============ -->
+<div class="overlay" id="sheet-profile" hidden>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-profile-title">
+    <div class="sheet-grab" aria-hidden="true"></div>
+    <header class="sheet-head">
+      <h2 id="sheet-profile-title">Edit profile</h2>
+      <button class="icon-btn" data-close aria-label="Close">
+        <svg class="ic" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </header>
+    <input type="file" id="file-avatar" accept="image/*" hidden>
+    <form id="form-profile" novalidate>
+      <div class="field">
+        <label>Profile photo</label>
+        <div id="pf-pick-wrap"></div>
+        <span class="hint" style="text-align:center">Square photo works best — we resize it automatically.</span>
+      </div>
+      <div class="field">
+        <label for="pf-name">Full name</label>
+        <input id="pf-name" type="text" maxlength="80">
+        <span class="field-error" aria-live="polite"></span>
+      </div>
+      <div class="field">
+        <label for="pf-phone">Phone number</label>
+        <input id="pf-phone" type="tel" inputmode="tel" maxlength="18" placeholder="e.g. 6000000000">
+        <span class="field-error" aria-live="polite"></span>
+        <span class="hint">Required — workshops use it to reach you.</span>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary btn-block" id="pf-submit" type="submit">Save profile</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div class="overlay" id="sheet-book" hidden>
   <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-book-title">
     <div class="sheet-grab" aria-hidden="true"></div>
@@ -1796,7 +1791,54 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   </div>
 </div>
 
-<!-- ============ Service sheet (owner) ============ -->
+<div class="overlay" id="sheet-edit-booking" hidden>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-edit-booking-title">
+    <div class="sheet-grab" aria-hidden="true"></div>
+    <header class="sheet-head">
+      <h2 id="sheet-edit-booking-title">Edit request</h2>
+      <button class="icon-btn" data-close aria-label="Close">
+        <svg class="ic" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </header>
+    <form id="form-edit-booking" novalidate>
+      <input type="hidden" id="eb-id">
+      <div class="form-grid">
+        <div class="field">
+          <label for="eb-vehicle">Your vehicle</label>
+          <select id="eb-vehicle"></select>
+          <span class="field-error" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label for="eb-service">Service <span class="muted">(optional)</span></label>
+          <select id="eb-service"></select>
+          <span class="field-error" aria-live="polite"></span>
+        </div>
+        <div class="form-grid two">
+          <div class="field">
+            <label for="eb-date">Preferred date</label>
+            <input id="eb-date" type="date">
+            <span class="field-error" aria-live="polite"></span>
+          </div>
+          <div class="field">
+            <label for="eb-time">Preferred time <span class="muted">(optional)</span></label>
+            <input id="eb-time" type="time">
+            <span class="field-error" aria-live="polite"></span>
+          </div>
+        </div>
+        <div class="field">
+          <label for="eb-note">Note for the workshop <span class="muted">(optional)</span></label>
+          <textarea id="eb-note" maxlength="500" rows="2" placeholder="Describe the issue or what you need"></textarea>
+          <span class="field-error" aria-live="polite"></span>
+        </div>
+      </div>
+      <p class="hint">You can edit your request until the workshop accepts it. The workshop and booking stay the same.</p>
+      <div class="form-actions">
+        <button class="btn btn-primary btn-block" id="eb-submit" type="submit">Save changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div class="overlay" id="sheet-service" hidden>
   <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-service-title">
     <div class="sheet-grab" aria-hidden="true"></div>
@@ -1866,7 +1908,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   </div>
 </div>
 
-<!-- ============ Listing sheet (owner · marketplace) ============ -->
 <div class="overlay" id="sheet-listing" hidden>
   <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-listing-title">
     <div class="sheet-grab" aria-hidden="true"></div>
@@ -1962,7 +2003,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   </div>
 </div>
 
-<!-- ============ Admin action sheet ============ -->
 <div class="overlay" id="sheet-adm" hidden>
   <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-adm-title">
     <div class="sheet-grab" aria-hidden="true"></div>
@@ -1987,7 +2027,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   </div>
 </div>
 
-<!-- ============ Schedule sheet (owner) ============ -->
 <div class="overlay" id="sheet-schedule" hidden>
   <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-schedule-title">
     <div class="sheet-grab" aria-hidden="true"></div>
@@ -2012,7 +2051,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   </div>
 </div>
 
-<!-- ============ Intake sheet (owner) ============ -->
 <div class="overlay" id="sheet-intake" hidden>
   <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-intake-title">
     <div class="sheet-grab" aria-hidden="true"></div>
@@ -2057,7 +2095,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   </div>
 </div>
 
-<!-- ============ Additional work sheet (owner) ============ -->
 <div class="overlay" id="sheet-extra" hidden>
   <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-extra-title">
     <div class="sheet-grab" aria-hidden="true"></div>
@@ -2094,7 +2131,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   </div>
 </div>
 
-<!-- ============ Service record sheet (owner) ============ -->
 <div class="overlay" id="sheet-record" hidden>
   <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-record-title">
     <div class="sheet-grab" aria-hidden="true"></div>
@@ -2172,7 +2208,6 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   </div>
 </div>
 
-<!-- ============ Confirm dialog ============ -->
 <div class="overlay" id="dialog-confirm" hidden>
   <div class="dialog-panel" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
     <h2 id="confirm-title"></h2>
@@ -2186,40 +2221,29 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
 
 <div id="toasts" role="status" aria-live="polite"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (() => {
 'use strict';
 
-/* ==========================================================
-   01 · CONFIG — BHAT NETWORK Supabase project.
-   The anon/publishable key is intentionally client-side.
-   NEVER place a secret/service-role key here.
-   ========================================================== */
 const SUPABASE_URL = 'https://dsjjhzikpnaofzjrrvyd.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzampoemlrcG5hb2Z6anJydnlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE0NDgxMzksImV4cCI6MjEwNzAyNDEzOX0.zmP6eCD5oLA3W72_Y8E3ObNpKdlnMJcEbIXbmp7QgC0';
-const APP_VERSION = 'Part 06 · v0.7.0';
+const APP_LOGO = 'https://res.cloudinary.com/prjgzqvy/image/upload/v1791482355/file_000000004eb861f79937c93d00e0ffe8_zyxoxf.png';
+const APP_VERSION = 'v0.8.0';
 
-/* ==========================================================
-   02 · SUPABASE CLIENT
-   ========================================================== */
 const sb = window.supabase
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
       auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
     })
   : null;
 
-/* ==========================================================
-   03 · APP STATE
-   ========================================================== */
 const S = {
   user: null,
   profile: null,
   profileError: null,
-  // customer
   vehicles: [], vehiclesLoading: false,
   requests: [], requestsLoading: false, cbFilter: 'all',
   vehRecords: null, vehRecLoading: null,
-  // owner
   workshop: null, workshopLoading: false,
   wBookings: [], wBookingsLoading: false, wBookingFilter: 'all',
   wRecords: [], wRecordsLoading: false,
@@ -2229,19 +2253,14 @@ const S = {
   schedBookingId: null, recBookingId: null, intakeBid: null, extraBid: null,
   intakeCache: {},
   whFilter: { q: '', cat: '', month: '' },
-  // marketplace (customer)
   mListings: null, mListingsLoading: false, mKey: '',
   mFilter: { q: '', cat: '' },
   mDetail: null, mDetailLoading: null, mMainImg: '',
-  // marketplace (owner)
   listEditId: null, listImgDrafts: [], listUrlsWork: [],
-  // passport
   passportPub: null, passportPubLoading: null,
   recDetail: null, recDetailLoading: null,
-  // notifications — guarded, one fetch per session + controlled retries
   notifications: [], notifLoading: false, unread: 0,
   notifLoadedOnce: false, notifError: null, notifSeq: 0,
-  // admin (Part 06)
   admin: null, adminLoading: false,
   adminWorkshops: null, adminWL: false, adminWq: '',
   adminListings: null, adminLL: false,
@@ -2249,24 +2268,26 @@ const S = {
   adminAudit: null, adminAL: false,
   adminWsDetail: null, adminWsLoading: null,
   admAction: null,
-  // discovery (customer)
   workshops: null, workshopsLoading: false, workshopsKey: '',
   shopDetail: null,
   wq: { term: '', cat: '', verified: false, openNow: false },
   location: null, locState: 'idle',
-  // quick service
   qIssue: '', qVehicle: '', qShop: '',
   bookShopW: null,
   vhEditId: null,
+  pfImgDraft: null,
+  editBid: null,
+  editShop: { wid: null, services: [] },
   booted: false, bootedOnce: false
 };
 const OB = { c: null, o: null, cur: { c: 1, o: 1 } };
 let routingKey = 'anon';
 let deferredInstall = null;
+let lastRouteKey = '';
+let openOverlays = [];
+let wsSeq = 0;
+let mkSeq = 0;
 
-/* ==========================================================
-   04 · UTILITIES
-   ========================================================== */
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -2344,6 +2365,9 @@ function isValidPhone(p){
 function firstName(){ return (S.profile?.full_name || '').trim().split(/\s+/)[0] || 'there'; }
 function initial(){ return (S.profile?.full_name || 'B').trim().charAt(0).toUpperCase() || 'B'; }
 function roleLabel(r){ return r === 'workshop_owner' ? 'Workshop owner' : r === 'admin' ? 'Admin' : 'Customer'; }
+function avatarInner(url, letter){
+  return url ? `<img src="${esc(url)}" alt="">` : esc(letter);
+}
 function haversine(a, w){
   if (w.latitude == null || w.longitude == null) return null;
   const R = 6371, toR = x => x * Math.PI / 180;
@@ -2445,12 +2469,6 @@ function storagePathFromUrl(url, bucket){
   } catch { return null; }
 }
 
-/* ==========================================================
-   ERROR CLASSIFICATION (Part 06)
-   Distinguishes OFFLINE / NETWORK / AUTH / DATABASE / UNKNOWN.
-   navigator.onLine === false is a strong offline signal;
-   every other failure keeps its own meaning.
-   ========================================================== */
 function classifyError(err){
   const m = String((err && (err.message || err.msg)) || err || '');
   const code = err ? (err.code ?? err.status) : undefined;
@@ -2460,13 +2478,6 @@ function classifyError(err){
   if (code === '42P01' || /schema cache|does not exist|could not find the table|relation .* does not exist/i.test(m)) return 'DATABASE_FAILURE';
   return 'UNKNOWN_FAILURE';
 }
-const CLASS_MSG = {
-  OFFLINE: 'You\u2019re offline. Check your connection and try again.',
-  NETWORK_FAILURE: 'We couldn\u2019t reach BHAT NETWORK just now. Try again.',
-  AUTH_FAILURE: 'Your session has expired. Please sign in again.',
-  DATABASE_FAILURE: 'That part of BHAT NETWORK is temporarily unavailable. Please try again shortly.',
-  UNKNOWN_FAILURE: 'Something went wrong. Please try again.'
-};
 
 function friendlyError(err){
   const m = (err && (err.message || err.msg)) || String(err || 'Unknown error');
@@ -2475,9 +2486,12 @@ function friendlyError(err){
   if (c === '23514') return 'Please check the values you entered.';
   if (c === '42501' || /row-level security/i.test(m)) return 'You don\u2019t have permission to do that.';
   if (/invalid booking status transition/i.test(m)) return 'That action doesn\u2019t fit this booking\u2019s current status.';
+  if (/customers can only cancel or edit/i.test(m)) return 'You can only edit or cancel a request before work begins.';
   if (/customers can only cancel/i.test(m)) return 'You can only cancel a request before work begins.';
   if (/already answered/i.test(m)) return 'This request was already answered.';
   if (/booking details cannot be altered/i.test(m)) return 'Booking details can\u2019t be changed here.';
+  if (/invalid vehicle for this booking/i.test(m)) return 'That vehicle can\u2019t be used for this booking.';
+  if (/invalid service for this booking/i.test(m)) return 'That service doesn\u2019t belong to this workshop.';
   if (/not accepting new requests/i.test(m)) return 'This workshop is currently unavailable.';
   if (/verification is managed/i.test(m)) return 'Verification is managed by BHAT NETWORK.';
   if (/admin only/i.test(m)) return 'You don\u2019t have permission to do that.';
@@ -2488,12 +2502,15 @@ function friendlyError(err){
   if (/already registered/i.test(m)) return 'An account with this email already exists. Try signing in instead.';
   if (/password should be at least/i.test(m)) return 'Your password is too short. Use at least 8 characters.';
   const cls = classifyError(err);
-  if (cls === 'OFFLINE') return CLASS_MSG.OFFLINE;
-  if (cls === 'NETWORK_FAILURE') return CLASS_MSG.NETWORK_FAILURE;
-  if (cls === 'AUTH_FAILURE') return CLASS_MSG.AUTH_FAILURE;
-  if (cls === 'DATABASE_FAILURE') return CLASS_MSG.DATABASE_FAILURE;
+  if (cls === 'OFFLINE') return 'You\u2019re offline. Check your connection and try again.';
+  if (cls === 'NETWORK_FAILURE') return 'We couldn\u2019t reach BHAT NETWORK just now. Try again.';
+  if (cls === 'AUTH_FAILURE') return 'Your session has expired. Please sign in again.';
+  if (cls === 'DATABASE_FAILURE'){
+    console.error('[BHAT] database error — a table/column is likely missing. Run the latest BHAT NETWORK SQL:', err);
+    return 'That part of BHAT NETWORK is temporarily unavailable. If it continues, the latest database update needs to be applied.';
+  }
   console.error('[BHAT]', err);
-  return CLASS_MSG.UNKNOWN_FAILURE;
+  return 'Something went wrong. Please try again.';
 }
 function requireConfig(){
   if (sb) return true;
@@ -2501,11 +2518,9 @@ function requireConfig(){
   return false;
 }
 
-/* ==========================================================
-   05 · UI COMPONENTS
-   ========================================================== */
 function toast(msg, type = 'info', ms = 3400){
   const wrap = $('#toasts');
+  if (!wrap) return;
   while (wrap.children.length >= 3) wrap.firstChild.remove();
   const t = document.createElement('div');
   t.className = `toast t-${type}`;
@@ -2518,34 +2533,47 @@ function toast(msg, type = 'info', ms = 3400){
 function setBusy(btn, on){
   if (!btn) return;
   if (on){
+    if (btn.disabled) return;
     btn.dataset.prev = btn.innerHTML;
     btn.disabled = true;
     btn.insertAdjacentHTML('beforeend', '<span class="spinner" aria-hidden="true"></span>');
   } else {
     btn.disabled = false;
-    if (btn.dataset.prev) btn.innerHTML = btn.dataset.prev;
+    if (btn.dataset.prev){ btn.innerHTML = btn.dataset.prev; delete btn.dataset.prev; }
   }
 }
 
 let trapEl = null, lastFocus = null;
 function openOverlay(el){
-  lastFocus = document.activeElement;
-  el.hidden = false; trapEl = el;
+  if (!el || openOverlays.includes(el)) return;
+  if (!openOverlays.length && document.activeElement && document.activeElement !== document.body) lastFocus = document.activeElement;
+  openOverlays.push(el);
+  el.hidden = false;
+  trapEl = el;
   requestAnimationFrame(() => el.classList.add('is-open'));
   document.body.classList.add('no-scroll');
 }
 function closeOverlay(el){
-  el.classList.remove('is-open'); document.body.classList.remove('no-scroll');
-  if (trapEl === el) trapEl = null;
+  if (!el) return;
+  openOverlays = openOverlays.filter(x => x !== el);
+  el.classList.remove('is-open');
+  if (!openOverlays.length) document.body.classList.remove('no-scroll');
+  trapEl = openOverlays[openOverlays.length - 1] || null;
   if (el.id === 'sheet-vehicle') S.vhEditId = null;
   if (el.id === 'sheet-service') S.svcEditId = null;
   if (el.id === 'sheet-listing'){ S.listEditId = null; S.listImgDrafts.forEach(d => URL.revokeObjectURL(d.url)); S.listImgDrafts = []; S.listUrlsWork = []; }
+  if (el.id === 'sheet-profile'){ if (S.pfImgDraft){ URL.revokeObjectURL(S.pfImgDraft.url); S.pfImgDraft = null; } }
+  if (el.id === 'sheet-book') S.bookShopW = null;
+  if (el.id === 'sheet-edit-booking') S.editBid = null;
   if (el.id === 'sheet-adm'){
-    if (S.admAction?.revert) S.admAction.revert();  // restore UI (e.g. role select) on cancel
+    if (S.admAction?.revert) S.admAction.revert();
     S.admAction = null;
   }
-  setTimeout(() => { el.hidden = true; }, 210);
-  if (lastFocus?.focus) lastFocus.focus();
+  setTimeout(() => { if (!el.classList.contains('is-open')) el.hidden = true; }, 220);
+  if (!openOverlays.length && lastFocus && lastFocus.focus){
+    try { lastFocus.focus(); } catch {}
+    lastFocus = null;
+  }
 }
 
 let confirmResolve = null;
@@ -2556,7 +2584,7 @@ function confirmDialog({ title, message, confirmLabel = 'Remove' }){
     $('#confirm-message').textContent = message;
     $('#confirm-ok').textContent = confirmLabel;
     openOverlay($('#dialog-confirm'));
-    setTimeout(() => $('#confirm-cancel').focus(), 60);
+    setTimeout(() => $('#confirm-cancel')?.focus(), 60);
   });
 }
 function settleConfirm(v){
@@ -2567,7 +2595,7 @@ function settleConfirm(v){
 }
 
 function fieldError(input, msg){
-  const f = input.closest('.field');
+  const f = input?.closest('.field');
   if (!f) return;
   f.classList.add('has-error');
   const e = f.querySelector('.field-error');
@@ -2617,10 +2645,7 @@ function timelineHTML(b){
 
 function vChipClass(vs){ return vs === 'VERIFIED' ? 'chip-verified' : vs === 'REJECTED' ? 'st-REJECTED' : vs === 'SUSPENDED' ? 'st-CANCELLED' : ''; }
 
-/* ==========================================================
-   06 · DATA LAYER — all Supabase queries live here
-   ========================================================== */
-const CUST_COLS = 'id,full_name,phone,created_at';
+const CUST_COLS = 'id,full_name,phone,avatar_url,created_at';
 const VEH_COLS = 'id,plate,make,model,year,vehicle_type,fuel_type,nickname,odometer_km';
 
 const DB = {
@@ -2647,7 +2672,7 @@ const DB = {
       .eq('owner_profile_id', pid).order('created_at').limit(1).maybeSingle(),
     create:   row  => sb.from('workshops').insert(row).select().single(),
     update: (id, patch) => sb.from('workshops').update(patch).eq('id', id).select().single(),
-    async list({ term = '', cat = '', verified = false, limit = 24 } = {}){
+    async list({ term = '', cat = '', verified = false, limit = 40 } = {}){
       const base = () => sb.from('workshops')
         .select('id,name,description,district,area,address_text,status,is_verified,verification_status,photo_url,open_time,close_time,working_days,latitude,longitude,created_at,services:workshop_services(id,name,category,price_min,price_max,price_note,is_active),hours:workshop_hours(day_of_week,is_open,open_time,close_time)')
         .eq('status', 'active')
@@ -2682,7 +2707,7 @@ const DB = {
         .maybeSingle();
     },
   },
-  members: { // future staff management
+  members: {
     mine: () => sb.from('workshop_members').select('*, workshop:workshops(id,name)').eq('profile_id', S.user.id),
   },
   services: {
@@ -2772,7 +2797,6 @@ const DB = {
     markOne: id => sb.from('notifications').update({ read: true }).eq('id', id),
   },
   passport: {
-    // Public, RPC-scoped view: returns ONLY safe fields, null when not found.
     public: token => sb.rpc('public_passport', { p_token: token }),
   },
   listings: {
@@ -2810,7 +2834,7 @@ const DB = {
     update: (id, patch) => sb.from('marketplace_listings').update(patch).eq('id', id).select().single(),
     remove: id   => sb.from('marketplace_listings').delete().eq('id', id),
   },
-  admin: { // Part 06 — all writes go through security-definer RPCs; reads rely on admin RLS
+  admin: {
     workshops: () => sb.from('workshops')
       .select('id,name,area,district,is_verified,verification_status,photo_url,status,created_at')
       .order('created_at', { ascending: false }).limit(60),
@@ -2826,9 +2850,6 @@ const DB = {
   },
 };
 
-/* ==========================================================
-   07 · AUTHENTICATION
-   ========================================================== */
 async function onSubmitSignIn(e){
   e.preventDefault();
   if (!requireConfig()) return;
@@ -2884,12 +2905,23 @@ async function onSubmitSignUp(e){
 }
 
 async function onSignOut(){
-  if (!requireConfig()) return;
   try {
-    const { error } = await sb.auth.signOut();
-    if (error) throw error;
-    toast('Signed out. See you soon.', 'success');
-  } catch (err){ toast(friendlyError(err), 'error'); }
+    if (sb){
+      const { error } = await sb.auth.signOut();
+      if (error) throw error;
+    }
+  } catch (e){
+    console.warn('[BHAT] signOut fell back to local sign-out:', e);
+    try { if (sb) await sb.auth.signOut({ scope: 'local' }); } catch {}
+  }
+  if (S.user){
+    routingKey = 'anon';
+    S.booted = true; S.bootedOnce = true;
+    resetState(); hideSplash();
+    goHash('');
+    applyRoute();
+  }
+  toast('Signed out. See you soon.', 'success');
 }
 
 function startAuthListener(){
@@ -2913,9 +2945,6 @@ function startAuthListener(){
   });
 }
 
-/* ==========================================================
-   08 · PROFILES, SESSION ROUTING & ONBOARDING
-   ========================================================== */
 async function ensureProfile(){
   const meta = S.user.user_metadata || {};
   let res = await DB.profiles.get(S.user.id);
@@ -2955,7 +2984,6 @@ async function loadRoleData(){
     if (S.workshop) loadWorkshopSpace();
     else { S.wBookings = []; S.wRecords = []; }
   }
-  // admin role: no bulk prefetch — each admin screen loads its own data on demand
   refreshUnread();
   applyRoute();
 }
@@ -2975,7 +3003,10 @@ async function loadWorkshopSpace(){
 
 async function routeSession(force = false){
   const key = S.user ? `${S.user.id}|${S.profile ? (S.profile.onboarding_complete ? '1' : '0') : '?'}` : 'anon';
-  if (!force && key === routingKey) return;
+  if (!force && key === routingKey){
+    if (!S.booted){ S.booted = true; S.bootedOnce = true; hideSplash(); applyRoute(); }
+    return;
+  }
   routingKey = key;
   if (!S.user){ S.booted = true; S.bootedOnce = true; hideSplash(); applyRoute(); return; }
 
@@ -2992,6 +3023,9 @@ async function routeSession(force = false){
 }
 
 function resetState(){
+  if (S.imgDraft){ URL.revokeObjectURL(S.imgDraft.url); }
+  if (S.pfImgDraft){ URL.revokeObjectURL(S.pfImgDraft.url); }
+  S.listImgDrafts.forEach(d => URL.revokeObjectURL(d.url));
   S.profile = null; S.profileError = null;
   S.vehicles = []; S.vehiclesLoading = false;
   S.requests = []; S.requestsLoading = false; S.cbFilter = 'all';
@@ -3026,14 +3060,17 @@ function resetState(){
   S.wq = { term: '', cat: '', verified: false, openNow: false };
   S.qIssue = ''; S.qVehicle = ''; S.qShop = ''; S.bookShopW = null;
   S.vhEditId = null;
+  S.pfImgDraft = null; S.editBid = null; S.editShop = { wid: null, services: [] };
   OB.c = null; OB.o = null;
-  ['#form-vehicle', '#form-book', '#form-quick', '#form-service', '#form-listing', '#form-schedule', '#form-record', '#form-intake', '#form-extra', '#form-adm',
+  ['#form-vehicle', '#form-book', '#form-quick', '#form-service', '#form-listing', '#form-schedule', '#form-record', '#form-intake', '#form-extra', '#form-adm', '#form-profile', '#form-edit-booking', '#form-complete',
    '#form-ob-c1', '#form-ob-c2', '#form-ob-c3', '#form-ob-o1', '#form-ob-o2', '#form-ob-o3']
     .forEach(s => $(s)?.reset());
   ['#form-vehicle', '#form-book', '#form-ob-c1', '#form-ob-c2', '#form-ob-c3',
-   '#form-ob-o1', '#form-ob-o2', '#form-ob-o3', '#form-workshop']
+   '#form-ob-o1', '#form-ob-o2', '#form-ob-o3', '#form-workshop', '#form-complete']
     .forEach(s => { if ($(s)) $(s).dataset.loaded = ''; });
   showStep('c', 1); showStep('o', 1);
+  lastRouteKey = '';
+  wsSeq++; mkSeq++;
 }
 
 function showStep(role, n){
@@ -3065,14 +3102,14 @@ function prepOnboarding(){
   }
 }
 
-/* --- Customer onboarding steps --- */
 function onSubmitObC1(e){
   e.preventDefault(); if (!requireConfig()) return;
   const f = e.currentTarget; clearErrors(f);
   const name = val('ob-c-name'), phone = val('ob-c-phone');
   let ok = true;
   if (name.length < 2){ fieldError($('#ob-c-name'), 'Please enter your full name.'); ok = false; }
-  if (phone && !isValidPhone(phone)){ fieldError($('#ob-c-phone'), 'Enter a valid phone number.'); ok = false; }
+  if (!phone){ fieldError($('#ob-c-phone'), 'Phone number is required.'); ok = false; }
+  else if (!isValidPhone(phone)){ fieldError($('#ob-c-phone'), 'Enter a valid phone number.'); ok = false; }
   if (!ok) return;
   OB.c = { name, phone, district: '', area: '' };
   showStep('c', 2);
@@ -3092,8 +3129,8 @@ function validateVehicle(prefix){
         plateRaw = val(prefix + '-plate'), yearRaw = val(prefix + '-year'),
         color = val(prefix + '-color'), odoRaw = val(prefix + '-odo'),
         nickname = val(prefix + '-nickname'),
-        fuel = $(('#' + prefix + '-fuel')).value,
-        type = $(('#' + prefix + '-type')).value;
+        fuel = $(('#' + prefix + '-fuel'))?.value || '',
+        type = $(('#' + prefix + '-type'))?.value || 'car';
   const any = make || model || plateRaw || yearRaw || color || odoRaw || nickname;
   if (!any && prefix !== 'vh') return null;
   let ok = true;
@@ -3138,7 +3175,7 @@ async function finishCustomerOnboarding(vehicle, btn){
       S.vehicles.push(res.data);
     }
     const prof = await DB.profiles.update(S.user.id, {
-      full_name: c.name, phone: c.phone || null, district: c.district,
+      full_name: c.name, phone: c.phone, district: c.district,
       area: c.area || null, onboarding_complete: true
     });
     if (prof.error) throw prof.error;
@@ -3150,14 +3187,14 @@ async function finishCustomerOnboarding(vehicle, btn){
   finally { setBusy(btn, false); }
 }
 
-/* --- Workshop-owner onboarding steps --- */
 function onSubmitObO1(e){
   e.preventDefault(); if (!requireConfig()) return;
   const f = e.currentTarget; clearErrors(f);
   const name = val('ob-o-name'), phone = val('ob-o-phone');
   let ok = true;
   if (name.length < 2){ fieldError($('#ob-o-name'), 'Please enter your full name.'); ok = false; }
-  if (phone && !isValidPhone(phone)){ fieldError($('#ob-o-phone'), 'Enter a valid phone number.'); ok = false; }
+  if (!phone){ fieldError($('#ob-o-phone'), 'Phone number is required.'); ok = false; }
+  else if (!isValidPhone(phone)){ fieldError($('#ob-o-phone'), 'Enter a valid phone number.'); ok = false; }
   if (!ok) return;
   OB.o = { name, phone, wname: '', desc: '', district: '', area: '', address: '', wphone: '' };
   showStep('o', 2);
@@ -3207,7 +3244,7 @@ async function finishOwnerOnboarding(btn){
     if (res.error) throw res.error;
     S.workshop = res.data;
     const prof = await DB.profiles.update(S.user.id, {
-      full_name: o.name, phone: o.phone || null, district: o.district,
+      full_name: o.name, phone: o.phone, district: o.district,
       area: o.area || null, onboarding_complete: true
     });
     if (prof.error) throw prof.error;
@@ -3219,9 +3256,6 @@ async function finishOwnerOnboarding(btn){
   finally { setBusy(btn, false); }
 }
 
-/* ==========================================================
-   09 · CUSTOMER SCREENS
-   ========================================================== */
 function vehicleCardHTML(v){
   const meta = [v.year, VEHICLE_TYPES[v.vehicle_type] || v.vehicle_type, FUEL_TYPES[v.fuel_type]].filter(Boolean).join(' · ');
   return `<article class="card veh-card">
@@ -3290,7 +3324,7 @@ function recordRowHTML(r){
 function screenHome(){
   $('#home-greet').textContent = greeting() + ',';
   $('#home-hi').textContent = firstName();
-  $('#home-avatar').textContent = initial();
+  $('#home-avatar').innerHTML = avatarInner(S.profile?.avatar_url, initial());
   const wv = $('#home-vehicle');
   if (S.vehiclesLoading){ wv.innerHTML = skelBlock; }
   else if (!S.vehicles.length){
@@ -3383,7 +3417,7 @@ function screenVehicleDetail(id){
     </a>
     <p class="hint" style="text-align:center;margin-top:8px">The verified identity and service history of this vehicle — shareable by link.</p>`
     : `<div class="card quiet" style="margin-top:16px">
-        <div><h3>BHAT Vehicle Passport</h3><p>Enable the Part 05 SQL to activate this vehicle&rsquo;s passport.</p></div>
+        <div><h3>BHAT Vehicle Passport</h3><p>Enable the latest database update to activate this vehicle&rsquo;s passport.</p></div>
         <span class="chip">Soon</span>
       </div>`}
 
@@ -3432,12 +3466,104 @@ function screenVehicleDetail(id){
       if (res.error) console.warn('[BHAT] vehicle records', res.error);
       if (parseHash().name === 'vehicle' && parseHash().param === id) applyRoute();
     });
+  } else {
+    recEl.innerHTML = skelBlock;
   }
 }
 
-/* ==========================================================
-   09b · VEHICLE PASSPORT (Part 05)
-   ========================================================== */
+function openVehicleSheet(id){
+  S.vhEditId = id || null;
+  const f = $('#form-vehicle');
+  if (!f) return;
+  f.reset();
+  clearErrors(f);
+  $('#sheet-vehicle-title').textContent = id ? 'Edit vehicle' : 'Add vehicle';
+  $('#vh-submit').textContent = id ? 'Save changes' : 'Add vehicle';
+  if (id){
+    const v = S.vehicles.find(x => x.id === id);
+    if (!v){ S.vhEditId = null; return; }
+    $('#vh-make').value = v.make || '';
+    $('#vh-model').value = v.model || '';
+    $('#vh-nickname').value = v.nickname || '';
+    $('#vh-year').value = v.year ?? '';
+    $('#vh-color').value = v.color || '';
+    $('#vh-type').value = v.vehicle_type || 'car';
+    $('#vh-fuel').value = v.fuel_type || '';
+    $('#vh-plate').value = v.plate || '';
+    $('#vh-odo').value = v.odometer_km ?? '';
+  }
+  openOverlay($('#sheet-vehicle'));
+  setTimeout(() => $('#vh-make')?.focus(), 140);
+}
+
+async function onSubmitVehicle(e){
+  e.preventDefault(); if (!requireConfig()) return;
+  const f = e.currentTarget; clearErrors(f);
+  const vehicle = validateVehicle('vh');
+  if (!vehicle) return;
+  const btn = $('#vh-submit');
+  if (btn.disabled) return;
+  setBusy(btn, true);
+  try {
+    if (S.vhEditId){
+      const res = await DB.vehicles.update(S.vhEditId, vehicle);
+      if (res.error) throw res.error;
+      S.vehicles = S.vehicles.map(v => v.id === S.vhEditId ? { ...v, ...res.data } : v);
+      S.vehRecords = null;
+      toast('Vehicle updated', 'success');
+    } else {
+      const res = await DB.vehicles.create({ owner_profile_id: S.user.id, is_primary: !S.vehicles.length, ...vehicle });
+      if (res.error) throw res.error;
+      S.vehicles.push(res.data);
+      toast('Vehicle added', 'success');
+    }
+    f.reset();
+    closeOverlay($('#sheet-vehicle'));
+    applyRoute();
+  } catch (err){ toast(friendlyError(err), 'error'); }
+  finally { setBusy(btn, false); }
+}
+
+async function setPrimaryVehicle(id){
+  if (!requireConfig()) return;
+  try {
+    const res = await DB.vehicles.update(id, { is_primary: true });
+    if (res.error) throw res.error;
+    if (S.vehicles.length > 1){
+      const clr = await DB.vehicles.clearPrimary(S.user.id, id);
+      if (clr.error) console.warn('[BHAT] clearPrimary', clr.error);
+    }
+    S.vehicles.forEach(x => { x.is_primary = x.id === id; });
+    toast('Primary vehicle updated', 'success');
+    applyRoute();
+  } catch (err){ toast(friendlyError(err), 'error'); }
+}
+
+async function removeVehicle(btnEl){
+  if (!requireConfig()) return;
+  const id = btnEl?.dataset?.delVehicle;
+  const v = S.vehicles.find(x => x.id === id);
+  if (!v) return;
+  const ok = await confirmDialog({
+    title: 'Remove this vehicle?',
+    message: `${v.make} ${v.model} (${v.plate}) will be removed from your garage. Service records already saved stay on the network.`,
+    confirmLabel: 'Remove vehicle'
+  });
+  if (!ok) return;
+  try {
+    const res = await DB.vehicles.remove(id);
+    if (res.error) throw res.error;
+    S.vehicles = S.vehicles.filter(x => x.id !== id);
+    if (S.vehRecords && S.vehRecords.id === id) S.vehRecords = null;
+    if (!S.vehicles.some(x => x.is_primary) && S.vehicles.length){
+      const first = S.vehicles[0];
+      try { await DB.vehicles.update(first.id, { is_primary: true }); first.is_primary = true; } catch {}
+    }
+    toast('Vehicle removed', 'success');
+    applyRoute();
+  } catch (err){ toast(friendlyError(err), 'error'); }
+}
+
 function passportRowHTML(r, owner){
   const km = owner && r.mileage_km != null ? ' · ' + fmtKm(r.mileage_km) : '';
   const verified = (r.verified !== undefined) ? !!r.verified : !!r.booking_id;
@@ -3605,7 +3731,7 @@ async function sharePassport(token){
   const v = S.vehicles.find(x => x.passport_token === token);
   const title = 'Vehicle Passport — ' + (v ? `${v.make} ${v.model}` : 'BHAT NETWORK');
   if (navigator.share){
-    try { await navigator.share({ title, url }); return; } catch { /* fall through to copy */ }
+    try { await navigator.share({ title, url }); return; } catch {}
   }
   try {
     await navigator.clipboard.writeText(url);
@@ -3666,7 +3792,6 @@ function screenRecord(id){
   }
 }
 
-/* --- Discovery --- */
 function shopCardHTML(w){
   const on = openNow(w);
   const svcs = activeServices(w).slice(0, 3).map(s => SVC_CATS[s.category] || s.name);
@@ -3683,6 +3808,52 @@ function shopCardHTML(w){
     </span>
     <svg class="ic" style="margin:auto 0;color:var(--ink-2);width:18px;height:18px" aria-hidden="true"><use href="#i-chev-r"/></svg>
   </a>`;
+}
+
+async function loadWorkshops(force = false){
+  if (!requireConfig() || !S.user) return;
+  const key = JSON.stringify(S.wq);
+  if (!force && S.workshopsKey === key && S.workshops !== null){ applyRoute(); return; }
+  S.workshopsLoading = true;
+  applyRoute();
+  const seq = ++wsSeq;
+  const res = await DB.workshops.list({ term: S.wq.term, cat: S.wq.cat, verified: S.wq.verified });
+  if (seq !== wsSeq) return;
+  S.workshopsLoading = false;
+  S.workshopsKey = key;
+  let list = res.error ? [] : (res.data || []);
+  if (res.error) console.warn('[BHAT] workshops', res.error);
+  if (S.wq.openNow) list = list.filter(w => openNow(w) === true);
+  if (S.location){
+    list.forEach(w => { if (w.dist == null) w.dist = haversine(S.location, w); });
+    list.sort((a, b) => (a.dist ?? Infinity) - (b.dist ?? Infinity));
+  }
+  S.workshops = list;
+  applyRoute();
+}
+
+function requestLocation(){
+  if (!('geolocation' in navigator)){ S.locState = 'unsupported'; applyRoute(); return; }
+  S.locState = 'locating';
+  applyRoute();
+  navigator.geolocation.getCurrentPosition(pos => {
+    S.location = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+    S.locState = 'granted';
+    (S.workshops || []).forEach(w => { w.dist = haversine(S.location, w); });
+    S.workshopsKey = '';
+    loadWorkshops(true);
+  }, err => {
+    S.locState = err && err.code === 1 ? 'denied' : err && err.code === 2 ? 'unavailable' : err && err.code === 3 ? 'timeout' : 'idle';
+    applyRoute();
+  }, { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 });
+}
+
+function clearLocation(){
+  S.location = null;
+  S.locState = 'idle';
+  (S.workshops || []).forEach(w => { w.dist = null; });
+  S.workshopsKey = '';
+  loadWorkshops(true);
 }
 
 function locbarHTML(context){
@@ -3723,7 +3894,11 @@ function screenNearby(){
   });
   $('#nb-loc').innerHTML = locbarHTML('nearby');
   const res = $('#nb-results');
-  if (S.workshops === null || S.workshopsLoading){ res.innerHTML = skelBlock; loadWorkshops(); return; }
+  if (S.workshops === null){
+    res.innerHTML = skelBlock;
+    if (!S.workshopsLoading) loadWorkshops();
+    return;
+  }
   if (!S.workshops.length){
     res.innerHTML = emptyStateHTML({
       title: q.term || q.cat || q.verified || q.openNow ? 'No workshops match your search' : 'No workshops available nearby yet',
@@ -3733,7 +3908,7 @@ function screenNearby(){
     });
     return;
   }
-  res.innerHTML = `<p class="hint" style="padding:0 4px">${S.workshops.length} workshop${S.workshops.length === 1 ? '' : 's'} found</p>` +
+  res.innerHTML = `<p class="hint" style="padding:0 4px">${S.workshopsLoading ? 'Updating results…' : S.workshops.length + ' workshop' + (S.workshops.length === 1 ? '' : 's') + ' found'}</p>` +
     S.workshops.map(shopCardHTML).join('');
 }
 
@@ -3750,6 +3925,7 @@ function screenShopDetail(id){
     el.innerHTML = emptyStateHTML({ title: 'Workshop not found', text: 'This workshop isn\u2019t available on the network right now.' });
     return;
   }
+  if (S.location && w.dist == null) w.dist = haversine(S.location, w);
   const on = openNow(w);
   const svcs = activeServices(w);
   const suspended = w.verification_status === 'SUSPENDED';
@@ -3825,9 +4001,89 @@ async function loadShopDetail(id){
   applyRoute();
 }
 
-/* ==========================================================
-   09c · MARKETPLACE (Part 05)
-   ========================================================== */
+function openBookingSheet(id){
+  const w = S.shopDetail && S.shopDetail.id === id && !S.shopDetail.missing ? S.shopDetail : null;
+  if (!w){ toast('Workshop not available right now.', 'error'); return; }
+  if (!S.vehicles.length){ toast('Add a vehicle first to book a service.', 'info'); return; }
+  S.bookShopW = w;
+  const f = $('#form-book');
+  f.reset();
+  clearErrors(f);
+  $('#bk-workshop').value = id;
+  $('#bk-vehicle').innerHTML = S.vehicles.map(v =>
+    `<option value="${esc(v.id)}">${esc(v.nickname || `${v.make} ${v.model}`)} · ${esc(v.plate)}</option>`).join('');
+  const primary = S.vehicles.find(v => v.is_primary) || S.vehicles[0];
+  if (primary) $('#bk-vehicle').value = primary.id;
+  const opts = ['<option value="">General service request</option>']
+    .concat(activeServices(w).map(s =>
+      `<option value="${esc(s.id)}">${esc(s.name)}${s.price_min != null ? ` — from ₹${Number(s.price_min).toLocaleString('en-IN')}` : ''}</option>`));
+  $('#bk-service').innerHTML = opts.join('');
+  $('#bk-date').min = new Date().toISOString().slice(0, 10);
+  $('#bk-summary').hidden = true;
+  openOverlay($('#sheet-book'));
+  setTimeout(() => $('#bk-date')?.focus(), 140);
+}
+
+function renderBookSummary(){
+  const w = S.bookShopW;
+  const box = $('#bk-summary');
+  if (!w || !box) return;
+  const v = S.vehicles.find(x => x.id === $('#bk-vehicle').value);
+  const s = activeServices(w).find(x => x.id === $('#bk-service').value);
+  const date = $('#bk-date').value, time = $('#bk-time').value;
+  if (!v && !s && !date){ box.hidden = true; return; }
+  const rows = [
+    ['Workshop', w.name],
+    ['Vehicle', v ? `${v.make} ${v.model} · ${v.plate}` : 'Not selected'],
+    ['Service', s ? s.name : 'General service request'],
+    ['Preferred', date ? fmtDate(date) + (time ? ' · ' + fmtTime(time) : '') : 'Flexible']
+  ];
+  if (s && s.price_min != null) rows.push(['Estimated', priceText(s) + ' — final price set by workshop']);
+  box.innerHTML = rows.map(([k, val]) => `<div class="row"><span>${esc(k)}</span><span>${esc(val)}</span></div>`).join('');
+  box.hidden = false;
+}
+
+async function onSubmitBooking(e){
+  e.preventDefault(); if (!requireConfig()) return;
+  const f = e.currentTarget; clearErrors(f);
+  const workshopId = $('#bk-workshop').value;
+  const vehicleId = $('#bk-vehicle').value;
+  const serviceId = $('#bk-service').value;
+  const date = $('#bk-date').value, time = $('#bk-time').value, note = val('bk-note');
+  if (!workshopId){ toast('Workshop not available right now.', 'error'); return; }
+  let ok = true;
+  if (!vehicleId){ fieldError($('#bk-vehicle'), 'Choose your vehicle.'); ok = false; }
+  if (!date){ fieldError($('#bk-date'), 'Choose a preferred date.'); ok = false; }
+  if (note.length > 500){ fieldError($('#bk-note'), 'Keep the note under 500 characters.'); ok = false; }
+  if (!ok) return;
+  const btn = $('#bk-submit');
+  if (btn.disabled) return;
+  setBusy(btn, true);
+  try {
+    const serviceName = serviceId
+      ? (($('#bk-service').selectedOptions[0]?.textContent.split(' — ')[0]) || null)
+      : null;
+    const res = await DB.requests.create({
+      customer_profile_id: S.user.id,
+      request_type: 'booking',
+      workshop_id: workshopId,
+      vehicle_id: vehicleId,
+      service_id: serviceId || null,
+      service_name: serviceName,
+      preferred_date: date,
+      preferred_time: time || null,
+      note: note || null
+    });
+    if (res.error) throw res.error;
+    f.reset();
+    closeOverlay($('#sheet-book'));
+    toast('Booking request sent', 'success');
+    await reloadRequests();
+    goHash('cbooking/' + res.data.id);
+  } catch (err){ toast(friendlyError(err), 'error'); }
+  finally { setBusy(btn, false); }
+}
+
 function prodCardHTML(l){
   const img = (l.photo_urls || [])[0];
   return `<a class="card prod-card" href="#/mlisting/${esc(l.id)}">
@@ -3848,12 +4104,20 @@ function screenMarket(){
       `<button class="fchip" data-mkcat="${k}" aria-pressed="${String(S.mFilter.cat === k)}">${esc(v)}</button>`).join('');
   const res = $('#mk-results');
   const key = JSON.stringify(S.mFilter);
-  if (S.mListings === null || S.mListingsLoading && S.mKey === key){
-    if (S.mListings === null) loadMarket();
+  if (S.mListings === null){
+    loadMarket();
     res.innerHTML = skelBlock;
     return;
   }
-  if (S.mListings === null || S.mKey !== key){ loadMarket(); res.innerHTML = skelBlock; return; }
+  if (S.mKey !== key){
+    loadMarket();
+    res.innerHTML = skelBlock;
+    return;
+  }
+  if (S.mListingsLoading){
+    res.innerHTML = skelBlock;
+    return;
+  }
   if (!S.mListings.length){
     res.innerHTML = emptyStateHTML({
       title: S.mFilter.q || S.mFilter.cat ? 'No listings match your search' : 'Marketplace listings will appear here',
@@ -3868,13 +4132,15 @@ function screenMarket(){
 }
 
 async function loadMarket(force = false){
-  if (!requireConfig()) return;
+  if (!requireConfig() || !S.user) return;
   const key = JSON.stringify(S.mFilter);
   if (!force && S.mKey === key && S.mListings !== null){ applyRoute(); return; }
   S.mKey = key;
   S.mListingsLoading = true;
   if (S.mListings === null) applyRoute();
+  const seq = ++mkSeq;
   const res = await DB.listings.list(S.mFilter);
+  if (seq !== mkSeq) return;
   S.mListingsLoading = false;
   S.mListings = res.error ? [] : (res.data || []);
   if (res.error) console.warn('[BHAT] marketplace', res.error);
@@ -3954,7 +4220,6 @@ function screenMListing(id){
   }
 }
 
-/* --- Quick service --- */
 function screenQuick(){
   $$('#q-issues .issue-card').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.issue === S.qIssue)));
   const qv = $('#q-vehicles');
@@ -3969,7 +4234,7 @@ function screenQuick(){
   }
   if (S.workshops === null && !S.workshopsLoading) loadWorkshops();
   const qs = $('#q-shops');
-  if (S.workshops === null || S.workshopsLoading){
+  if (S.workshops === null){
     qs.innerHTML = '<span class="hint">Loading workshops…</span>';
   } else if (!S.workshops.length){
     qs.innerHTML = '<p class="hint">No workshops on the network yet — you can still send the request and track it here.</p>';
@@ -4009,15 +4274,26 @@ async function onSubmitQuick(e){
     };
     const res = await DB.requests.create(row);
     if (res.error) throw res.error;
-    S.qIssue = ''; S.qVehicle = ''; S.qShop = ''; $('#form-quick').reset();
+    const v = S.vehicles.find(x => x.id === row.vehicle_id) || null;
+    const ws = (S.workshops || []).find(w => w.id === row.workshop_id) || null;
+    S.requests.unshift({ ...res.data, vehicle: v, workshop: ws, updates: [] });
+    S.qIssue = ''; S.qVehicle = ''; S.qShop = '';
+    $('#form-quick').reset();
     toast('Quick Service request sent', 'success');
-    S.requests.unshift(res.data);
     goHash('bookings');
+    reloadRequests();
   } catch (err){ toast(friendlyError(err), 'error'); }
   finally { setBusy(btn, false); }
 }
 
-/* --- Customer bookings --- */
+async function reloadRequests(){
+  if (!sb || !S.user) return;
+  const res = await DB.requests.listMine();
+  if (!res.error) S.requests = res.data || [];
+  else console.warn('[BHAT] requests', res.error);
+  applyRoute();
+}
+
 function screenBookings(){
   $$('#cb-filters button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.cbfilter === S.cbFilter)));
   const el = $('#bookings-body');
@@ -4038,7 +4314,6 @@ function screenBookings(){
     : `<div class="card quiet"><p class="muted" style="font-weight:600">Nothing in this view yet.</p></div>`;
 }
 
-/* --- Customer booking detail --- */
 function extraCardCustHTML(x){
   const chipCls = x.status === 'PENDING' ? 'chip-primary' : x.status === 'APPROVED' ? 'chip-verified' : 'st-CANCELLED';
   return `<div class="card" style="padding:17px">
@@ -4065,6 +4340,7 @@ function renderCBookingDetail(b){
   const ups = (b.updates || []).slice().sort((a, z) => new Date(z.created_at) - new Date(a.created_at));
   const extras = b.additional || [];
   const cancellable = ['REQUESTED','ACCEPTED'].includes(b.status);
+  const editable = b.status === 'REQUESTED' && !isQuick;
   const pendingExtra = extras.some(x => x.status === 'PENDING');
   return `
   <article class="card" style="padding:22px">
@@ -4116,9 +4392,10 @@ function renderCBookingDetail(b){
       : `<div class="card quiet"><div><h3>No updates yet</h3><p>The workshop will post updates here as your service progresses.</p></div></div>`}
   </section>
 
-  ${cancellable ? `<div class="cta-block">
-    <button class="btn btn-ghost btn-block" data-cbook-cancel="${esc(b.id)}">Cancel this request</button>
-    <p class="hint" style="text-align:center">You can cancel until the workshop begins work.</p>
+  ${(editable || cancellable) ? `<div class="cta-block">
+    ${editable ? `<button class="btn btn-primary btn-block" data-edit-booking="${esc(b.id)}"><svg class="ic" aria-hidden="true"><use href="#i-pencil"/></svg>Edit request</button>` : ''}
+    ${cancellable ? `<button class="btn btn-ghost btn-block" data-cbook-cancel="${esc(b.id)}">Cancel this request</button>` : ''}
+    <p class="hint" style="text-align:center">${editable ? 'You can edit or cancel until the workshop begins work.' : 'You can cancel until the workshop begins work.'}</p>
   </div>` : ''}`;
 }
 
@@ -4160,7 +4437,7 @@ async function refreshCBooking(id){
   if (!res.error && res.data){
     S.booking = res.data;
     const i = S.requests.findIndex(x => x.id === id);
-    if (i >= 0) S.requests[i] = { ...S.requests[i], status: res.data.status, updates: res.data.updates };
+    if (i >= 0) S.requests[i] = { ...S.requests[i], status: res.data.status, updates: res.data.updates, additional: res.data.additional };
   }
   applyRoute();
 }
@@ -4187,12 +4464,13 @@ async function respondExtra(status, xid){
     if (res.error) throw res.error;
     toast(status === 'APPROVED' ? 'Additional work approved' : 'Additional work declined', 'success');
     if (S.booking) await refreshCBooking(S.booking.id);
+    else await reloadRequests();
   } catch (err){ toast(friendlyError(err), 'error'); }
 }
 
 function screenProfile(){
   const p = S.profile; if (!p) return;
-  $('#pf-avatar').textContent = initial();
+  $('#pf-avatar').innerHTML = avatarInner(p.avatar_url, initial());
   $('#pf-name').textContent = p.full_name || 'BHAT NETWORK user';
   $('#pf-email').textContent = S.user?.email || '';
   $('#pf-role').textContent = roleLabel(p.role);
@@ -4202,250 +4480,202 @@ function screenProfile(){
   updateInstallRow();
 }
 
-/* --- Vehicle actions (customer) --- */
-function openVehicleSheet(id = null){
-  S.vhEditId = id;
-  const sheet = $('#sheet-vehicle'), f = $('#form-vehicle');
+function openProfileSheet(){
+  const f = $('#form-profile');
   f.reset(); clearErrors(f);
-  $('#sheet-vehicle-title').textContent = id ? 'Edit vehicle' : 'Add vehicle';
-  $('#vh-submit').textContent = id ? 'Save changes' : 'Add vehicle';
-  if (id){
-    const v = S.vehicles.find(x => x.id === id);
-    if (!v) return;
-    $('#vh-nickname').value = v.nickname || '';
-    $('#vh-make').value = v.make || '';
-    $('#vh-model').value = v.model || '';
-    $('#vh-year').value = v.year ?? '';
-    $('#vh-color').value = v.color || '';
-    $('#vh-type').value = v.vehicle_type || 'car';
-    $('#vh-fuel').value = v.fuel_type || '';
-    $('#vh-plate').value = v.plate || '';
-    $('#vh-odo').value = v.odometer_km ?? '';
-  }
-  openOverlay(sheet);
-  setTimeout(() => $('#vh-make').focus(), 140);
+  if (S.pfImgDraft){ URL.revokeObjectURL(S.pfImgDraft.url); S.pfImgDraft = null; }
+  $('#pf-name').value = S.profile?.full_name || '';
+  $('#pf-phone').value = S.profile?.phone || '';
+  renderPfPick();
+  openOverlay($('#sheet-profile'));
+  setTimeout(() => $('#pf-name')?.focus(), 140);
 }
 
-async function onSubmitVehicle(e){
+function renderPfPick(){
+  const el = $('#pf-pick-wrap');
+  if (!el) return;
+  const url = S.pfImgDraft ? S.pfImgDraft.url : (S.profile?.avatar_url || '');
+  el.innerHTML = url
+    ? `<div class="pf-pick has" id="pf-pick"><img src="${esc(url)}" alt="Profile photo preview"></div>
+       <div class="img-actions">
+         <label class="btn btn-ghost" for="file-avatar" style="min-height:44px;padding:0 18px;font-size:14px">Change photo</label>
+         ${S.pfImgDraft
+           ? `<button type="button" class="btn btn-primary" data-pf-save-img style="min-height:44px;padding:0 18px;font-size:14px">Save photo</button>
+              <button type="button" class="btn btn-ghost" data-pf-cancel-img style="min-height:44px;padding:0 18px;font-size:14px">Discard</button>`
+           : ''}
+       </div>`
+    : `<label class="pf-pick" for="file-avatar" id="pf-pick">
+         <svg class="ic" style="width:26px;height:26px" aria-hidden="true"><use href="#i-plus"/></svg>
+       </label>
+       <p class="hint" style="text-align:center;margin-top:8px">Tap to add a profile photo</p>`;
+}
+
+async function onPickAvatar(e){
+  const file = e.target.files?.[0];
+  e.target.value = '';
+  if (!file) return;
+  if (!/^image\//.test(file.type)){ toast('Please choose an image file.', 'error'); return; }
+  if (file.size > 10 * 1024 * 1024){ toast('That image is too large (max 10MB).', 'error'); return; }
+  try {
+    const blob = await downscaleImage(file, 512);
+    if (S.pfImgDraft) URL.revokeObjectURL(S.pfImgDraft.url);
+    S.pfImgDraft = { blob, url: URL.createObjectURL(blob) };
+    renderPfPick();
+  } catch { toast('Could not process that image. Try another one.', 'error'); }
+}
+
+async function saveAvatarUrl(blob){
+  const path = `${S.user.id}/avatar-${Date.now()}.jpg`;
+  const up = await sb.storage.from('profile-photos').upload(path, blob, { contentType: 'image/jpeg', upsert: false });
+  if (up.error) throw up.error;
+  const oldUrl = S.profile?.avatar_url;
+  const url = sb.storage.from('profile-photos').getPublicUrl(path).data.publicUrl;
+  if (oldUrl){
+    const oldPath = storagePathFromUrl(oldUrl, 'profile-photos');
+    if (oldPath) sb.storage.from('profile-photos').remove([oldPath]).catch(() => {});
+  }
+  return url;
+}
+
+async function saveProfilePhotoOnly(){
+  if (!S.pfImgDraft || !requireConfig()) return;
+  const btns = $$('[data-pf-save-img]');
+  btns.forEach(b => setBusy(b, true));
+  try {
+    const url = await saveAvatarUrl(S.pfImgDraft.blob);
+    const res = await DB.profiles.update(S.user.id, { avatar_url: url });
+    if (res.error) throw res.error;
+    S.profile = res.data;
+    URL.revokeObjectURL(S.pfImgDraft.url);
+    S.pfImgDraft = null;
+    renderPfPick();
+    screenProfile();
+    toast('Profile photo saved', 'success');
+  } catch (err){ toast(friendlyError(err), 'error'); }
+  finally { btns.forEach(b => setBusy(b, false)); }
+}
+
+async function onSubmitProfile(e){
   e.preventDefault(); if (!requireConfig()) return;
   const f = e.currentTarget; clearErrors(f);
-  const vehicle = validateVehicle('vh');
-  if (!vehicle){
-    if (!val('vh-make')) fieldError($('#vh-make'), 'Make is required.');
-    if (!val('vh-model')) fieldError($('#vh-model'), 'Model is required.');
-    if (normPlate(val('vh-plate')).length < 3) fieldError($('#vh-plate'), 'Enter the plate number.');
-    return;
-  }
-  const btn = $('#vh-submit');
+  const name = val('pf-name'), phone = val('pf-phone');
+  let ok = true;
+  if (name.length < 2){ fieldError($('#pf-name'), 'Please enter your full name.'); ok = false; }
+  if (!phone){ fieldError($('#pf-phone'), 'Phone number is required.'); ok = false; }
+  else if (!isValidPhone(phone)){ fieldError($('#pf-phone'), 'Enter a valid phone number.'); ok = false; }
+  if (!ok) return;
+  const btn = $('#pf-submit');
   if (btn.disabled) return;
   setBusy(btn, true);
   try {
-    if (S.vhEditId){
-      const res = await DB.vehicles.update(S.vhEditId, vehicle);
-      if (res.error) throw res.error;
-      S.vehicles = S.vehicles.map(v => v.id === S.vhEditId ? res.data : v);
-      toast('Vehicle updated', 'success');
-    } else {
-      const payload = { owner_profile_id: S.user.id, ...vehicle, is_primary: S.vehicles.length === 0 };
-      const res = await DB.vehicles.create(payload);
-      if (res.error) throw res.error;
-      S.vehicles.push(res.data);
-      toast('Vehicle added', 'success');
-    }
-    f.reset(); closeOverlay($('#sheet-vehicle'));
+    let avatar_url = S.profile?.avatar_url || null;
+    if (S.pfImgDraft) avatar_url = await saveAvatarUrl(S.pfImgDraft.blob);
+    const res = await DB.profiles.update(S.user.id, { full_name: name, phone, avatar_url });
+    if (res.error) throw res.error;
+    S.profile = res.data;
+    if (S.pfImgDraft){ URL.revokeObjectURL(S.pfImgDraft.url); S.pfImgDraft = null; }
+    f.reset(); closeOverlay($('#sheet-profile'));
+    toast('Profile saved', 'success');
     applyRoute();
   } catch (err){ toast(friendlyError(err), 'error'); }
   finally { setBusy(btn, false); }
 }
 
-async function removeVehicle(btn){
-  const id = btn.dataset.delVehicle;
-  const v = S.vehicles.find(x => x.id === id);
-  if (!v) return;
-  const ok = await confirmDialog({
-    title: 'Remove this vehicle?',
-    message: `${v.make} ${v.model} (${v.plate}) will be removed from BHAT NETWORK. This can\u2019t be undone.`,
-    confirmLabel: 'Remove vehicle'
-  });
-  if (!ok) return;
-  btn.disabled = true;
-  try {
-    const res = await DB.vehicles.remove(id);
-    if (res.error) throw res.error;
-    S.vehicles = S.vehicles.filter(x => x.id !== id);
-    toast('Vehicle removed', 'success');
-    if (parseHash().name === 'vehicle' && parseHash().param === id) goHash('vehicles');
-    else applyRoute();
-  } catch (err){ toast(friendlyError(err), 'error'); btn.disabled = false; }
-}
-
-async function setPrimaryVehicle(id){
-  if (!requireConfig()) return;
-  try {
-    const a = await DB.vehicles.clearPrimary(S.user.id, id);
-    if (a.error) throw a.error;
-    const b = await DB.vehicles.update(id, { is_primary: true });
-    if (b.error) throw b.error;
-    S.vehicles = S.vehicles.map(v => ({ ...v, is_primary: v.id === id }));
-    toast('Primary vehicle updated', 'success');
-    applyRoute();
-  } catch (err){ toast(friendlyError(err), 'error'); }
-}
-
-/* --- Discovery data (customer) --- */
-async function loadWorkshops(force = false){
-  if (!requireConfig()) return;
-  const key = JSON.stringify(S.wq);
-  if (!force && S.workshopsKey === key && S.workshops !== null) return;
-  S.workshopsKey = key;
-  S.workshopsLoading = true;
-  if (S.workshops === null) applyRoute();
-  const res = await DB.workshops.list(S.wq);
-  S.workshopsLoading = false;
-  if (res.error){ toast(friendlyError(res.error), 'error'); S.workshops = []; }
-  else {
-    let list = (res.data || []).map(w => ({ ...w, services: activeServices(w) }));
-    if (S.location) list = list.map(w => ({ ...w, dist: haversine(S.location, w) }))
-                              .sort((a, b) => (a.dist ?? 1e9) - (b.dist ?? 1e9));
-    if (S.wq.openNow) list = list.filter(w => openNow(w) === true);
-    S.workshops = list;
+function screenComplete(){
+  const f = $('#form-complete');
+  if (f.dataset.loaded !== '1'){
+    $('#cp-phone').value = S.profile?.phone || '';
+    f.dataset.loaded = '1';
   }
-  applyRoute();
 }
-
-/* --- Location (customer) --- */
-function requestLocation(){
-  if (!('geolocation' in navigator)){
-    S.locState = 'unsupported'; applyRoute();
-    return;
-  }
-  S.locState = 'locating'; applyRoute();
-  navigator.geolocation.getCurrentPosition(
-    pos => {
-      S.location = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-      S.locState = 'granted';
-      toast('Location added — workshops sorted by distance', 'success');
-      loadWorkshops(true);
-    },
-    err => {
-      S.locState = err.code === 1 ? 'denied' : err.code === 3 ? 'timeout' : 'unavailable';
-      applyRoute();
-    },
-    { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
-  );
-}
-function clearLocation(){
-  S.location = null; S.locState = 'idle';
-  loadWorkshops(true);
-}
-
-/* --- Booking sheet (customer) --- */
-function openBookingSheet(workshopId){
-  const w = (S.shopDetail && S.shopDetail.id === workshopId) ? S.shopDetail : (S.workshops || []).find(x => x.id === workshopId);
-  if (!w) return;
-  if (w.verification_status === 'SUSPENDED'){
-    toast('This workshop is not accepting bookings right now.', 'info');
-    return;
-  }
-  S.bookShopW = w;
-  const sheet = $('#sheet-book');
-  $('#sheet-book-title').textContent = `Book · ${w.name}`;
-  $('#bk-workshop').value = workshopId;
-  const vsel = $('#bk-vehicle');
-  vsel.innerHTML = S.vehicles.map(v =>
-    `<option value="${esc(v.id)}">${esc(v.nickname || `${v.make} ${v.model}`)} · ${esc(v.plate)}</option>`).join('');
-  const primary = S.vehicles.find(v => v.is_primary);
-  if (primary) vsel.value = primary.id;
-  const ssel = $('#bk-service');
-  ssel.innerHTML = '<option value="">General service request</option>' +
-    activeServices(w).map(s =>
-      `<option value="${esc(s.id)}">${esc(s.name)}${s.price_min != null ? ` — from ₹${Number(s.price_min).toLocaleString('en-IN')}` : ''}</option>`).join('');
-  const d = $('#bk-date'); d.min = new Date().toISOString().slice(0, 10); d.value = '';
-  $('#bk-time').value = '';
-  $('#bk-note').value = '';
-  clearErrors($('#form-book'));
-  renderBookSummary();
-  openOverlay(sheet);
-}
-
-function renderBookSummary(){
-  const el = $('#bk-summary');
-  if (!el) return;
-  const w = S.bookShopW;
-  const vId = $('#bk-vehicle').value;
-  const v = S.vehicles.find(x => x.id === vId);
-  const sSel = $('#bk-service');
-  const svc = sSel.value ? (sSel.selectedOptions[0]?.textContent.split(' — ')[0] || '') : 'General service request';
-  const date = $('#bk-date').value, time = $('#bk-time').value, note = val('bk-note');
-  const rows = [
-    ['Workshop', w?.name || ''],
-    ['Vehicle', v ? `${v.nickname || v.make + ' ' + v.model} · ${v.plate}` : ''],
-    ['Service', svc],
-    ['Date', date ? fmtDate(date) : 'Not set'],
-    ['Time', time ? fmtTime(time) : 'Any time']
-  ];
-  el.hidden = false;
-  el.innerHTML = rows.filter(r => r[1]).map(([k, v2]) =>
-    `<div class="row"><span>${esc(k)}</span><span>${esc(v2)}</span></div>`).join('') +
-    (note ? `<div class="row"><span>Note</span><span>${esc(note)}</span></div>` : '');
-}
-
-async function onSubmitBooking(e){
+async function onSubmitComplete(e){
   e.preventDefault(); if (!requireConfig()) return;
   const f = e.currentTarget; clearErrors(f);
-  const workshopId = $('#bk-workshop').value;
-  const vehicleId = $('#bk-vehicle').value;
-  const serviceId = $('#bk-service').value;
-  const date = $('#bk-date').value;
-  const time = $('#bk-time').value;
-  const note = val('bk-note');
-  const w = S.bookShopW;
-  if (!vehicleId){ fieldError($('#bk-vehicle'), 'Add a vehicle first.'); return; }
-  if (note.length > 500){ fieldError($('#bk-note'), 'Keep the note under 500 characters.'); return; }
-  if (date && w){
-    const h = hoursForDate(w, date);
-    if (h && !h.open){
-      fieldError($('#bk-date'), `${w.name} is closed on ${fmtDate(date)}. Pick an open day.`);
-      return;
-    }
-    if (h && h.open && time && (time < h.from || time >= h.to)){
-      fieldError($('#bk-time'), `Pick a time within opening hours (${fmtTime(h.from)} – ${fmtTime(h.to)}).`);
-      return;
-    }
+  const phone = val('cp-phone');
+  if (!phone){ fieldError($('#cp-phone'), 'Phone number is required.'); return; }
+  if (!isValidPhone(phone)){ fieldError($('#cp-phone'), 'Enter a valid phone number.'); return; }
+  const btn = $('#cp-submit');
+  if (btn.disabled) return;
+  setBusy(btn, true);
+  try {
+    const res = await DB.profiles.update(S.user.id, { phone });
+    if (res.error) throw res.error;
+    S.profile = res.data;
+    f.dataset.loaded = '';
+    toast('Thanks — your account is complete', 'success');
+    redirect(roleHome());
+  } catch (err){ toast(friendlyError(err), 'error'); }
+  finally { setBusy(btn, false); }
+}
+
+async function openBookingEdit(id){
+  const b = S.requests.find(x => x.id === id) || (S.booking && S.booking.id === id ? S.booking : null);
+  if (!b){ toast('Booking not found.', 'error'); return; }
+  if (b.status !== 'REQUESTED'){
+    toast('Only requests that are still pending can be edited.', 'info');
+    return;
   }
-  const btn = $('#bk-submit');
+  S.editBid = id;
+  $('#eb-id').value = id;
+  $('#eb-vehicle').innerHTML = S.vehicles.map(v =>
+    `<option value="${esc(v.id)}">${esc(v.nickname || `${v.make} ${v.model}`)} · ${esc(v.plate)}</option>`).join('');
+  $('#eb-vehicle').value = b.vehicle_id || '';
+  if (S.editShop.wid !== b.workshop_id){
+    const res = await DB.workshops.get(b.workshop_id);
+    S.editShop = { wid: b.workshop_id, services: res.data ? activeServices(res.data) : [] };
+  }
+  const opts = ['<option value="">General service request</option>'];
+  S.editShop.services.forEach(s =>
+    opts.push(`<option value="${esc(s.id)}">${esc(s.name)}${s.price_min != null ? ` — from ₹${Number(s.price_min).toLocaleString('en-IN')}` : ''}</option>`));
+  if (b.service_id && !S.editShop.services.some(s => s.id === b.service_id)){
+    opts.push(`<option value="${esc(b.service_id)}">${esc(b.service_name || 'Selected service')}</option>`);
+  }
+  $('#eb-service').innerHTML = opts.join('');
+  $('#eb-service').value = b.service_id || '';
+  const d = $('#eb-date');
+  d.min = new Date().toISOString().slice(0, 10);
+  d.value = b.preferred_date || '';
+  $('#eb-time').value = b.preferred_time || '';
+  $('#eb-note').value = b.note || '';
+  clearErrors($('#form-edit-booking'));
+  openOverlay($('#sheet-edit-booking'));
+  setTimeout(() => $('#eb-vehicle')?.focus(), 140);
+}
+
+async function onSubmitBookingEdit(e){
+  e.preventDefault(); if (!requireConfig()) return;
+  const id = $('#eb-id').value;
+  const b = S.requests.find(x => x.id === id) || (S.booking && S.booking.id === id ? S.booking : null);
+  if (!b || b.status !== 'REQUESTED'){ closeOverlay($('#sheet-edit-booking')); return; }
+  const f = e.currentTarget; clearErrors(f);
+  const vehicleId = $('#eb-vehicle').value;
+  const serviceId = $('#eb-service').value;
+  const date = $('#eb-date').value, time = $('#eb-time').value, note = val('eb-note');
+  if (!vehicleId){ fieldError($('#eb-vehicle'), 'Choose your vehicle.'); return; }
+  if (note.length > 500){ fieldError($('#eb-note'), 'Keep the note under 500 characters.'); return; }
+  const btn = $('#eb-submit');
   if (btn.disabled) return;
   setBusy(btn, true);
   try {
     const serviceName = serviceId
-      ? ($('#bk-service').selectedOptions[0]?.textContent.split(' — ')[0] || null)
+      ? (($('#eb-service').selectedOptions[0]?.textContent.split(' — ')[0]) || null)
       : null;
-    const row = {
-      customer_profile_id: S.user.id,
-      request_type: 'booking',
-      workshop_id: workshopId || null,
+    const res = await DB.bookings.update(id, {
       vehicle_id: vehicleId,
       service_id: serviceId || null,
       service_name: serviceName,
       preferred_date: date || null,
       preferred_time: time || null,
       note: note || null
-    };
-    const res = await DB.requests.create(row);
+    });
     if (res.error) throw res.error;
-    S.requests.unshift(res.data);
-    closeOverlay($('#sheet-book'));
-    toast('Your request has been sent to the workshop', 'success', 4200);
-    goHash('bookings');
+    f.reset(); closeOverlay($('#sheet-edit-booking'));
+    toast('Booking updated', 'success');
+    await refreshCBooking(id);
   } catch (err){ toast(friendlyError(err), 'error'); }
   finally { setBusy(btn, false); }
 }
 
-/* ==========================================================
-   10 · NOTIFICATIONS (Part 06 — loop fixed)
-   Pure renderer + guarded one-shot loader. No polling, no
-   realtime, no repeated fetches, no repeated offline toasts.
-   ========================================================== */
 function updateBellBadges(){
   $$('.bell-badge').forEach(b => {
     b.textContent = S.unread > 99 ? '99+' : String(S.unread);
@@ -4459,25 +4689,24 @@ async function refreshUnread(){
 }
 
 async function loadNotifications(){
-  // Guard: never run two fetches concurrently; never fetch when signed out.
   if (!sb || !S.user || S.notifLoading) return;
   S.notifLoading = true; S.notifError = null;
-  applyRoute(); // pure render → skeleton (screen fn no longer triggers loads)
+  applyRoute();
   const seq = ++S.notifSeq;
   const res = await DB.notifications.list();
-  if (seq !== S.notifSeq) return; // superseded — discard stale response, keep guard intact
+  if (seq !== S.notifSeq){ S.notifLoading = false; return; }
   S.notifLoading = false;
   if (res.error){
     S.notifError = classifyError(res.error);
     S.notifications = [];
-    console.warn('[BHAT] notifications load failed:', res.error); // dev detail only
+    console.warn('[BHAT] notifications load failed:', res.error);
   } else {
     S.notifLoadedOnce = true;
     S.notifError = null;
     S.notifications = res.data || [];
   }
   refreshUnread();
-  applyRoute(); // final render — does NOT re-trigger the loader
+  applyRoute();
 }
 
 function screenNotifications(){
@@ -4486,7 +4715,6 @@ function screenNotifications(){
   const el = $('#notif-body');
   if (S.notifLoading){ el.innerHTML = skelBlock; return; }
   if (!S.notifLoadedOnce){
-    // One controlled fetch per session; the loader re-renders when done.
     el.innerHTML = skelBlock;
     loadNotifications();
     return;
@@ -4504,7 +4732,6 @@ function screenNotifications(){
     return;
   }
   if (!S.notifications.length){
-    // Empty is NOT an error.
     el.innerHTML = emptyStateHTML({
       title: 'No notifications yet',
       text: S.profile?.role === 'workshop_owner'
@@ -4533,7 +4760,6 @@ function screenNotifications(){
 async function markAllNotifications(){
   const unreadItems = S.notifications.filter(n => !n.read);
   if (!unreadItems.length){ toast('You\u2019re all caught up.', 'info'); return; }
-  // Optimistic, single request, no full re-render (no scroll jump).
   const prev = new Map(unreadItems.map(n => [n.id, n.read]));
   unreadItems.forEach(n => n.read = true);
   S.unread = 0; updateBellBadges();
@@ -4547,9 +4773,6 @@ async function markAllNotifications(){
   }
 }
 
-/* ==========================================================
-   11 · WORKSHOP SPACE
-   ========================================================== */
 function deriveWCustomers(){
   const map = new Map();
   const get = (id, name, phone) => {
@@ -4609,7 +4832,7 @@ function wBookingCardHTML(b){
 function screenDashboard(){
   $('#dash-greet').textContent = greeting() + ',';
   $('#dash-hi').textContent = firstName();
-  $('#dash-avatar').textContent = initial();
+  $('#dash-avatar').innerHTML = avatarInner(S.profile?.avatar_url, initial());
   const wrap = $('#dash-workshop');
   const statsSec = $('#dash-stats-sec');
   const reqEl = $('#dash-requests'), shopEl = $('#dash-inshop');
@@ -5158,7 +5381,6 @@ function screenWCustomerDetail(id){
     </section>`;
 }
 
-/* --- Workshop page: tabs --- */
 function screenWorkshop(){
   const has = !!S.workshop;
   $('#ws-tabs').hidden = !has;
@@ -5239,13 +5461,12 @@ function renderImgBlock(){
   }
 }
 
-function downscaleImage(file){
+function downscaleImage(file, max = 1400){
   return new Promise((resolve, reject) => {
     const img = new Image();
     const url = URL.createObjectURL(file);
     img.onload = () => {
       try {
-        const max = 1400;
         let w = img.width, h = img.height;
         const sc = Math.min(1, max / Math.max(w, h));
         w = Math.round(w * sc); h = Math.round(h * sc);
@@ -5268,7 +5489,7 @@ async function onPickImage(e){
   if (!/^image\//.test(file.type)){ toast('Please choose an image file.', 'error'); return; }
   if (file.size > 10 * 1024 * 1024){ toast('That image is too large (max 10MB).', 'error'); return; }
   try {
-    const blob = await downscaleImage(file);
+    const blob = await downscaleImage(file, 1400);
     if (S.imgDraft?.url) URL.revokeObjectURL(S.imgDraft.url);
     S.imgDraft = { blob, url: URL.createObjectURL(blob) };
     renderImgBlock();
@@ -5356,7 +5577,6 @@ async function onSubmitWorkshop(e){
   finally { setBusy(btn, false); }
 }
 
-/* --- Services management --- */
 function renderServicesPanel(){
   const wrap = $('#services-wrap');
   if (!S.workshop){
@@ -5417,7 +5637,7 @@ function openServiceSheet(id = null){
     $('#sv-active').checked = true;
   }
   openOverlay($('#sheet-service'));
-  setTimeout(() => $('#sv-name').focus(), 140);
+  setTimeout(() => $('#sv-name')?.focus(), 140);
 }
 
 async function onSubmitService(e){
@@ -5495,7 +5715,6 @@ async function deleteService(id){
   } catch (err){ toast(friendlyError(err), 'error'); }
 }
 
-/* --- Marketplace listings management (owner) --- */
 function renderListingsPanel(){
   const wrap = $('#listings-wrap');
   if (!S.workshop){
@@ -5577,7 +5796,7 @@ function openListingSheet(id = null){
   }
   renderListingImgs();
   openOverlay($('#sheet-listing'));
-  setTimeout(() => $('#li-title').focus(), 140);
+  setTimeout(() => $('#li-title')?.focus(), 140);
 }
 
 async function onPickListingImages(e){
@@ -5591,7 +5810,7 @@ async function onPickListingImages(e){
     if (!/^image\//.test(file.type)){ toast('Please choose image files only.', 'error'); continue; }
     if (file.size > 10 * 1024 * 1024){ toast('One of those images is too large (max 10MB).', 'error'); continue; }
     try {
-      const blob = await downscaleImage(file);
+      const blob = await downscaleImage(file, 1400);
       S.listImgDrafts.push({ blob, url: URL.createObjectURL(blob) });
     } catch { toast('Could not process one of the images.', 'error'); }
   }
@@ -5691,7 +5910,6 @@ async function deleteListing(id){
   } catch (err){ toast(friendlyError(err), 'error'); }
 }
 
-/* --- Hours management --- */
 function ensureHoursBuf(){
   if (S.hoursBuf) return;
   const src = {};
@@ -5754,7 +5972,6 @@ async function saveHours(){
   finally { setBusy(btn, false); }
 }
 
-/* --- Workshop history panel --- */
 function renderHistoryResults(){
   const el = $('#wh-results');
   if (!el) return;
@@ -5807,6 +6024,7 @@ function renderHistoryPanel(){
     </div>`;
   renderHistoryResults();
   const search = $('#wh-search');
+  if (!search) return;
   let t = null;
   search.addEventListener('input', () => {
     clearTimeout(t);
@@ -5814,12 +6032,6 @@ function renderHistoryPanel(){
   });
 }
 
-/* ==========================================================
-   11b · ADMIN (Part 06)
-   Reads use admin RLS policies; every write goes through a
-   security-definer RPC that verifies is_admin() and writes
-   an audit_log row. Non-admins get nothing, even via URL.
-   ========================================================== */
 async function loadAdminMetrics(){
   if (!requireConfig() || S.adminLoading || !S.user) return;
   S.adminLoading = true; applyRoute();
@@ -6124,7 +6336,6 @@ async function onSubmitAdminAction(e){
     closeOverlay($('#sheet-adm'));
     S.admAction = null;
     toast('Action recorded in the audit log', 'success');
-    // Invalidate affected caches; the current screen re-fetches via its loader.
     if (a.type === 'verify'){
       S.admin = null; S.adminWorkshops = null; S.adminWL = false;
       S.adminWsDetail = null; S.adminWsLoading = null;
@@ -6141,14 +6352,12 @@ async function onSubmitAdminAction(e){
   finally { setBusy(btn, false); }
 }
 
-/* ==========================================================
-   12 · ROUTER — hash-based, guarded by auth + role
-   ========================================================== */
 const ROUTES = {
   '':                { view: 'view-landing',       shell: 'public' },
   'signin':          { view: 'view-signin',        shell: 'public' },
   'signup':          { view: 'view-signup',        shell: 'public' },
   'onboarding':      { view: 'view-onboard',       shell: 'public', auth: true },
+  'complete-profile':{ view: 'view-complete',      shell: 'public', auth: true },
   'home':            { view: 'view-home',          shell: 'customer', auth: true },
   'vehicles':        { view: 'view-vehicles',      shell: 'customer', auth: true },
   'vehicle':         { view: 'view-vehicle-detail',shell: 'customer', auth: true },
@@ -6186,7 +6395,8 @@ const SCREENS = {
   dashboard: screenDashboard, 'owner-bookings': screenWBookings,
   booking: screenBookingDetail, 'owner-customers': screenWCustomers,
   wcustomer: screenWCustomerDetail, workshop: screenWorkshop,
-  notifications: screenNotifications, // pure renderer — loading handled inside with guards
+  notifications: screenNotifications,
+  'complete-profile': screenComplete,
   admin: screenAdmin, 'admin-workshops': screenAdminWorkshops,
   'admin-workshop': screenAdminWorkshop, 'admin-listings': screenAdminListings,
   'admin-users': screenAdminUsers, 'admin-audit': screenAdminAudit
@@ -6232,6 +6442,7 @@ function applyRoute(){
     if (!r.auth) return redirect(roleHome());
     if (name === 'onboarding' && S.profile.onboarding_complete) return redirect(roleHome());
     if (name !== 'onboarding' && !S.profile.onboarding_complete) return redirect('onboarding');
+    if (name !== 'complete-profile' && !String(S.profile.phone || '').trim()) return redirect('complete-profile');
     if (r.shell === 'customer' && role !== 'customer') return redirect(roleHome());
     if (r.shell === 'owner' && role !== 'workshop_owner') return redirect(roleHome());
     if (r.shell === 'admin' && role !== 'admin') return redirect(roleHome());
@@ -6245,344 +6456,309 @@ function applyRoute(){
     if (activeTab && t.dataset.route === activeTab) t.setAttribute('aria-current', 'page');
     else t.removeAttribute('aria-current');
   });
-  (SCREENS[name] || (() => {}))(param);
-  window.scrollTo(0, 0);
+  try { (SCREENS[name] || (() => {}))(param); }
+  catch (err){ console.error('[BHAT] screen render failed:', err); }
+
+  const routeKey = name + (param ? '/' + param : '');
+  if (routeKey !== lastRouteKey){
+    window.scrollTo(0, 0);
+    lastRouteKey = routeKey;
+  }
+  if (!openOverlays.length) document.body.classList.remove('no-scroll');
 }
 
-/* ==========================================================
-   13 · EVENT BINDINGS
-   ========================================================== */
 let searchTimer = null;
 
 function onGlobalClick(e){
-  const open = e.target.closest('[data-open-sheet]');
-  if (open){
-    const id = open.dataset.openSheet;
-    if (id === 'sheet-vehicle') openVehicleSheet(null);
-    else if (id === 'sheet-service') openServiceSheet(null);
-    else if (id === 'sheet-listing') openListingSheet(null);
-    else {
-      const sh = $('#' + id);
-      openOverlay(sh);
-      setTimeout(() => sh.querySelector('input,select,textarea')?.focus(), 140);
-    }
-    return;
-  }
-  // Controlled retries — exactly one request per click, never automatic.
-  const rbtn = e.target.closest('[data-retry]');
-  if (rbtn){
-    const k = rbtn.dataset.retry;
-    if (k === 'notif'){ S.notifLoadedOnce = false; S.notifError = null; S.notifLoading = false; loadNotifications(); }
-    else if (k === 'metrics'){ S.admin = null; S.adminLoading = false; loadAdminMetrics(); }
-    else if (k === 'aw'){ S.adminWorkshops = null; S.adminWL = false; applyRoute(); }
-    else if (k === 'al'){ S.adminListings = null; S.adminLL = false; applyRoute(); }
-    else if (k === 'au'){ S.adminUsers = null; S.adminUL = false; applyRoute(); }
-    else if (k === 'aa'){ S.adminAudit = null; S.adminAL = false; applyRoute(); }
-    else if (k.startsWith('awd:')){ S.adminWsDetail = null; S.adminWsLoading = null; applyRoute(); }
-    return;
-  }
-  const av = e.target.closest('[data-av]');
-  if (av){
-    openAdminSheet({
-      type: 'verify', id: av.dataset.awid, status: av.dataset.av,
-      title: 'Verification decision',
-      ctx: `${av.dataset.awname || 'Workshop'} → ${VERIFY_STATES[av.dataset.av] || av.dataset.av}`,
-      confirmLabel: 'Record decision'
-    });
-    return;
-  }
-  const al = e.target.closest('[data-al]');
-  if (al){
-    openAdminSheet({
-      type: 'listing', id: al.dataset.alid, status: al.dataset.al,
-      title: 'Listing moderation',
-      ctx: `${al.dataset.alname || 'Listing'} → ${fmtStatus(al.dataset.al)}`,
-      confirmLabel: 'Apply'
-    });
-    return;
-  }
-  const wtab = e.target.closest('[data-wtab]');
-  if (wtab){ S.wTab = wtab.dataset.wtab; applyRoute(); return; }
-  const ctab = e.target.closest('[data-cust-tab]');
-  if (ctab){ S.custTab = ctab.dataset.custTab; applyRoute(); return; }
-  const cbf = e.target.closest('[data-cbfilter]');
-  if (cbf){ S.cbFilter = cbf.dataset.cbfilter; applyRoute(); return; }
-  const dashSvc = e.target.closest('[data-dash-services]');
-  if (dashSvc){ S.wTab = 'services'; goHash('workshop'); setTimeout(() => openServiceSheet(null), 260); return; }
-  const dashHrs = e.target.closest('[data-dash-hours]');
-  if (dashHrs){ S.wTab = 'hours'; goHash('workshop'); return; }
-  const bfilter = e.target.closest('[data-bfilter]');
-  if (bfilter){ S.wBookingFilter = bfilter.dataset.bfilter; applyRoute(); return; }
-  const whcat = e.target.closest('[data-whcat]');
-  if (whcat){ S.whFilter.cat = whcat.dataset.whcat; renderHistoryPanel(); return; }
-  const mkcat = e.target.closest('[data-mkcat]');
-  if (mkcat){ S.mFilter.cat = mkcat.dataset.mkcat; S.mListings = null; loadMarket(true); return; }
-  const edit = e.target.closest('[data-edit-vehicle]');
-  if (edit){ openVehicleSheet(edit.dataset.editVehicle); return; }
-  const prim = e.target.closest('[data-primary-vehicle]');
-  if (prim && !prim.disabled){ setPrimaryVehicle(prim.dataset.primaryVehicle); return; }
-  const del = e.target.closest('[data-del-vehicle]');
-  if (del){ removeVehicle(del); return; }
-  const book = e.target.closest('[data-book-shop]');
-  if (book){ openBookingSheet(book.dataset.bookShop); return; }
-  const svcToggle = e.target.closest('[data-svc-toggle]');
-  if (svcToggle){ toggleService(svcToggle.dataset.svcToggle); return; }
-  const svcEdit = e.target.closest('[data-svc-edit]');
-  if (svcEdit){ openServiceSheet(svcEdit.dataset.svcEdit); return; }
-  const svcDel = e.target.closest('[data-svc-del]');
-  if (svcDel){ deleteService(svcDel.dataset.svcDel); return; }
-  const liEdit = e.target.closest('[data-li-edit]');
-  if (liEdit){ openListingSheet(liEdit.dataset.liEdit); return; }
-  const liDel = e.target.closest('[data-li-del]');
-  if (liDel){ deleteListing(liDel.dataset.liDel); return; }
-  const liRm = e.target.closest('[data-li-rmimg]');
-  if (liRm){
-    const [kind, idxStr] = liRm.dataset.liRmimg.split(':');
-    const idx = parseInt(idxStr, 10);
-    if (kind === 'work'){
-      const [removed] = S.listUrlsWork.splice(idx, 1);
-      if (removed){
-        const p = storagePathFromUrl(removed, 'marketplace-photos');
-        if (p) sb.storage.from('marketplace-photos').remove([p]).catch(() => {});
+  try {
+    const open = e.target.closest('[data-open-sheet]');
+    if (open){
+      const id = open.dataset.openSheet;
+      if (id === 'sheet-vehicle') openVehicleSheet(null);
+      else if (id === 'sheet-service') openServiceSheet(null);
+      else if (id === 'sheet-listing') openListingSheet(null);
+      else if (id === 'sheet-profile') openProfileSheet();
+      else {
+        const sh = $('#' + id);
+        openOverlay(sh);
+        setTimeout(() => sh?.querySelector('input,select,textarea')?.focus(), 140);
       }
-    } else {
-      const [d] = S.listImgDrafts.splice(idx, 1);
-      if (d) URL.revokeObjectURL(d.url);
+      return;
     }
-    renderListingImgs();
-    return;
-  }
-  const swap = e.target.closest('[data-img-swap]');
-  if (swap){
-    const main = $('#mld-main img');
-    if (main){
-      main.src = swap.dataset.imgSwap;
-      $$('[data-img-swap]').forEach(b => b.setAttribute('aria-current', String(b.dataset.imgSwap === swap.dataset.imgSwap)));
+    if (e.target.closest('[data-signout-here]')){ onSignOut(); return; }
+    const rbtn = e.target.closest('[data-retry]');
+    if (rbtn){
+      const k = rbtn.dataset.retry;
+      if (k === 'notif'){ S.notifLoadedOnce = false; S.notifError = null; S.notifLoading = false; S.notifSeq++; loadNotifications(); }
+      else if (k === 'metrics'){ S.admin = null; S.adminLoading = false; loadAdminMetrics(); }
+      else if (k === 'aw'){ S.adminWorkshops = null; S.adminWL = false; applyRoute(); }
+      else if (k === 'al'){ S.adminListings = null; S.adminLL = false; applyRoute(); }
+      else if (k === 'au'){ S.adminUsers = null; S.adminUL = false; applyRoute(); }
+      else if (k === 'aa'){ S.adminAudit = null; S.adminAL = false; applyRoute(); }
+      else if (k.startsWith('awd:')){ S.adminWsDetail = null; S.adminWsLoading = null; applyRoute(); }
+      return;
     }
-    return;
-  }
-  const shareP = e.target.closest('[data-share-passport]');
-  if (shareP){ sharePassport(shareP.dataset.sharePassport); return; }
-  if (e.target.closest('[data-back-hist]')){ history.back(); return; }
-  const hourT = e.target.closest('[data-hour-toggle]');
-  if (hourT){
-    ensureHoursBuf();
-    const d = hourT.dataset.hourToggle;
-    S.hoursBuf[d].is_open = !S.hoursBuf[d].is_open;
-    renderHoursPanel();
-    return;
-  }
-  if (e.target.closest('[data-img-save]')){ saveWorkshopImage(); return; }
-  if (e.target.closest('[data-img-cancel]')){
-    if (S.imgDraft){ URL.revokeObjectURL(S.imgDraft.url); S.imgDraft = null; }
-    renderImgBlock();
-    return;
-  }
-  if (e.target.closest('[data-img-remove]')){ removeWorkshopImage(); return; }
-  if (e.target.closest('[data-intake-skip]')){ skipIntake(); return; }
-
-  const extraNew = e.target.closest('[data-extra-new]');
-  if (extraNew){
-    const b = getBookingById(extraNew.dataset.extraNew);
-    if (!b) return;
-    S.extraBid = b.id;
-    $('#ex-ctx').textContent = `${b.customer?.full_name || 'Customer'} · ${b.vehicle ? `${b.vehicle.make} ${b.vehicle.model} (${b.vehicle.plate})` : ''}`;
-    $('#ex-title').value = ''; $('#ex-reason').value = ''; $('#ex-cost').value = '';
-    clearErrors($('#form-extra'));
-    openOverlay($('#sheet-extra'));
-    setTimeout(() => $('#ex-title').focus(), 140);
-    return;
-  }
-  const xResp = e.target.closest('[data-extra-respond]');
-  if (xResp){ respondExtra(xResp.dataset.extraRespond, xResp.dataset.xid); return; }
-
-  const cCancel = e.target.closest('[data-cbook-cancel]');
-  if (cCancel){ customerCancelBooking(cCancel.dataset.cbookCancel); return; }
-
-  const act = e.target.closest('[data-booking-action]');
-  if (act){
-    const b = getBookingById(act.dataset.bid);
-    if (!b) return;
-    const to = act.dataset.bookingAction;
-    if (to === 'SCHEDULED'){
-      S.schedBookingId = b.id;
-      $('#sc-ctx').textContent = `${b.customer?.full_name || 'Customer'} · ${b.vehicle ? b.vehicle.make + ' ' + b.vehicle.model : 'Service request'}`;
-      $('#sc-datetime').value = b.scheduled_at ? toLocalInput(b.scheduled_at) : '';
-      const dt = $('#sc-datetime');
-      dt.min = toLocalInput(new Date().toISOString());
-      clearErrors($('#form-schedule'));
-      openOverlay($('#sheet-schedule'));
-      setTimeout(() => dt.focus(), 140);
-    } else if (to === 'COMPLETED'){
-      S.recBookingId = b.id;
-      $('#rc-ctx').textContent = `${b.customer?.full_name || 'Customer'} · ${b.vehicle ? `${b.vehicle.make} ${b.vehicle.model} (${b.vehicle.plate})` : ''}`;
-      $('#rc-name').value = b.service?.name || b.service_name || '';
-      $('#rc-cat').value = b.service?.category || 'general';
-      $('#rc-date').value = new Date().toISOString().slice(0, 10);
-      $('#rc-mileage').value = b.vehicle?.odometer_km ?? '';
-      $('#rc-work').value = ''; $('#rc-parts').value = ''; $('#rc-cost').value = ''; $('#rc-notes').value = '';
-      clearErrors($('#form-record'));
-      openOverlay($('#sheet-record'));
-      setTimeout(() => $('#rc-name').focus(), 140);
-    } else if (to === 'VEHICLE_RECEIVED' && b.request_type !== 'quick_service'){
-      S.intakeBid = b.id;
-      $('#in-ctx').textContent = `${b.customer?.full_name || 'Customer'} · ${b.vehicle ? `${b.vehicle.make} ${b.vehicle.model} (${b.vehicle.plate})` : ''}`;
-      $('#in-time').value = toLocalInput(new Date().toISOString());
-      $('#in-mileage').value = '';
-      $('#in-concern').value = ''; $('#in-notes').value = '';
-      clearErrors($('#form-intake'));
-      openOverlay($('#sheet-intake'));
-      setTimeout(() => $('#in-mileage').focus(), 140);
-    } else {
-      doTransition(b, to);
+    const av = e.target.closest('[data-av]');
+    if (av){
+      openAdminSheet({
+        type: 'verify', id: av.dataset.awid, status: av.dataset.av,
+        title: 'Verification decision',
+        ctx: `${av.dataset.awname || 'Workshop'} → ${VERIFY_STATES[av.dataset.av] || av.dataset.av}`,
+        confirmLabel: 'Record decision'
+      });
+      return;
     }
-    return;
-  }
-  const decline = e.target.closest('[data-booking-decline]');
-  if (decline){
-    const b = getBookingById(decline.dataset.bid);
-    if (!b) return;
-    confirmDialog({
-      title: 'Decline this request?',
-      message: 'The customer will be able to see that the booking was declined.',
-      confirmLabel: 'Decline'
-    }).then(ok => { if (ok) doTransition(b, 'REJECTED'); });
-    return;
-  }
-  const cancel = e.target.closest('[data-booking-cancel]');
-  if (cancel){
-    const b = getBookingById(cancel.dataset.bid);
-    if (!b) return;
-    confirmDialog({
-      title: 'Cancel this booking?',
-      message: 'The customer will be able to see that the booking was cancelled by your workshop.',
-      confirmLabel: 'Cancel booking'
-    }).then(ok => { if (ok) doTransition(b, 'CANCELLED'); });
-    return;
-  }
-
-  if (e.target.closest('[data-notif-markall]')){ markAllNotifications(); return; }
-  const notif = e.target.closest('[data-notif]');
-  if (notif){
-    // Mark-as-read: only when actually unread; optimistic, no reload, no re-render.
-    const n = S.notifications.find(x => x.id === notif.dataset.notif);
-    if (n && !n.read){
-      n.read = true;
-      S.unread = Math.max(0, S.unread - 1);
-      updateBellBadges();
-      notif.classList.remove('notif-unread');
-      DB.notifications.markOne(n.id).then(res => {
-        if (res.error){ n.read = false; refreshUnread(); console.warn('[BHAT] markOne', res.error); }
-      }).catch(() => { n.read = false; refreshUnread(); });
+    const al = e.target.closest('[data-al]');
+    if (al){
+      openAdminSheet({
+        type: 'listing', id: al.dataset.alid, status: al.dataset.al,
+        title: 'Listing moderation',
+        ctx: `${al.dataset.alname || 'Listing'} → ${fmtStatus(al.dataset.al)}`,
+        confirmLabel: 'Apply'
+      });
+      return;
     }
-    return; // anchor navigation proceeds normally — no route recursion
-  }
+    const pfSaveImg = e.target.closest('[data-pf-save-img]');
+    if (pfSaveImg){ saveProfilePhotoOnly(); return; }
+    if (e.target.closest('[data-pf-cancel-img]')){
+      if (S.pfImgDraft){ URL.revokeObjectURL(S.pfImgDraft.url); S.pfImgDraft = null; }
+      renderPfPick();
+      return;
+    }
+    const ebtn = e.target.closest('[data-edit-booking]');
+    if (ebtn){ openBookingEdit(ebtn.dataset.editBooking); return; }
+    const wtab = e.target.closest('[data-wtab]');
+    if (wtab){ S.wTab = wtab.dataset.wtab; applyRoute(); return; }
+    const ctab = e.target.closest('[data-cust-tab]');
+    if (ctab){ S.custTab = ctab.dataset.custTab; applyRoute(); return; }
+    const cbf = e.target.closest('[data-cbfilter]');
+    if (cbf){ S.cbFilter = cbf.dataset.cbfilter; applyRoute(); return; }
+    const dashSvc = e.target.closest('[data-dash-services]');
+    if (dashSvc){ S.wTab = 'services'; goHash('workshop'); setTimeout(() => openServiceSheet(null), 260); return; }
+    const dashHrs = e.target.closest('[data-dash-hours]');
+    if (dashHrs){ S.wTab = 'hours'; goHash('workshop'); return; }
+    const bfilter = e.target.closest('[data-bfilter]');
+    if (bfilter){ S.wBookingFilter = bfilter.dataset.bfilter; applyRoute(); return; }
+    const whcat = e.target.closest('[data-whcat]');
+    if (whcat){ S.whFilter.cat = whcat.dataset.whcat; renderHistoryPanel(); return; }
+    const mkcat = e.target.closest('[data-mkcat]');
+    if (mkcat){ S.mFilter.cat = mkcat.dataset.mkcat; S.mListings = null; loadMarket(true); return; }
+    const edit = e.target.closest('[data-edit-vehicle]');
+    if (edit){ openVehicleSheet(edit.dataset.editVehicle); return; }
+    const prim = e.target.closest('[data-primary-vehicle]');
+    if (prim && !prim.disabled){ setPrimaryVehicle(prim.dataset.primaryVehicle); return; }
+    const del = e.target.closest('[data-del-vehicle]');
+    if (del){ removeVehicle(del); return; }
+    const book = e.target.closest('[data-book-shop]');
+    if (book){ openBookingSheet(book.dataset.bookShop); return; }
+    const svcToggle = e.target.closest('[data-svc-toggle]');
+    if (svcToggle){ toggleService(svcToggle.dataset.svcToggle); return; }
+    const svcEdit = e.target.closest('[data-svc-edit]');
+    if (svcEdit){ openServiceSheet(svcEdit.dataset.svcEdit); return; }
+    const svcDel = e.target.closest('[data-svc-del]');
+    if (svcDel){ deleteService(svcDel.dataset.svcDel); return; }
+    const liEdit = e.target.closest('[data-li-edit]');
+    if (liEdit){ openListingSheet(liEdit.dataset.liEdit); return; }
+    const liDel = e.target.closest('[data-li-del]');
+    if (liDel){ deleteListing(liDel.dataset.liDel); return; }
+    const liRm = e.target.closest('[data-li-rmimg]');
+    if (liRm){
+      const [kind, idxStr] = liRm.dataset.liRmimg.split(':');
+      const idx = parseInt(idxStr, 10);
+      if (kind === 'work'){
+        const [removed] = S.listUrlsWork.splice(idx, 1);
+        if (removed){
+          const p = storagePathFromUrl(removed, 'marketplace-photos');
+          if (p) sb.storage.from('marketplace-photos').remove([p]).catch(() => {});
+        }
+      } else {
+        const [d] = S.listImgDrafts.splice(idx, 1);
+        if (d) URL.revokeObjectURL(d.url);
+      }
+      renderListingImgs();
+      return;
+    }
+    const swap = e.target.closest('[data-img-swap]');
+    if (swap){
+      const main = $('#mld-main img');
+      if (main){
+        main.src = swap.dataset.imgSwap;
+        $$('[data-img-swap]').forEach(b => b.setAttribute('aria-current', String(b.dataset.imgSwap === swap.dataset.imgSwap)));
+      }
+      return;
+    }
+    const shareP = e.target.closest('[data-share-passport]');
+    if (shareP){ sharePassport(shareP.dataset.sharePassport); return; }
+    if (e.target.closest('[data-back-hist]')){ history.back(); return; }
+    const hourT = e.target.closest('[data-hour-toggle]');
+    if (hourT){
+      ensureHoursBuf();
+      const d = hourT.dataset.hourToggle;
+      S.hoursBuf[d].is_open = !S.hoursBuf[d].is_open;
+      renderHoursPanel();
+      return;
+    }
+    if (e.target.closest('[data-img-save]')){ saveWorkshopImage(); return; }
+    if (e.target.closest('[data-img-cancel]')){
+      if (S.imgDraft){ URL.revokeObjectURL(S.imgDraft.url); S.imgDraft = null; }
+      renderImgBlock();
+      return;
+    }
+    if (e.target.closest('[data-img-remove]')){ removeWorkshopImage(); return; }
+    if (e.target.closest('[data-intake-skip]')){ skipIntake(); return; }
 
-  const locBtn = e.target.closest('[data-loc-btn]');
-  if (locBtn){ requestLocation(); return; }
-  const locClear = e.target.closest('[data-loc-clear]');
-  if (locClear){ clearLocation(); return; }
-  const issue = e.target.closest('[data-issue]');
-  if (issue){ S.qIssue = S.qIssue === issue.dataset.issue ? '' : issue.dataset.issue; screenQuick(); return; }
-  const qv = e.target.closest('[data-qvehicle]');
-  if (qv){ S.qVehicle = qv.dataset.qvehicle; screenQuick(); return; }
-  const qshop = e.target.closest('[data-qshop]');
-  if (qshop){ S.qShop = qshop.dataset.qshop; screenQuick(); return; }
-  const fchip = e.target.closest('#nb-filters .fchip');
-  if (fchip){
-    const f = fchip.dataset.filter, v = fchip.dataset.val;
-    if (f === 'cat') S.wq.cat = S.wq.cat === v ? '' : v;
-    else if (f === 'verified') S.wq.verified = !S.wq.verified;
-    else if (f === 'openNow') S.wq.openNow = !S.wq.openNow;
-    loadWorkshops();
-    return;
-  }
-  if (e.target.closest('[data-install]')){ onInstallClick(); return; }
-  const close = e.target.closest('[data-close]');
-  if (close){
-    const ov = close.closest('.overlay');
-    if (ov.id === 'dialog-confirm') settleConfirm(false); else closeOverlay(ov);
+    const extraNew = e.target.closest('[data-extra-new]');
+    if (extraNew){
+      const b = getBookingById(extraNew.dataset.extraNew);
+      if (!b) return;
+      S.extraBid = b.id;
+      $('#ex-ctx').textContent = `${b.customer?.full_name || 'Customer'} · ${b.vehicle ? `${b.vehicle.make} ${b.vehicle.model} (${b.vehicle.plate})` : ''}`;
+      $('#ex-title').value = ''; $('#ex-reason').value = ''; $('#ex-cost').value = '';
+      clearErrors($('#form-extra'));
+      openOverlay($('#sheet-extra'));
+      setTimeout(() => $('#ex-title')?.focus(), 140);
+      return;
+    }
+    const xResp = e.target.closest('[data-extra-respond]');
+    if (xResp){ respondExtra(xResp.dataset.extraRespond, xResp.dataset.xid); return; }
+
+    const cCancel = e.target.closest('[data-cbook-cancel]');
+    if (cCancel){ customerCancelBooking(cCancel.dataset.cbookCancel); return; }
+
+    const act = e.target.closest('[data-booking-action]');
+    if (act){
+      const b = getBookingById(act.dataset.bid);
+      if (!b) return;
+      const to = act.dataset.bookingAction;
+      if (to === 'SCHEDULED'){
+        S.schedBookingId = b.id;
+        $('#sc-ctx').textContent = `${b.customer?.full_name || 'Customer'} · ${b.vehicle ? b.vehicle.make + ' ' + b.vehicle.model : 'Service request'}`;
+        $('#sc-datetime').value = b.scheduled_at ? toLocalInput(b.scheduled_at) : '';
+        const dt = $('#sc-datetime');
+        dt.min = toLocalInput(new Date().toISOString());
+        clearErrors($('#form-schedule'));
+        openOverlay($('#sheet-schedule'));
+        setTimeout(() => dt.focus(), 140);
+      } else if (to === 'COMPLETED'){
+        S.recBookingId = b.id;
+        $('#rc-ctx').textContent = `${b.customer?.full_name || 'Customer'} · ${b.vehicle ? `${b.vehicle.make} ${b.vehicle.model} (${b.vehicle.plate})` : ''}`;
+        $('#rc-name').value = b.service?.name || b.service_name || '';
+        $('#rc-cat').value = b.service?.category || 'general';
+        $('#rc-date').value = new Date().toISOString().slice(0, 10);
+        $('#rc-mileage').value = b.vehicle?.odometer_km ?? '';
+        $('#rc-work').value = ''; $('#rc-parts').value = ''; $('#rc-cost').value = ''; $('#rc-notes').value = '';
+        clearErrors($('#form-record'));
+        openOverlay($('#sheet-record'));
+        setTimeout(() => $('#rc-name')?.focus(), 140);
+      } else if (to === 'VEHICLE_RECEIVED' && b.request_type !== 'quick_service'){
+        S.intakeBid = b.id;
+        $('#in-ctx').textContent = `${b.customer?.full_name || 'Customer'} · ${b.vehicle ? `${b.vehicle.make} ${b.vehicle.model} (${b.vehicle.plate})` : ''}`;
+        $('#in-time').value = toLocalInput(new Date().toISOString());
+        $('#in-mileage').value = '';
+        $('#in-concern').value = ''; $('#in-notes').value = '';
+        clearErrors($('#form-intake'));
+        openOverlay($('#sheet-intake'));
+        setTimeout(() => $('#in-mileage')?.focus(), 140);
+      } else {
+        doTransition(b, to);
+      }
+      return;
+    }
+    const decline = e.target.closest('[data-booking-decline]');
+    if (decline){
+      const b = getBookingById(decline.dataset.bid);
+      if (!b) return;
+      confirmDialog({
+        title: 'Decline this request?',
+        message: 'The customer will be able to see that the booking was declined.',
+        confirmLabel: 'Decline'
+      }).then(ok => { if (ok) doTransition(b, 'REJECTED'); });
+      return;
+    }
+    const cancel = e.target.closest('[data-booking-cancel]');
+    if (cancel){
+      const b = getBookingById(cancel.dataset.bid);
+      if (!b) return;
+      confirmDialog({
+        title: 'Cancel this booking?',
+        message: 'The customer will be able to see that the booking was cancelled by your workshop.',
+        confirmLabel: 'Cancel booking'
+      }).then(ok => { if (ok) doTransition(b, 'CANCELLED'); });
+      return;
+    }
+
+    if (e.target.closest('[data-notif-markall]')){ markAllNotifications(); return; }
+    const notif = e.target.closest('[data-notif]');
+    if (notif){
+      const n = S.notifications.find(x => x.id === notif.dataset.notif);
+      if (n && !n.read){
+        n.read = true;
+        S.unread = Math.max(0, S.unread - 1);
+        updateBellBadges();
+        notif.classList.remove('notif-unread');
+        DB.notifications.markOne(n.id).then(res => {
+          if (res.error){ n.read = false; refreshUnread(); console.warn('[BHAT] markOne', res.error); }
+        }).catch(() => { n.read = false; refreshUnread(); });
+      }
+      return;
+    }
+
+    const locBtn = e.target.closest('[data-loc-btn]');
+    if (locBtn){ requestLocation(); return; }
+    const locClear = e.target.closest('[data-loc-clear]');
+    if (locClear){ clearLocation(); return; }
+    const issue = e.target.closest('[data-issue]');
+    if (issue){ S.qIssue = S.qIssue === issue.dataset.issue ? '' : issue.dataset.issue; screenQuick(); return; }
+    const qv = e.target.closest('[data-qvehicle]');
+    if (qv){ S.qVehicle = qv.dataset.qvehicle; screenQuick(); return; }
+    const qshop = e.target.closest('[data-qshop]');
+    if (qshop){ S.qShop = qshop.dataset.qshop; screenQuick(); return; }
+    const fchip = e.target.closest('#nb-filters .fchip');
+    if (fchip){
+      const f = fchip.dataset.filter, v = fchip.dataset.val;
+      if (f === 'cat') S.wq.cat = S.wq.cat === v ? '' : v;
+      else if (f === 'verified') S.wq.verified = !S.wq.verified;
+      else if (f === 'openNow') S.wq.openNow = !S.wq.openNow;
+      loadWorkshops();
+      return;
+    }
+    if (e.target.closest('[data-install]')){ onInstallClick(); return; }
+    const close = e.target.closest('[data-close]');
+    if (close){
+      const ov = close.closest('.overlay');
+      if (ov.id === 'dialog-confirm') settleConfirm(false); else closeOverlay(ov);
+    }
+  } catch (err){
+    console.error('[BHAT] click handler failed:', err);
   }
 }
 
 function onDocChange(e){
-  const o = e.target.closest('[data-hour-open]');
-  if (o){ ensureHoursBuf(); S.hoursBuf[o.dataset.hourOpen].open_time = o.value; return; }
-  const c = e.target.closest('[data-hour-close]');
-  if (c){ ensureHoursBuf(); S.hoursBuf[c.dataset.hourClose].close_time = c.value; return; }
-  if (e.target.id === 'wh-month'){ S.whFilter.month = e.target.value; renderHistoryResults(); return; }
-  const mr = e.target.closest('[data-mrole]');
-  if (mr){
-    const mid = mr.dataset.mrole;
-    const mem = S.adminWsDetail?.members?.find(m => m.id === mid);
-    if (!mem || mem.member_role === mr.value) return;
-    openAdminSheet({
-      type: 'member', id: mid, status: mr.value,
-      title: 'Change member role',
-      ctx: `${mem.profile?.full_name || 'Member'} → ${mr.value.charAt(0).toUpperCase() + mr.value.slice(1)}`,
-      confirmLabel: 'Change role',
-      revert: () => { mr.value = mem.member_role; }
-    });
+  try {
+    const o = e.target.closest('[data-hour-open]');
+    if (o){ ensureHoursBuf(); S.hoursBuf[o.dataset.hourOpen].open_time = o.value; return; }
+    const c = e.target.closest('[data-hour-close]');
+    if (c){ ensureHoursBuf(); S.hoursBuf[c.dataset.hourClose].close_time = c.value; return; }
+    if (e.target.id === 'wh-month'){ S.whFilter.month = e.target.value; renderHistoryResults(); return; }
+    const mr = e.target.closest('[data-mrole]');
+    if (mr){
+      const mid = mr.dataset.mrole;
+      const mem = S.adminWsDetail?.members?.find(m => m.id === mid);
+      if (!mem || mem.member_role === mr.value) return;
+      openAdminSheet({
+        type: 'member', id: mid, status: mr.value,
+        title: 'Change member role',
+        ctx: `${mem.profile?.full_name || 'Member'} → ${mr.value.charAt(0).toUpperCase() + mr.value.slice(1)}`,
+        confirmLabel: 'Change role',
+        revert: () => { mr.value = mem.member_role; }
+      });
+    }
+  } catch (err){
+    console.error('[BHAT] change handler failed:', err);
   }
 }
 
 function bind(){
-  $('#form-signin').addEventListener('submit', onSubmitSignIn);
-  $('#form-signup').addEventListener('submit', onSubmitSignUp);
-  $('#form-ob-c1').addEventListener('submit', onSubmitObC1);
-  $('#form-ob-c2').addEventListener('submit', onSubmitObC2);
-  $('#form-ob-c3').addEventListener('submit', onSubmitObC3);
-  $('#form-ob-o1').addEventListener('submit', onSubmitObO1);
-  $('#form-ob-o2').addEventListener('submit', onSubmitObO2);
-  $('#form-ob-o3').addEventListener('submit', onSubmitObO3);
-  $('#form-vehicle').addEventListener('submit', onSubmitVehicle);
-  $('#form-book').addEventListener('submit', onSubmitBooking);
-  $('#form-book').addEventListener('input', () => { if (!$('#bk-summary').hidden) renderBookSummary(); });
-  $('#form-book').addEventListener('change', renderBookSummary);
-  $('#form-quick').addEventListener('submit', onSubmitQuick);
-  $('#form-service').addEventListener('submit', onSubmitService);
-  $('#form-listing').addEventListener('submit', onSubmitListing);
-  $('#form-schedule').addEventListener('submit', onSubmitSchedule);
-  $('#form-intake').addEventListener('submit', onSubmitIntake);
-  $('#form-extra').addEventListener('submit', onSubmitExtra);
-  $('#form-record').addEventListener('submit', onSubmitRecord);
-  $('#form-workshop').addEventListener('submit', onSubmitWorkshop);
-  $('#form-adm').addEventListener('submit', onSubmitAdminAction);
-  $('#hours-save').addEventListener('click', saveHours);
-  $('#file-wsimg').addEventListener('change', onPickImage);
-  $('#file-limgs').addEventListener('change', onPickListingImages);
-  $('#ob-c-skip').addEventListener('click', () => { if (requireConfig()) finishCustomerOnboarding(null, $('#ob-c-skip')); });
-  $('#pf-signout').addEventListener('click', onSignOut);
-  $('#err-signout').addEventListener('click', onSignOut);
-  $('#err-retry').addEventListener('click', async e => {
-    setBusy(e.currentTarget, true);
-    routingKey = '';
-    await routeSession(true);
-    setBusy(e.currentTarget, false);
-  });
-  $('#confirm-ok').addEventListener('click', () => settleConfirm(true));
-  $('#confirm-cancel').addEventListener('click', () => settleConfirm(false));
-  $('#nb-search').addEventListener('input', e => {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => { S.wq.term = e.target.value; loadWorkshops(); }, 350);
-  });
-  $('#mk-search').addEventListener('input', e => {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => { S.mFilter.q = e.target.value; S.mListings = null; loadMarket(true); }, 350);
-  });
-  $('#cust-search').addEventListener('input', e => {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => { S.custQuery = e.target.value; applyRoute(); }, 250);
-  });
-  $('#aw-search').addEventListener('input', e => {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => { S.adminWq = e.target.value; applyRoute(); }, 250);
-  });
-  $('#au-search').addEventListener('input', e => {
-    clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => { S.adminUq = e.target.value; applyRoute(); }, 250);
-  });
-
   document.addEventListener('click', onGlobalClick);
   document.addEventListener('change', onDocChange);
   document.addEventListener('input', e => {
@@ -6595,19 +6771,106 @@ function bind(){
       return;
     }
     if (e.key === 'Tab' && trapEl){
-      const f = [...trapEl.querySelectorAll('button,[href],input,select,textarea,label')].filter(x => !x.disabled && x.offsetParent !== null);
+      const f = [...trapEl.querySelectorAll('button,[href],input,select,textarea')].filter(x => !x.disabled && x.offsetParent !== null);
       if (!f.length) return;
       const first = f[0], last = f[f.length - 1];
       if (e.shiftKey && document.activeElement === first){ last.focus(); e.preventDefault(); }
       else if (!e.shiftKey && document.activeElement === last){ first.focus(); e.preventDefault(); }
     }
   });
+  window.addEventListener('hashchange', () => {
+    if (S.booted){ applyRoute(); return; }
+    const r = ROUTES[parseHash().name];
+    if (r && !r.auth) applyRoute();
+  });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible' || !S.user || !sb || !navigator.onLine) return;
+    refreshUnread();
+    const h = parseHash();
+    if (h.name === 'cbooking' && h.param) refreshCBooking(h.param);
+    else if (h.name === 'booking' && h.param) refreshBooking(h.param);
+    else if (h.name === 'notifications') loadNotifications();
+  });
+  setInterval(() => {
+    if (S.user && sb && navigator.onLine && document.visibilityState === 'visible') refreshUnread();
+  }, 60000);
+
+  const on = (sel, ev, fn) => {
+    const el = $(sel);
+    if (!el){ console.warn('[BHAT] bind: missing element ' + sel + ' — update your index.html'); return; }
+    el.addEventListener(ev, e => {
+      try { fn(e); }
+      catch (err){ console.error('[BHAT] handler failed for ' + sel, err); }
+    });
+  };
+
+  on('#form-signin','submit',onSubmitSignIn);
+  on('#form-signup','submit',onSubmitSignUp);
+  on('#form-ob-c1','submit',onSubmitObC1);
+  on('#form-ob-c2','submit',onSubmitObC2);
+  on('#form-ob-c3','submit',onSubmitObC3);
+  on('#form-ob-o1','submit',onSubmitObO1);
+  on('#form-ob-o2','submit',onSubmitObO2);
+  on('#form-ob-o3','submit',onSubmitObO3);
+  on('#form-vehicle','submit',onSubmitVehicle);
+  on('#form-book','submit',onSubmitBooking);
+  on('#form-book','input',() => { if (!$('#bk-summary')?.hidden) renderBookSummary(); });
+  on('#form-book','change',renderBookSummary);
+  on('#form-quick','submit',onSubmitQuick);
+  on('#form-service','submit',onSubmitService);
+  on('#form-listing','submit',onSubmitListing);
+  on('#form-schedule','submit',onSubmitSchedule);
+  on('#form-intake','submit',onSubmitIntake);
+  on('#form-extra','submit',onSubmitExtra);
+  on('#form-record','submit',onSubmitRecord);
+  on('#form-workshop','submit',onSubmitWorkshop);
+  on('#form-adm','submit',onSubmitAdminAction);
+  on('#form-profile','submit',onSubmitProfile);
+  on('#form-edit-booking','submit',onSubmitBookingEdit);
+  on('#form-complete','submit',onSubmitComplete);
+  on('#hours-save','click',saveHours);
+  on('#file-wsimg','change',onPickImage);
+  on('#file-limgs','change',onPickListingImages);
+  on('#file-avatar','change',onPickAvatar);
+  on('#ob-c-skip','click',() => { if (requireConfig()) finishCustomerOnboarding(null, $('#ob-c-skip')); });
+  on('#pf-signout','click',onSignOut);
+  on('#err-signout','click',onSignOut);
+  on('#err-retry','click',async e => {
+    setBusy(e.currentTarget, true);
+    routingKey = '';
+    await routeSession(true);
+    setBusy(e.currentTarget, false);
+  });
+  on('#confirm-ok','click',() => settleConfirm(true));
+  on('#confirm-cancel','click',() => settleConfirm(false));
+  on('#nb-search','input',e => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => { S.wq.term = e.target.value; loadWorkshops(); }, 350);
+  });
+  on('#mk-search','input',e => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => { S.mFilter.q = e.target.value; S.mListings = null; loadMarket(true); }, 350);
+  });
+  on('#cust-search','input',e => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => { S.custQuery = e.target.value; applyRoute(); }, 250);
+  });
+  on('#aw-search','input',e => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => { S.adminWq = e.target.value; applyRoute(); }, 250);
+  });
+  on('#au-search','input',e => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => { S.adminUq = e.target.value; applyRoute(); }, 250);
+  });
+
   $$('.overlay').forEach(ov => ov.addEventListener('click', e => {
     if (e.target !== ov) return;
     if (ov.id === 'dialog-confirm') settleConfirm(false); else closeOverlay(ov);
   }));
   $$('.pw-toggle').forEach(b => b.addEventListener('click', () => {
     const input = $(b.getAttribute('data-toggle-pw'));
+    if (!input) return;
     const show = input.type === 'password';
     input.type = show ? 'text' : 'password';
     b.setAttribute('aria-pressed', String(show));
@@ -6615,8 +6878,6 @@ function bind(){
     b.querySelector('.i-eye').hidden = show;
     b.querySelector('.i-eye-off').hidden = !show;
   }));
-
-  window.addEventListener('hashchange', () => { if (S.booted) applyRoute(); });
 }
 
 function fillSelects(){
@@ -6628,9 +6889,6 @@ function fillSelects(){
   });
 }
 
-/* ==========================================================
-   14 · PWA — manifest, icons, install prompt, service worker
-   ========================================================== */
 function drawIcon(size){
   const c = document.createElement('canvas'); c.width = c.height = size;
   const x = c.getContext('2d');
@@ -6662,18 +6920,15 @@ function buildManifest(){
       background_color: '#F7F3EA',
       theme_color: '#092C35',
       icons: [
-        { src: drawIcon(192), sizes: '192x192', type: 'image/png' },
-        { src: drawIcon(512), sizes: '512x512', type: 'image/png' }
+        { src: APP_LOGO, sizes: '512x512', type: 'image/png', purpose: 'any' },
+        { src: drawIcon(512), sizes: '512x512', type: 'image/png', purpose: 'any' },
+        { src: drawIcon(192), sizes: '192x192', type: 'image/png', purpose: 'any' }
       ]
     };
     const link = document.createElement('link');
     link.rel = 'manifest';
     link.href = URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' }));
     document.head.appendChild(link);
-    const apple = document.createElement('link');
-    apple.rel = 'apple-touch-icon';
-    apple.href = drawIcon(180);
-    document.head.appendChild(apple);
   } catch (err){ console.warn('[BHAT] manifest', err); }
 }
 
@@ -6686,18 +6941,12 @@ async function onInstallClick(){
   if (!deferredInstall) return;
   deferredInstall.prompt();
   try { const { outcome } = await deferredInstall.userChoice; if (outcome === 'accepted') toast('Installing BHAT NETWORK\u2026', 'success'); }
-  catch { /* user dismissed */ }
+  catch {}
   deferredInstall = null;
   updateInstallRow();
 }
 
 async function initServiceWorker(){
-  // Service workers only exist in secure http(s) contexts. When the app is
-  // opened via file:// (local testing), we must NOT attempt a fetch or
-  // registration — skip silently and let the app boot normally.
-  // On HTTPS (or localhost) the full PWA behaviour is preserved. Any sw.js
-  // deployed alongside this file must NEVER cache Supabase authenticated
-  // API responses — static assets only (see deployment notes).
   if (!('serviceWorker' in navigator)) return;
   const proto = location.protocol;
   if (proto !== 'https:' && proto !== 'http:'){
@@ -6716,9 +6965,6 @@ async function initServiceWorker(){
   }
 }
 
-/* ==========================================================
-   15 · SPLASH & BOOT
-   ========================================================== */
 function showSplash(){ const sp = $('#splash'); sp.hidden = false; sp.classList.remove('is-hidden'); }
 function hideSplash(){ const sp = $('#splash'); if (sp.hidden) return; sp.classList.add('is-hidden'); setTimeout(() => { sp.hidden = true; }, 320); }
 
@@ -6728,10 +6974,11 @@ async function boot(){
   initServiceWorker().catch(err => console.warn('[BHAT] PWA init skipped:', err));
   updateInstallRow();
   $('#pf-version').textContent = APP_VERSION;
-  // Hardened: a missing/renamed UI section can never stop authentication
-  // and routing from starting — it surfaces as a precise console warning.
   try { bind(); }
-  catch (err) { console.error('[BHAT] A UI section failed to initialise — app continues:', err); }
+  catch (err) {
+    console.error('[BHAT] App bindings failed:', err);
+    toast('Some controls failed to start. Please update your index.html to the latest version.', 'error', 8000);
+  }
 
   window.addEventListener('beforeinstallprompt', e => {
     e.preventDefault(); deferredInstall = e; updateInstallRow();
@@ -6748,6 +6995,7 @@ async function boot(){
   startAuthListener();
   setTimeout(() => {
     if (!S.bootedOnce){
+      S.booted = true; S.bootedOnce = true;
       hideSplash(); applyRoute();
       toast('Having trouble reaching BHAT NETWORK. Check your connection and try again.', 'error', 5000);
     }
