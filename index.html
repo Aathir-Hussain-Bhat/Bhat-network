@@ -358,6 +358,18 @@ a.req-card{display:block;color:inherit;text-decoration:none}
 .tl-item b{font-size:14.5px;display:block}
 .tl-item time{display:block;font-size:12.5px;color:var(--ink-2);font-weight:600;margin-top:1px}
 
+.pb{display:flex;flex-direction:column;gap:8px;margin:2px 0 16px}
+.pb-track{height:8px;border-radius:99px;background:var(--surface-2);border:1px solid var(--line);overflow:hidden}
+.pb-fill{height:100%;border-radius:99px;background:var(--teal);transition:width .25s ease}
+.pb-fill.done{background:var(--success)}
+.pb-fill.closed{background:var(--danger)}
+.pb-now{font:800 12.5px var(--f-body);color:var(--ink-2)}
+.pb-now b{color:var(--navy)}
+.pb-now.closed,.pb-now.closed b{color:var(--danger)}
+.pb-steps{display:flex;justify-content:space-between;font:700 10.5px var(--f-body);color:var(--ink-2);letter-spacing:.01em}
+.pb-steps span.on{color:var(--teal)}
+@media(max-width:559px){.pb-steps{display:none}}
+
 .bk-summary{background:var(--surface-2);border-radius:16px;padding:15px 17px;display:flex;flex-direction:column;gap:8px}
 .bk-summary .row{display:flex;justify-content:space-between;gap:14px;font-size:14px;font-weight:600}
 .bk-summary .row span:first-child{color:var(--ink-2);flex:none}
@@ -2038,12 +2050,19 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </header>
     <form id="form-schedule" novalidate>
       <p class="hint" id="sc-ctx" style="margin-bottom:12px"></p>
-      <div class="field">
-        <label for="sc-datetime">Date &amp; time</label>
-        <input id="sc-datetime" type="datetime-local">
-        <span class="field-error" aria-live="polite"></span>
+      <div class="form-grid">
+        <div class="field">
+          <label for="sc-datetime">Date &amp; time</label>
+          <input id="sc-datetime" type="datetime-local">
+          <span class="field-error" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label for="sc-estimate">Estimated completion <span class="muted">(optional)</span></label>
+          <input id="sc-estimate" type="datetime-local">
+          <span class="field-error" aria-live="polite"></span>
+        </div>
       </div>
-      <p class="hint" style="margin-top:10px">Must fall within your workshop&rsquo;s opening hours. The customer sees this time once saved.</p>
+      <p class="hint" style="margin-top:10px">Must fall within your workshop&rsquo;s opening hours. The customer sees the appointment and the estimate once saved.</p>
       <div class="form-actions">
         <button class="btn btn-primary btn-block" id="sc-submit" type="submit">Confirm schedule</button>
       </div>
@@ -2229,7 +2248,7 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
 const SUPABASE_URL = 'https://dsjjhzikpnaofzjrrvyd.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzampoemlrcG5hb2Z6anJydnlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE0NDgxMzksImV4cCI6MjEwNzAyNDEzOX0.zmP6eCD5oLA3W72_Y8E3ObNpKdlnMJcEbIXbmp7QgC0';
 const APP_LOGO = 'https://res.cloudinary.com/prjgzqvy/image/upload/v1791482355/file_000000004eb861f79937c93d00e0ffe8_zyxoxf.png';
-const APP_VERSION = 'v0.8.0';
+const APP_VERSION = 'v0.9.0';
 
 const sb = window.supabase
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
@@ -2287,6 +2306,10 @@ let lastRouteKey = '';
 let openOverlays = [];
 let wsSeq = 0;
 let mkSeq = 0;
+let rtChannel = null;
+let rtUserId = null;
+let rtOk = false;
+const selfWrites = new Map();
 
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -2627,6 +2650,28 @@ function errorBlock(title, text, retry){
 const skelBlock = '<div class="skeleton"></div>';
 const verifiedChip = '<span class="chip chip-verified"><svg class="ic" aria-hidden="true"><use href="#i-shield-check"/></svg>Verified</span>';
 
+function progressBarHTML(b){
+  const quick = b.request_type === 'quick_service';
+  const steps = quick
+    ? [{s:'REQUESTED',l:'Sent'},{s:'ACCEPTED',l:'Accepted'},{s:'DISPATCHED',l:'Dispatched'},{s:'IN_PROGRESS',l:'In service'},{s:'RESOLVED',l:'Resolved'}]
+    : [{s:'REQUESTED',l:'Sent'},{s:'ACCEPTED',l:'Accepted'},{s:'SCHEDULED',l:'Scheduled'},{s:'VEHICLE_RECEIVED',l:'Received'},{s:'IN_SERVICE',l:'In service'},{s:'READY',l:'Ready'},{s:'COMPLETED',l:'Completed'}];
+  const idx = steps.findIndex(x => x.s === b.status);
+  const closed = b.status === 'CANCELLED' || b.status === 'REJECTED';
+  const finished = idx === steps.length - 1;
+  const pct = (closed || finished) ? 100 : (idx < 0 ? 0 : Math.round((idx / (steps.length - 1)) * 100));
+  const fillCls = closed ? ' closed' : finished ? ' done' : '';
+  const label = closed
+    ? `This booking was ${fmtStatus(b.status).toLowerCase()}.`
+    : idx < 0
+      ? `Status: ${fmtStatus(b.status)}`
+      : `Step ${idx + 1} of ${steps.length} — ${steps[idx].l}`;
+  return `<div class="pb">
+    <div class="pb-track"><div class="pb-fill${fillCls}" style="width:${pct}%"></div></div>
+    <p class="pb-now${closed ? ' closed' : ''}"><b>${esc(label)}</b></p>
+    <div class="pb-steps">${steps.map((x, i) => `<span class="${i <= idx ? 'on' : ''}">${esc(x.l)}</span>`).join('')}</div>
+  </div>`;
+}
+
 function timelineHTML(b){
   const hist = (b.history || []).slice().sort((a, z) => new Date(a.changed_at) - new Date(z.changed_at));
   const evs = [{ status: 'REQUESTED', at: b.created_at }];
@@ -2727,7 +2772,7 @@ const DB = {
   },
   requests: {
     listMine: () => sb.from('service_requests')
-      .select(`id,request_type,issue_type,service_name,preferred_date,preferred_time,note,status,created_at,updated_at,workshop_id,vehicle_id,
+      .select(`id,request_type,issue_type,service_name,preferred_date,preferred_time,scheduled_at,estimated_ready_at,note,status,created_at,updated_at,workshop_id,vehicle_id,
                workshop:workshops(id,name,area,district),
                vehicle:vehicles(${VEH_COLS}),
                updates:booking_updates(id,title,message,created_at)`)
@@ -2984,6 +3029,7 @@ async function loadRoleData(){
     if (S.workshop) loadWorkshopSpace();
     else { S.wBookings = []; S.wRecords = []; }
   }
+  setupRealtime();
   refreshUnread();
   applyRoute();
 }
@@ -3023,6 +3069,7 @@ async function routeSession(force = false){
 }
 
 function resetState(){
+  teardownRealtime();
   if (S.imgDraft){ URL.revokeObjectURL(S.imgDraft.url); }
   if (S.pfImgDraft){ URL.revokeObjectURL(S.pfImgDraft.url); }
   S.listImgDrafts.forEach(d => URL.revokeObjectURL(d.url));
@@ -3284,9 +3331,11 @@ function vehicleCardHTML(v){
 function requestCardHTML(r){
   const isQuick = r.request_type === 'quick_service';
   const title = isQuick ? (ISSUE_TYPES[r.issue_type] || 'Quick Service') : (r.service_name || 'Service request');
-  const when = r.preferred_date
-    ? 'Preferred ' + fmtDate(r.preferred_date) + (r.preferred_time ? ' · ' + fmtTime(r.preferred_time) : '')
-    : 'Sent ' + fmtDate(r.created_at);
+  const when = r.scheduled_at
+    ? 'Appointment ' + fmtDateTime(r.scheduled_at)
+    : r.preferred_date
+      ? 'Preferred ' + fmtDate(r.preferred_date) + (r.preferred_time ? ' · ' + fmtTime(r.preferred_time) : '')
+      : 'Sent ' + fmtDate(r.created_at);
   const ups = (r.updates || []).slice().sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
   return `<a class="card req-card" href="#/cbooking/${esc(r.id)}">
     <div class="req-top">
@@ -4075,6 +4124,7 @@ async function onSubmitBooking(e){
       note: note || null
     });
     if (res.error) throw res.error;
+    markSelfWrite(res.data.id);
     f.reset();
     closeOverlay($('#sheet-book'));
     toast('Booking request sent', 'success');
@@ -4274,6 +4324,7 @@ async function onSubmitQuick(e){
     };
     const res = await DB.requests.create(row);
     if (res.error) throw res.error;
+    markSelfWrite(res.data.id);
     const v = S.vehicles.find(x => x.id === row.vehicle_id) || null;
     const ws = (S.workshops || []).find(w => w.id === row.workshop_id) || null;
     S.requests.unshift({ ...res.data, vehicle: v, workshop: ws, updates: [] });
@@ -4342,6 +4393,7 @@ function renderCBookingDetail(b){
   const cancellable = ['REQUESTED','ACCEPTED'].includes(b.status);
   const editable = b.status === 'REQUESTED' && !isQuick;
   const pendingExtra = extras.some(x => x.status === 'PENDING');
+  const showEst = !['COMPLETED','CANCELLED','REJECTED','RESOLVED'].includes(b.status);
   return `
   <article class="card" style="padding:22px">
     <div class="req-top">
@@ -4356,7 +4408,7 @@ function renderCBookingDetail(b){
 
   <section class="home-sec" style="margin-top:22px">
     <p class="sec-label">Progress</p>
-    <div class="card" style="padding:18px 18px 10px">${timelineHTML(b)}</div>
+    <div class="card" style="padding:18px 18px 10px">${progressBarHTML(b)}${timelineHTML(b)}</div>
   </section>
 
   <section class="home-sec">
@@ -4370,6 +4422,8 @@ function renderCBookingDetail(b){
         <p>${esc(fmtDate(b.preferred_date))}${b.preferred_time ? ' · ' + esc(fmtTime(b.preferred_time)) : ''}<small>Your preferred slot</small></p></div>` : ''}
       ${b.scheduled_at ? `<div class="info-row"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>
         <p>${esc(fmtDateTime(b.scheduled_at))}<small>Confirmed appointment</small></p></div>` : ''}
+      ${showEst ? `<div class="info-row"><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>
+        <p>${b.estimated_ready_at ? esc(fmtDateTime(b.estimated_ready_at)) : 'Time not yet estimated'}<small>Estimated completion</small></p></div>` : ''}
       ${b.note ? `<div class="info-row"><svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>
         <p>${esc(b.note)}<small>Your note</small></p></div>` : ''}
       <div class="info-row"><svg class="ic" aria-hidden="true"><use href="#i-history"/></svg>
@@ -4401,7 +4455,7 @@ function renderCBookingDetail(b){
 
 function screenCBookingDetail(id){
   const el = $('#cbooking-body');
-  let b = S.requests.find(x => x.id === id) || (S.booking && S.booking.id === id ? S.booking : null);
+  let b = (S.booking && S.booking.id === id ? S.booking : null) || S.requests.find(x => x.id === id) || null;
   if (!b){
     if (S.bookingLoading !== id){
       S.bookingLoading = id;
@@ -4413,17 +4467,23 @@ function screenCBookingDetail(id){
           return;
         }
         S.booking = res.data;
+        const i = S.requests.findIndex(x => x.id === id);
+        if (i >= 0) S.requests[i] = res.data;
+        else S.requests.unshift(res.data);
         const h = parseHash();
         if (h.name === 'cbooking' && h.param === id) applyRoute();
       });
+    } else {
+      el.innerHTML = skelBlock;
     }
     return;
   }
   if (!b.history){
     DB.bookings.get(id).then(res => {
-      if (!res.error && res.data){ S.booking = res.data;
+      if (!res.error && res.data){
+        S.booking = res.data;
         const i = S.requests.findIndex(x => x.id === id);
-        if (i >= 0) S.requests[i] = { ...S.requests[i], status: res.data.status };
+        if (i >= 0) S.requests[i] = res.data;
         const h = parseHash();
         if (h.name === 'cbooking' && h.param === id) applyRoute();
       }
@@ -4437,7 +4497,8 @@ async function refreshCBooking(id){
   if (!res.error && res.data){
     S.booking = res.data;
     const i = S.requests.findIndex(x => x.id === id);
-    if (i >= 0) S.requests[i] = { ...S.requests[i], status: res.data.status, updates: res.data.updates, additional: res.data.additional };
+    if (i >= 0) S.requests[i] = res.data;
+    else S.requests.unshift(res.data);
   }
   applyRoute();
 }
@@ -4450,6 +4511,7 @@ async function customerCancelBooking(id){
   });
   if (!ok) return;
   try {
+    markSelfWrite(id);
     const res = await DB.bookings.update(id, { status: 'CANCELLED' });
     if (res.error) throw res.error;
     toast('Booking cancelled', 'success');
@@ -4660,6 +4722,7 @@ async function onSubmitBookingEdit(e){
     const serviceName = serviceId
       ? (($('#eb-service').selectedOptions[0]?.textContent.split(' — ')[0]) || null)
       : null;
+    markSelfWrite(id);
     const res = await DB.bookings.update(id, {
       vehicle_id: vehicleId,
       service_id: serviceId || null,
@@ -4771,6 +4834,58 @@ async function markAllNotifications(){
     applyRoute();
     toast(friendlyError(res.error), 'error');
   }
+}
+
+function markSelfWrite(id){
+  if (!id) return;
+  selfWrites.set(id, Date.now() + 2000);
+}
+function isSelfWrite(id){
+  const t = selfWrites.get(id);
+  if (!t) return false;
+  if (Date.now() > t){ selfWrites.delete(id); return false; }
+  return true;
+}
+function teardownRealtime(){
+  if (rtChannel && sb){ try { sb.removeChannel(rtChannel); } catch {} }
+  rtChannel = null; rtUserId = null; rtOk = false;
+  selfWrites.clear();
+}
+function setupRealtime(){
+  if (!sb || !S.user || !S.profile) return;
+  if (S.profile.role === 'admin') return;
+  if (rtChannel && rtUserId === S.user.id) return;
+  teardownRealtime();
+  rtUserId = S.user.id;
+  try {
+    rtChannel = sb.channel('bhat-bookings-' + S.user.id);
+    rtChannel.on('postgres_changes', { event: '*', schema: 'public', table: 'service_requests' }, onBookingChange);
+    rtChannel.subscribe(status => { rtOk = status === 'SUBSCRIBED'; });
+  } catch (err){
+    console.warn('[BHAT] realtime unavailable, using interval fallback:', err);
+    rtChannel = null; rtOk = false;
+  }
+}
+function onBookingChange(payload){
+  try {
+    if (!S.user || !S.profile || !S.booted) return;
+    const row = (payload.new && payload.new.id) ? payload.new : (payload.old || {});
+    const id = row.id;
+    if (!id || isSelfWrite(id)) return;
+    if (S.profile.role === 'customer'){
+      if (row.customer_profile_id !== S.user.id) return;
+      const h = parseHash();
+      if (h.name === 'cbooking' && h.param === id) refreshCBooking(id);
+      else reloadRequests();
+    } else if (S.profile.role === 'workshop_owner'){
+      if (!S.workshop || row.workshop_id !== S.workshop.id) return;
+      const known = getBookingById(id);
+      if (known && known.status === row.status &&
+          String(known.estimated_ready_at ?? '') === String(row.estimated_ready_at ?? '') &&
+          String(known.updated_at ?? '') === String(row.updated_at)) return;
+      refreshBooking(id);
+    }
+  } catch (err){ console.warn('[BHAT] realtime event skipped:', err); }
 }
 
 function deriveWCustomers(){
@@ -4974,6 +5089,8 @@ function renderBookingDetail(b){
   const canExtra = ['VEHICLE_RECEIVED','IN_SERVICE'].includes(b.status);
   const intake = S.intakeCache[b.id];
   const showIntake = !isQuick && ['SCHEDULED','VEHICLE_RECEIVED','IN_SERVICE','READY','COMPLETED'].includes(b.status);
+  const canEstimate = ['SCHEDULED','VEHICLE_RECEIVED','IN_SERVICE','DISPATCHED','IN_PROGRESS'].includes(b.status);
+  const estTxt = b.estimated_ready_at ? fmtDateTime(b.estimated_ready_at) : '';
   return `
   <article class="card" style="padding:22px">
     <div class="req-top">
@@ -5031,6 +5148,24 @@ function renderBookingDetail(b){
     </div>
   </section>
 
+  <section class="home-sec">
+    <p class="sec-label">Estimated completion</p>
+    <div class="card" style="padding:16px 18px">
+      <p style="font-size:15px;font-weight:700;color:${estTxt ? 'var(--navy)' : 'var(--ink-2)'}">${estTxt ? esc(estTxt) : 'Time not yet estimated'}</p>
+      ${estTxt
+        ? '<p class="veh-odo">The customer sees this same time on their booking.</p>'
+        : '<p class="veh-odo">Set an estimate so the customer knows when to expect the vehicle.</p>'}
+      ${canEstimate ? `
+      <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;align-items:flex-end">
+        <div class="field" style="flex:1;min-width:200px;margin:0">
+          <label for="est-input">Update estimate</label>
+          <input id="est-input" type="datetime-local" value="${esc(b.estimated_ready_at ? toLocalInput(b.estimated_ready_at) : '')}">
+        </div>
+        <button type="button" class="btn btn-primary" style="min-height:52px" data-estimate-save="${esc(b.id)}">Save estimate</button>
+      </div>` : ''}
+    </div>
+  </section>
+
   ${showIntake ? `<section class="home-sec">
     <p class="sec-label">Workshop intake</p>
     ${intakeSectionHTML(b, intake)}
@@ -5046,7 +5181,7 @@ function renderBookingDetail(b){
 
   <section class="home-sec">
     <p class="sec-label">Timeline</p>
-    <div class="card" style="padding:18px 18px 10px">${timelineHTML(b)}</div>
+    <div class="card" style="padding:18px 18px 10px">${progressBarHTML(b)}${timelineHTML(b)}</div>
   </section>
 
   <section class="home-sec">
@@ -5113,6 +5248,7 @@ async function refreshBooking(id){
 async function doTransition(b, to, extra = {}, message = null){
   if (!requireConfig()) return false;
   try {
+    markSelfWrite(b.id);
     const res = await DB.bookings.update(b.id, { status: to, ...extra });
     if (res.error) throw res.error;
     const upd = await DB.updates.create({
@@ -5139,6 +5275,13 @@ async function onSubmitSchedule(e){
   if (!dt){ fieldError($('#sc-datetime'), 'Choose a date and time.'); return; }
   const d = new Date(dt);
   if (Number.isNaN(d.getTime())){ fieldError($('#sc-datetime'), 'Choose a valid date and time.'); return; }
+  const estRaw = val('sc-estimate');
+  let estIso = b.estimated_ready_at || null;
+  if (estRaw){
+    const ed = new Date(estRaw);
+    if (Number.isNaN(ed.getTime())){ fieldError($('#sc-estimate'), 'Enter a valid estimated completion time.'); return; }
+    estIso = ed.toISOString();
+  }
   const w = S.workshop;
   if (w){
     const dateStr = dt.slice(0, 10), timeStr = dt.slice(11, 16);
@@ -5152,7 +5295,7 @@ async function onSubmitSchedule(e){
       return;
     }
   }
-  const ok = await doTransition(b, 'SCHEDULED', { scheduled_at: d.toISOString() },
+  const ok = await doTransition(b, 'SCHEDULED', { scheduled_at: d.toISOString(), estimated_ready_at: estIso },
     'Appointment: ' + fmtDateTime(d.toISOString()));
   if (ok) closeOverlay($('#sheet-schedule'));
 }
@@ -6469,7 +6612,7 @@ function applyRoute(){
 
 let searchTimer = null;
 
-function onGlobalClick(e){
+async function onGlobalClick(e){
   try {
     const open = e.target.closest('[data-open-sheet]');
     if (open){
@@ -6625,6 +6768,28 @@ function onGlobalClick(e){
     const cCancel = e.target.closest('[data-cbook-cancel]');
     if (cCancel){ customerCancelBooking(cCancel.dataset.cbookCancel); return; }
 
+    const estSave = e.target.closest('[data-estimate-save]');
+    if (estSave){
+      if (estSave.disabled) return;
+      const id = estSave.dataset.estimateSave;
+      const input = $('#est-input');
+      const raw = (input?.value || '').trim();
+      if (!raw){ toast('Choose a date and time for the estimate first.', 'info'); return; }
+      const d = new Date(raw);
+      if (Number.isNaN(d.getTime())){ toast('Choose a valid date and time.', 'error'); return; }
+      setBusy(estSave, true);
+      markSelfWrite(id);
+      const res = await DB.bookings.update(id, { estimated_ready_at: d.toISOString() });
+      if (res.error){
+        setBusy(estSave, false);
+        toast(friendlyError(res.error), 'error');
+        return;
+      }
+      toast('Estimated completion time saved', 'success');
+      await refreshBooking(id);
+      return;
+    }
+
     const act = e.target.closest('[data-booking-action]');
     if (act){
       const b = getBookingById(act.dataset.bid);
@@ -6636,6 +6801,7 @@ function onGlobalClick(e){
         $('#sc-datetime').value = b.scheduled_at ? toLocalInput(b.scheduled_at) : '';
         const dt = $('#sc-datetime');
         dt.min = toLocalInput(new Date().toISOString());
+        $('#sc-estimate').value = b.estimated_ready_at ? toLocalInput(b.estimated_ready_at) : '';
         clearErrors($('#form-schedule'));
         openOverlay($('#sheet-schedule'));
         setTimeout(() => dt.focus(), 140);
@@ -6660,7 +6826,9 @@ function onGlobalClick(e){
         openOverlay($('#sheet-intake'));
         setTimeout(() => $('#in-mileage')?.focus(), 140);
       } else {
-        doTransition(b, to);
+        if (act.disabled) return;
+        setBusy(act, true);
+        doTransition(b, to).then(ok => { if (!ok) setBusy(act, false); });
       }
       return;
     }
@@ -6786,13 +6954,20 @@ function bind(){
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState !== 'visible' || !S.user || !sb || !navigator.onLine) return;
     refreshUnread();
+    if (S.profile?.role === 'customer') reloadRequests();
     const h = parseHash();
     if (h.name === 'cbooking' && h.param) refreshCBooking(h.param);
     else if (h.name === 'booking' && h.param) refreshBooking(h.param);
     else if (h.name === 'notifications') loadNotifications();
   });
   setInterval(() => {
-    if (S.user && sb && navigator.onLine && document.visibilityState === 'visible') refreshUnread();
+    if (S.user && sb && navigator.onLine && document.visibilityState === 'visible'){
+      refreshUnread();
+      if (!rtOk && S.profile){
+        if (S.profile.role === 'customer') reloadRequests();
+        else if (S.profile.role === 'workshop_owner' && S.workshop) loadWorkshopSpace();
+      }
+    }
   }, 60000);
 
   const on = (sel, ev, fn) => {
@@ -7006,4 +7181,4 @@ boot();
 })();
 </script>
 </body>
-   </html>
+  </html>
