@@ -282,6 +282,13 @@ svg.ic{width:20px;height:20px;flex:none}
 .fchip{flex:none;min-height:40px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line-2);background:var(--surface);font:700 13.5px var(--f-body);color:var(--ink-2);transition:all .16s ease}
 .fchip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#F7F3EA}
 
+.mk-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.mk-controls input,.mk-controls select{min-height:42px;padding:8px 14px;border:1.5px solid var(--line);border-radius:999px;background:var(--surface);font:700 13.5px var(--f-body);color:var(--ink)}
+.mk-controls input{width:110px;flex:none}
+.mk-controls select{max-width:190px}
+.mk-controls input:focus,.mk-controls select:focus{outline:none;border-color:var(--teal)}
+.mk-reset{min-height:42px;padding:0 16px;font-size:13.5px}
+
 .shop-card{display:flex;gap:14px;padding:15px;border-radius:22px;text-decoration:none;color:inherit;transition:transform .16s ease}
 .shop-card:hover{transform:translateY(-1px)}
 .shop-thumb{width:62px;height:62px;border-radius:16px;overflow:hidden;background:var(--surface-2);display:grid;place-items:center;color:var(--teal);flex:none}
@@ -338,6 +345,31 @@ a.req-card{display:block;color:inherit;text-decoration:none}
 .req-meta .ic{width:15px;height:15px;flex:none}
 .req-note{margin-top:10px;padding:10px 13px;background:var(--surface-2);border-radius:12px;font-size:13px;font-weight:500;color:var(--ink-2)}
 .notif-unread{border-left:3px solid var(--saffron)}
+
+.svc2{padding:14px 16px;border-radius:20px;display:flex;flex-direction:column;gap:10px}
+.svc2-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.svc2-who{display:flex;align-items:center;gap:10px;min-width:0;text-decoration:none;color:inherit}
+.svc2-ava{width:40px;height:40px;font-size:15px;box-shadow:none}
+.svc2-id{display:flex;flex-direction:column;min-width:0}
+.svc2-id strong{font:600 15.5px var(--f-display);color:var(--navy);overflow-wrap:anywhere}
+.svc2-tel{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.svc2-mid{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.svc2-veh{font:700 13.5px var(--f-body);color:var(--ink)}
+.svc2-srv{font-size:13px;font-weight:600;color:var(--ink-2);overflow-wrap:anywhere}
+.svc2-meta{display:flex;flex-direction:column;gap:4px;font-size:12.5px;font-weight:600;color:var(--ink-2)}
+.svc2-meta span{display:flex;align-items:center;gap:7px;overflow-wrap:anywhere}
+.svc2-meta .ic{width:14px;height:14px;flex:none;color:var(--teal)}
+.svc2-actions{display:flex;gap:8px;flex-wrap:wrap}
+.svc2-actions .btn{flex:1 1 auto;min-width:88px;min-height:40px;padding:0 12px;font-size:13px}
+.svc2-hist{margin-top:4px;border-top:1px dashed var(--line-2);padding-top:10px;display:flex;flex-direction:column;gap:6px}
+.svc2-hrow{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--ink);text-decoration:none;padding:7px 9px;background:var(--surface-2);border-radius:11px}
+a.svc2-hrow:hover{background:#EAE2CF}
+.svc2-hrow time{margin-left:auto;color:var(--ink-2);font-size:12px;white-space:nowrap;flex:none}
+.svc2-hmain{flex:1;min-width:0;overflow-wrap:anywhere}
+.svc2-hrow .ic{width:14px;height:14px;color:var(--success);flex:none}
+.wb-sortrow{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.wb-sortrow label{font:700 13px var(--f-body);color:var(--ink-2);white-space:nowrap}
+.wb-sortrow select{min-height:44px;padding:8px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);font:700 14px var(--f-body);color:var(--ink)}
 
 .updates{display:flex;flex-direction:column;gap:8px;margin-top:12px}
 .upd{display:flex;gap:10px;padding:11px 13px;background:var(--surface-2);border-radius:13px}
@@ -514,7 +546,7 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
 .sheet-grab{width:42px;height:4px;border-radius:99px;background:var(--line-2);margin:4px auto 12px}
 .sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .sheet-head h2{font:600 20px var(--f-display);color:var(--navy)}
-#form-vehicle,#form-book,#form-service,#form-record,#form-intake,#form-extra,#form-listing,#form-adm,#form-profile,#form-edit-booking,#form-complete{display:flex;flex-direction:column;gap:14px}
+#form-vehicle,#form-book,#form-service,#form-record,#form-intake,#form-extra,#form-listing,#form-adm,#form-profile,#form-edit-booking,#form-complete,#form-wa{display:flex;flex-direction:column;gap:14px}
 
 #toasts{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(108px + env(safe-area-inset-bottom));z-index:60;display:flex;flex-direction:column;gap:8px;width:min(92vw,430px);pointer-events:none}
 .toast{display:flex;align-items:flex-start;gap:10px;padding:14px 16px;border-radius:16px;background:var(--navy);color:#F7F3EA;font:600 14.5px/1.45 var(--f-body);box-shadow:0 12px 32px rgba(9,44,53,.35);animation:toastIn .22s ease;pointer-events:auto}
@@ -1213,16 +1245,36 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
 
   <section class="view" id="view-market">
     <div class="page">
-      <header class="page-head">
+      <div class="backrow" id="mk-backrow" hidden>
+        <a class="icon-btn" href="#/dashboard" aria-label="Back to dashboard"><svg class="ic" aria-hidden="true"><use href="#i-arrow-left"/></svg></a>
+        <h1>Marketplace</h1>
+      </div>
+      <header class="page-head" id="mk-head">
         <h1>Marketplace</h1>
         <svg class="ridge-divider" aria-hidden="true"><use href="#ridge-line"/></svg>
       </header>
       <div class="home-sec" style="margin-top:18px">
         <div class="searchbar">
           <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg>
-          <input id="mk-search" type="search" placeholder="Search listings or workshops…" aria-label="Search marketplace" autocomplete="off">
+          <input id="mk-search" type="search" placeholder="Search listings, parts or sellers…" aria-label="Search marketplace" autocomplete="off">
         </div>
         <div class="filters" id="mk-cats" role="group" aria-label="Categories"></div>
+        <div class="mk-controls">
+          <input id="mk-min" type="number" inputmode="decimal" min="0" placeholder="Min ₹" aria-label="Minimum price">
+          <input id="mk-max" type="number" inputmode="decimal" min="0" placeholder="Max ₹" aria-label="Maximum price">
+          <select id="mk-avail" aria-label="Availability">
+            <option value="">Any availability</option>
+            <option value="in">In stock</option>
+            <option value="req">On request</option>
+          </select>
+          <select id="mk-sort" aria-label="Sort listings">
+            <option value="recent">Newest first</option>
+            <option value="name">Name A–Z</option>
+            <option value="price_asc">Price: low to high</option>
+            <option value="price_desc">Price: high to low</option>
+          </select>
+          <button type="button" class="btn btn-ghost mk-reset" data-mk-reset>Reset</button>
+        </div>
         <div id="mk-results" class="stack"></div>
       </div>
     </div>
@@ -1353,6 +1405,20 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
         <div id="dash-inshop" class="stack"></div>
       </section>
 
+      <section class="home-sec" id="dash-market-sec">
+        <div class="sec-top">
+          <p class="sec-label">Marketplace</p>
+          <a class="link-row" style="margin-top:0" href="#/market">Browse all <svg class="ic" aria-hidden="true"><use href="#i-chev-r"/></svg></a>
+        </div>
+        <div class="searchbar">
+          <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg>
+          <input id="dm-search" type="search" placeholder="Search parts, products or sellers…" aria-label="Search marketplace" autocomplete="off">
+        </div>
+        <div class="filters" id="dm-cats" role="group" aria-label="Marketplace categories"></div>
+        <div id="dm-own"></div>
+        <div id="dm-listings" class="stack"></div>
+      </section>
+
       <section class="home-sec">
         <p class="sec-label">Coming to the network</p>
         <div class="card roadmap">
@@ -1369,6 +1435,10 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
         <h1>Bookings</h1>
         <svg class="ridge-divider" aria-hidden="true"><use href="#ridge-line"/></svg>
       </header>
+      <div class="searchbar">
+        <svg class="ic" aria-hidden="true"><use href="#i-search"/></svg>
+        <input id="wb-search" type="search" placeholder="Search customer, phone, vehicle or service…" aria-label="Search bookings" autocomplete="off">
+      </div>
       <div class="filters" id="wb-filters" role="group" aria-label="Booking filters">
         <button class="fchip" data-bfilter="all" aria-pressed="true">All</button>
         <button class="fchip" data-bfilter="requests" aria-pressed="false">Pending</button>
@@ -1379,6 +1449,15 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
         <button class="fchip" data-bfilter="ready" aria-pressed="false">Ready</button>
         <button class="fchip" data-bfilter="completed" aria-pressed="false">Completed</button>
         <button class="fchip" data-bfilter="closed" aria-pressed="false">Cancelled</button>
+      </div>
+      <div class="wb-sortrow">
+        <label for="wb-sort">Sort by</label>
+        <select id="wb-sort">
+          <option value="recent">Most recent booking</option>
+          <option value="upcoming">Upcoming appointment</option>
+          <option value="updated">Latest update</option>
+          <option value="name">Customer name</option>
+        </select>
       </div>
       <div id="wb-list" class="stack wb-list"></div>
     </div>
@@ -2227,6 +2306,35 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   </div>
 </div>
 
+<div class="overlay" id="sheet-wa" hidden>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-wa-title">
+    <div class="sheet-grab" aria-hidden="true"></div>
+    <header class="sheet-head">
+      <h2 id="sheet-wa-title">Message on WhatsApp</h2>
+      <button class="icon-btn" data-close aria-label="Close">
+        <svg class="ic" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </header>
+    <form id="form-wa" novalidate>
+      <p class="hint" id="wa-ctx" style="margin-bottom:12px"></p>
+      <div class="field">
+        <label for="wa-phone">WhatsApp number</label>
+        <input id="wa-phone" type="tel" inputmode="tel" maxlength="20" placeholder="+91 98765 43210">
+        <span class="field-error" aria-live="polite"></span>
+        <span class="hint">Include the country code, e.g. +91 for India. Nothing is sent automatically — WhatsApp opens with this draft for you to review and send yourself.</span>
+      </div>
+      <div class="field">
+        <label for="wa-msg">Message draft</label>
+        <textarea id="wa-msg" maxlength="500" rows="3"></textarea>
+        <span class="field-error" aria-live="polite"></span>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary btn-block" id="wa-submit" type="submit">Open WhatsApp</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div class="overlay" id="dialog-confirm" hidden>
   <div class="dialog-panel" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
     <h2 id="confirm-title"></h2>
@@ -2248,7 +2356,7 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
 const SUPABASE_URL = 'https://dsjjhzikpnaofzjrrvyd.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzampoemlrcG5hb2Z6anJydnlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE0NDgxMzksImV4cCI6MjEwNzAyNDEzOX0.zmP6eCD5oLA3W72_Y8E3ObNpKdlnMJcEbIXbmp7QgC0';
 const APP_LOGO = 'https://res.cloudinary.com/prjgzqvy/image/upload/v1791482355/file_000000004eb861f79937c93d00e0ffe8_zyxoxf.png';
-const APP_VERSION = 'v0.9.0';
+const APP_VERSION = 'v0.11.0';
 
 const sb = window.supabase
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
@@ -2265,6 +2373,7 @@ const S = {
   vehRecords: null, vehRecLoading: null,
   workshop: null, workshopLoading: false,
   wBookings: [], wBookingsLoading: false, wBookingFilter: 'all',
+  wBookingQuery: '', wBookingSort: 'recent', wHistOpen: null,
   wRecords: [], wRecordsLoading: false,
   booking: null, bookingLoading: null,
   wTab: 'details', custTab: 'customers', custQuery: '',
@@ -2273,7 +2382,10 @@ const S = {
   intakeCache: {},
   whFilter: { q: '', cat: '', month: '' },
   mListings: null, mListingsLoading: false, mKey: '',
-  mFilter: { q: '', cat: '' },
+  mTotal: 0, mLoaded: 0, mMore: false, mError: null, mSort: 'recent',
+  mFilter: { q: '', cat: '', minP: '', maxP: '', avail: '' },
+  dashMarket: { list: null, loading: false, error: null },
+  dmQuery: '',
   mDetail: null, mDetailLoading: null, mMainImg: '',
   listEditId: null, listImgDrafts: [], listUrlsWork: [],
   passportPub: null, passportPubLoading: null,
@@ -2305,7 +2417,6 @@ let deferredInstall = null;
 let lastRouteKey = '';
 let openOverlays = [];
 let wsSeq = 0;
-let mkSeq = 0;
 let rtChannel = null;
 let rtUserId = null;
 let rtOk = false;
@@ -2327,6 +2438,7 @@ const DAY_NAMES = { 1:'Mon', 2:'Tue', 3:'Wed', 4:'Thu', 5:'Fri', 6:'Sat', 7:'Sun
 const DISTRICTS = ['Srinagar','Budgam','Ganderbal','Baramulla','Bandipora','Kupwara','Pulwama','Shopian','Kulgam','Anantnag',
   'Doda','Ramban','Kishtwar','Poonch','Rajouri','Udhampur','Jammu','Samba','Kathua','Reasi','Kargil','Leh','Other'];
 const VERIFY_STATES = { PENDING:'Pending', VERIFIED:'Verified', REJECTED:'Rejected', SUSPENDED:'Suspended' };
+const MK_PAGE = 12;
 
 const STATUS_UPDATE_TITLE = {
   ACCEPTED: 'Booking accepted', SCHEDULED: 'Appointment scheduled',
@@ -2359,6 +2471,31 @@ const CB_FILTERS = {
   active: r => ['SCHEDULED','VEHICLE_RECEIVED','IN_SERVICE','READY'].includes(r.status),
   completed: r => r.status === 'COMPLETED',
   cancelled: r => ['CANCELLED','REJECTED'].includes(r.status)
+};
+const WB_FILTERS = {
+  all: () => true,
+  requests: b => b.status === 'REQUESTED',
+  accepted: b => b.status === 'ACCEPTED',
+  scheduled: b => b.status === 'SCHEDULED',
+  today: b => b.scheduled_at && new Date(b.scheduled_at).toDateString() === new Date().toDateString()
+              && !['COMPLETED','CANCELLED','REJECTED'].includes(b.status),
+  inservice: b => ['VEHICLE_RECEIVED','IN_SERVICE','DISPATCHED','IN_PROGRESS'].includes(b.status),
+  ready: b => b.status === 'READY' || b.status === 'RESOLVED',
+  completed: b => b.status === 'COMPLETED',
+  closed: b => ['CANCELLED','REJECTED'].includes(b.status)
+};
+const WB_SORTS = {
+  recent: (a, z) => new Date(z.created_at) - new Date(a.created_at),
+  upcoming: (a, z) => {
+    const ta = a.scheduled_at ? new Date(a.scheduled_at).getTime() : null;
+    const tz = z.scheduled_at ? new Date(z.scheduled_at).getTime() : null;
+    if (ta == null && tz == null) return new Date(z.created_at) - new Date(a.created_at);
+    if (ta == null) return 1;
+    if (tz == null) return -1;
+    return ta - tz;
+  },
+  updated: (a, z) => new Date(z.updated_at || z.created_at) - new Date(a.updated_at || a.created_at),
+  name: (a, z) => (a.customer?.full_name || '').localeCompare(z.customer?.full_name || '')
 };
 
 function greeting(){ const h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening'; }
@@ -2490,6 +2627,45 @@ function storagePathFromUrl(url, bucket){
     const i = url.indexOf(marker);
     return i >= 0 ? decodeURIComponent(url.slice(i + marker.length)) : null;
   } catch { return null; }
+}
+function waDigits(raw){
+  const s = String(raw || '').trim();
+  if (s.startsWith('+')) return s.slice(1).replace(/\D/g, '');
+  const compact = s.replace(/\s/g, '');
+  if (compact.startsWith('00')) return compact.slice(2).replace(/\D/g, '');
+  return null;
+}
+function openWhatsAppFor(c){
+  const phone = String((c && (c.phone || c.full_phone)) || '').trim();
+  const name = (c && (c.full_name || c.name)) || 'Customer';
+  if (!phone){ toast('No phone number saved for this customer.', 'info'); return; }
+  const workshopName = S.workshop?.name || 'BHAT NETWORK';
+  const msg = `Hello, I'm contacting you regarding your vehicle service booking at ${workshopName}.`;
+  const d = waDigits(phone);
+  if (d && d.length >= 8 && d.length <= 15){
+    window.open('https://wa.me/' + d + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    return;
+  }
+  const ctx = $('#wa-ctx');
+  if (ctx) ctx.textContent = `${name} — the saved number (${phone}) doesn't include a country code. Confirm the full international number before opening WhatsApp.`;
+  $('#wa-phone').value = phone;
+  $('#wa-msg').value = msg;
+  clearErrors($('#form-wa'));
+  openOverlay($('#sheet-wa'));
+  setTimeout(() => $('#wa-phone')?.focus(), 140);
+}
+function onSubmitWa(e){
+  e.preventDefault();
+  const f = e.currentTarget; clearErrors(f);
+  const raw = $('#wa-phone').value.trim();
+  const d = waDigits(raw);
+  if (!d || d.length < 8 || d.length > 15){
+    fieldError($('#wa-phone'), 'Enter the full number with its country code (e.g. +91 98765 43210).');
+    return;
+  }
+  const msg = $('#wa-msg').value;
+  closeOverlay($('#sheet-wa'));
+  window.open('https://wa.me/' + d + '?text=' + encodeURIComponent(msg || ''), '_blank', 'noopener');
 }
 
 function classifyError(err){
@@ -2845,29 +3021,41 @@ const DB = {
     public: token => sb.rpc('public_passport', { p_token: token }),
   },
   listings: {
-    async list({ q = '', cat = '' } = {}){
-      const base = () => sb.from('marketplace_listings')
-        .select('id,title,description,category,price,is_available,status,photo_urls,compat_make,compat_model,compat_year_from,compat_year_to,created_at,workshop:workshops(id,name,area,district,photo_url,is_verified)')
-        .eq('status', 'ACTIVE')
-        .order('created_at', { ascending: false })
-        .limit(30);
-      const t = q.trim().replace(/[(),%]/g, ' ').slice(0, 60);
-      try {
-        let query = base();
-        if (t) query = query.or(`title.ilike.%${t}%,description.ilike.%${t}%,workshops.name.ilike.%${t}%`);
+    async list({ q = '', cat = '', minP = null, maxP = null, avail = '', sort = 'recent', page = 0, pageSize = MK_PAGE } = {}){
+      const COLS = 'id,title,description,category,price,is_available,status,photo_urls,compat_make,compat_model,compat_year_from,compat_year_to,created_at,workshop:workshops(id,name,area,district,photo_url,is_verified)';
+      const orderFor = query => {
+        if (sort === 'name') return query.order('title', { ascending: true });
+        if (sort === 'price_asc') return query.order('price', { ascending: true, nullsFirst: false });
+        if (sort === 'price_desc') return query.order('price', { ascending: false, nullsLast: true });
+        return query.order('created_at', { ascending: false });
+      };
+      const applyCommon = query => {
         if (cat) query = query.eq('category', cat);
-        const res = await query;
+        if (minP != null) query = query.gte('price', minP);
+        if (maxP != null) query = query.lte('price', maxP);
+        if (avail === 'in') query = query.eq('is_available', true);
+        if (avail === 'req') query = query.eq('is_available', false);
+        return orderFor(query).range(page * pageSize, page * pageSize + pageSize - 1);
+      };
+      const t = q.trim().replace(/[(),%'"]/g, ' ').slice(0, 60);
+      try {
+        let query = sb.from('marketplace_listings')
+          .select(COLS, { count: 'exact' })
+          .eq('status', 'ACTIVE');
+        if (t) query = query.or(`title.ilike.%${t}%,description.ilike.%${t}%,compat_make.ilike.%${t}%,workshops.name.ilike.%${t}%`);
+        const res = await applyCommon(query);
         if (res.error) throw res.error;
         return res;
       } catch (e1){
         try {
-          let query = base();
-          if (t) query = query.or(`title.ilike.%${t}%,description.ilike.%${t}%`);
-          if (cat) query = query.eq('category', cat);
-          const res = await query;
-          if (res.error) return { data: [], error: e1 };
+          let query = sb.from('marketplace_listings')
+            .select(COLS, { count: 'exact' })
+            .eq('status', 'ACTIVE');
+          if (t) query = query.or(`title.ilike.%${t}%,description.ilike.%${t}%,compat_make.ilike.%${t}%`);
+          const res = await applyCommon(query);
+          if (res.error) return { data: [], error: e1, count: 0 };
           return res;
-        } catch (e2){ return { data: [], error: e2 }; }
+        } catch (e2){ return { data: [], error: e2, count: 0 }; }
       }
     },
     get: id => sb.from('marketplace_listings')
@@ -3038,12 +3226,18 @@ async function loadWorkshopSpace(){
   const wid = S.workshop.id;
   S.wBookingsLoading = true; S.wRecordsLoading = true;
   applyRoute();
-  const [bk, rc] = await Promise.all([DB.bookings.forWorkshop(wid), DB.records.listForWorkshop(wid)]);
+  const [bk, rc, ls] = await Promise.all([
+    DB.bookings.forWorkshop(wid),
+    DB.records.listForWorkshop(wid),
+    DB.listings.forWorkshop(wid)
+  ]);
   S.wBookingsLoading = false; S.wRecordsLoading = false;
   if (bk.error){ toast(friendlyError(bk.error), 'error'); S.wBookings = []; }
   else S.wBookings = bk.data || [];
   if (rc.error){ toast(friendlyError(rc.error), 'error'); S.wRecords = []; }
   else S.wRecords = rc.data || [];
+  if (ls.error){ toast(friendlyError(ls.error), 'error'); if (S.workshop) S.workshop.listings = []; }
+  else if (S.workshop) S.workshop.listings = ls.data || [];
   applyRoute();
 }
 
@@ -3079,6 +3273,7 @@ function resetState(){
   S.vehRecords = null; S.vehRecLoading = null;
   S.workshop = null; S.workshopLoading = false;
   S.wBookings = []; S.wBookingsLoading = false; S.wBookingFilter = 'all';
+  S.wBookingQuery = ''; S.wBookingSort = 'recent'; S.wHistOpen = null;
   S.wRecords = []; S.wRecordsLoading = false;
   S.booking = null; S.bookingLoading = null;
   S.wTab = 'details'; S.custTab = 'customers'; S.custQuery = '';
@@ -3087,7 +3282,10 @@ function resetState(){
   S.intakeCache = {};
   S.whFilter = { q: '', cat: '', month: '' };
   S.mListings = null; S.mListingsLoading = false; S.mKey = '';
-  S.mFilter = { q: '', cat: '' };
+  S.mTotal = 0; S.mLoaded = 0; S.mMore = false; S.mError = null; S.mSort = 'recent';
+  S.mFilter = { q: '', cat: '', minP: '', maxP: '', avail: '' };
+  S.dashMarket = { list: null, loading: false, error: null };
+  S.dmQuery = '';
   S.mDetail = null; S.mDetailLoading = null; S.mMainImg = '';
   S.listEditId = null; S.listImgDrafts = []; S.listUrlsWork = [];
   S.passportPub = null; S.passportPubLoading = null;
@@ -3109,15 +3307,19 @@ function resetState(){
   S.vhEditId = null;
   S.pfImgDraft = null; S.editBid = null; S.editShop = { wid: null, services: [] };
   OB.c = null; OB.o = null;
-  ['#form-vehicle', '#form-book', '#form-quick', '#form-service', '#form-listing', '#form-schedule', '#form-record', '#form-intake', '#form-extra', '#form-adm', '#form-profile', '#form-edit-booking', '#form-complete',
+  ['#form-vehicle', '#form-book', '#form-quick', '#form-service', '#form-listing', '#form-schedule', '#form-record', '#form-intake', '#form-extra', '#form-adm', '#form-profile', '#form-edit-booking', '#form-complete', '#form-wa',
    '#form-ob-c1', '#form-ob-c2', '#form-ob-c3', '#form-ob-o1', '#form-ob-o2', '#form-ob-o3']
     .forEach(s => $(s)?.reset());
   ['#form-vehicle', '#form-book', '#form-ob-c1', '#form-ob-c2', '#form-ob-c3',
    '#form-ob-o1', '#form-ob-o2', '#form-ob-o3', '#form-workshop', '#form-complete']
     .forEach(s => { if ($(s)) $(s).dataset.loaded = ''; });
+  const wbSearch = $('#wb-search'); if (wbSearch) wbSearch.value = '';
+  const wbSort = $('#wb-sort'); if (wbSort) wbSort.value = 'recent';
+  const dmS = $('#dm-search'); if (dmS) dmS.value = '';
+  syncMarketInputs();
   showStep('c', 1); showStep('o', 1);
   lastRouteKey = '';
-  wsSeq++; mkSeq++;
+  wsSeq++;
 }
 
 function showStep(role, n){
@@ -4148,53 +4350,151 @@ function prodCardHTML(l){
 }
 
 function screenMarket(){
+  const isWs = S.profile?.role === 'workshop_owner';
+  const back = $('#mk-backrow'), head = $('#mk-head');
+  if (back) back.hidden = !isWs;
+  if (head) head.hidden = isWs;
   $('#mk-cats').innerHTML =
     `<button class="fchip" data-mkcat="" aria-pressed="${String(!S.mFilter.cat)}">All</button>` +
     Object.entries(MK_CATS).map(([k, v]) =>
       `<button class="fchip" data-mkcat="${k}" aria-pressed="${String(S.mFilter.cat === k)}">${esc(v)}</button>`).join('');
   const res = $('#mk-results');
-  const key = JSON.stringify(S.mFilter);
-  if (S.mListings === null){
-    loadMarket();
+  const key = JSON.stringify([S.mFilter, S.mSort]);
+  if (key !== S.mKey && !S.mListingsLoading) loadMarket();
+  if (S.mListings === null || key !== S.mKey){
     res.innerHTML = skelBlock;
     return;
   }
-  if (S.mKey !== key){
-    loadMarket();
-    res.innerHTML = skelBlock;
+  if (S.mError){
+    res.innerHTML = errorBlock('Couldn\u2019t load listings', 'We couldn\u2019t reach the Marketplace just now. Try again.', 'market');
     return;
   }
-  if (S.mListingsLoading){
-    res.innerHTML = skelBlock;
-    return;
-  }
+  const filtering = S.mFilter.q || S.mFilter.cat || S.mFilter.minP || S.mFilter.maxP || S.mFilter.avail;
   if (!S.mListings.length){
     res.innerHTML = emptyStateHTML({
-      title: S.mFilter.q || S.mFilter.cat ? 'No listings match your search' : 'Marketplace listings will appear here',
-      text: S.mFilter.q || S.mFilter.cat
-        ? 'Try a different search or category. Workshops on BHAT NETWORK add listings over time.'
+      title: filtering ? 'No listings match your search' : 'Marketplace listings will appear here',
+      text: filtering
+        ? 'Try a different search, category or price range.'
         : 'Workshops on BHAT NETWORK list genuine parts, products and offerings here — nothing fake, ever.'
     });
     return;
   }
-  res.innerHTML = `<p class="hint" style="padding:0 4px">${S.mListings.length} listing${S.mListings.length === 1 ? '' : 's'}</p>
-    <div class="prod-grid">${S.mListings.map(prodCardHTML).join('')}</div>`;
+  const more = S.mMore && S.mListings.length < (S.mTotal || Infinity);
+  res.innerHTML = `<p class="hint" style="padding:0 4px">${S.mTotal} listing${S.mTotal === 1 ? '' : 's'}${filtering ? ' match your filters' : ''}</p>
+    <div class="prod-grid">${S.mListings.map(prodCardHTML).join('')}</div>
+    ${S.mListingsLoading
+      ? skelBlock
+      : more ? `<button type="button" class="btn btn-ghost btn-block" data-mk-more style="margin-top:12px">Load more listings</button>` : ''}`;
 }
 
 async function loadMarket(force = false){
-  if (!requireConfig() || !S.user) return;
-  const key = JSON.stringify(S.mFilter);
-  if (!force && S.mKey === key && S.mListings !== null){ applyRoute(); return; }
-  S.mKey = key;
+  if (!sb || !S.user) return;
+  const key = JSON.stringify([S.mFilter, S.mSort]);
+  if (force || key !== S.mKey){
+    S.mKey = key;
+    S.mListings = null; S.mTotal = 0; S.mLoaded = 0; S.mMore = false; S.mError = null;
+  }
+  if (S.mListingsLoading) return;
+  if (S.mListings !== null && !S.mMore) return;
   S.mListingsLoading = true;
-  if (S.mListings === null) applyRoute();
-  const seq = ++mkSeq;
-  const res = await DB.listings.list(S.mFilter);
-  if (seq !== mkSeq) return;
+  const page = S.mLoaded;
+  const minP = S.mFilter.minP !== '' && Number.isFinite(Number(S.mFilter.minP)) ? Number(S.mFilter.minP) : null;
+  const maxP = S.mFilter.maxP !== '' && Number.isFinite(Number(S.mFilter.maxP)) ? Number(S.mFilter.maxP) : null;
+  const res = await DB.listings.list({ q: S.mFilter.q, cat: S.mFilter.cat, minP, maxP, avail: S.mFilter.avail, sort: S.mSort, page });
   S.mListingsLoading = false;
-  S.mListings = res.error ? [] : (res.data || []);
-  if (res.error) console.warn('[BHAT] marketplace', res.error);
+  const nowKey = JSON.stringify([S.mFilter, S.mSort]);
+  if (nowKey !== S.mKey){ loadMarket(true); return; }
+  if (res.error){
+    S.mError = classifyError(res.error);
+    if (S.mListings === null) S.mListings = [];
+    console.warn('[BHAT] marketplace', res.error);
+    applyRoute();
+    return;
+  }
+  const batch = res.data || [];
+  S.mTotal = typeof res.count === 'number' ? res.count : (S.mListings === null ? 0 : S.mListings.length) + batch.length;
+  S.mListings = S.mListings === null ? batch : S.mListings.concat(batch);
+  S.mLoaded = page + 1;
+  S.mMore = batch.length >= MK_PAGE;
   applyRoute();
+}
+
+function syncMarketInputs(){
+  const map = [['#mk-search', S.mFilter.q], ['#mk-min', S.mFilter.minP], ['#mk-max', S.mFilter.maxP], ['#mk-avail', S.mFilter.avail], ['#mk-sort', S.mSort]];
+  map.forEach(([sel, v]) => { const el = $(sel); if (el) el.value = v ?? ''; });
+}
+
+function browseMarketFromDash(term){
+  S.mFilter = { q: term || '', cat: '', minP: '', maxP: '', avail: '' };
+  S.mSort = 'recent';
+  syncMarketInputs();
+  goHash('market');
+}
+
+function loadDashMarket(){
+  const dm = S.dashMarket;
+  if (dm.loading || dm.list !== null || dm.error) return;
+  dm.loading = true;
+  DB.listings.list({ page: 0, pageSize: 8, sort: 'recent' }).then(res => {
+    dm.loading = false;
+    if (res.error){
+      dm.error = classifyError(res.error);
+      console.warn('[BHAT] dashboard marketplace', res.error);
+    } else dm.list = res.data || [];
+    if (parseHash().name === 'dashboard') applyRoute();
+  });
+}
+
+function renderDashMarket(){
+  const cats = $('#dm-cats');
+  if (cats){
+    cats.innerHTML = `<button type="button" class="fchip" data-dmcat="">All</button>` +
+      Object.entries(MK_CATS).map(([k, v]) =>
+        `<button type="button" class="fchip" data-dmcat="${k}">${esc(v)}</button>`).join('');
+  }
+  const own = $('#dm-own');
+  if (own){
+    if (S.workshopLoading){
+      own.innerHTML = `<div class="card quiet"><div><h3>Your listings</h3><p>Loading your listings\u2026</p></div></div>`;
+    } else if (!S.workshop){
+      own.innerHTML = `<div class="card quiet">
+        <div><h3>Sell on the Marketplace</h3><p>Add your workshop profile to list parts and products for customers.</p></div>
+        <a class="btn btn-primary" href="#/workshop">Add workshop</a>
+      </div>`;
+    } else {
+      const l = Array.isArray(S.workshop.listings) ? S.workshop.listings : null;
+      const active = l ? l.filter(x => x.status === 'ACTIVE').length : 0;
+      own.innerHTML = `<div class="card quiet">
+        <div><h3>Your listings</h3><p>${l == null ? 'Loading your listings\u2026' : `${active} active of ${l.length} listing${l.length === 1 ? '' : 's'} — parts and products your workshop sells.`}</p></div>
+        <button type="button" class="btn btn-primary" data-dash-listings>Manage listings</button>
+      </div>`;
+    }
+  }
+  const wrap = $('#dm-listings');
+  if (!wrap) return;
+  const dm = S.dashMarket;
+  if (dm.error){
+    wrap.innerHTML = errorBlock('Couldn\u2019t load Marketplace listings', 'Please try again.', 'dmkt');
+    return;
+  }
+  if (dm.list === null){
+    if (!dm.loading) loadDashMarket();
+    wrap.innerHTML = skelBlock;
+    return;
+  }
+  const q = (S.dmQuery || '').trim().toLowerCase();
+  let list = dm.list;
+  if (q) list = list.filter(l =>
+    `${l.title} ${l.description || ''} ${l.compat_make || ''} ${l.category || ''} ${l.workshop?.name || ''}`.toLowerCase().includes(q));
+  const show = q ? list.slice(0, 8) : list.slice(0, 4);
+  wrap.innerHTML = show.length
+    ? `<div class="prod-grid">${show.map(prodCardHTML).join('')}</div>` +
+      (q ? `<button type="button" class="link-row" data-dm-browse-q>See these results in the full Marketplace <svg class="ic" aria-hidden="true"><use href="#i-chev-r"/></svg></button>` : '')
+    : `<div class="card quiet">
+        <div><h3>${q ? 'Nothing in recent listings' : 'Marketplace listings will appear here'}</h3>
+        <p>${q ? 'Search the full Marketplace for more parts and products.' : 'Workshops on BHAT NETWORK list genuine parts and products here — nothing fake, ever.'}</p></div>
+        <a class="btn btn-primary" href="#/market">Browse all</a>
+      </div>`;
 }
 
 function screenMListing(id){
@@ -4203,12 +4503,21 @@ function screenMListing(id){
     const imgs = l.photo_urls || [];
     const main = S.mMainImg || imgs[0] || '';
     const w = l.workshop || {};
+    const isCustomer = S.profile?.role === 'customer';
     const compat = [
       l.compat_make, l.compat_model,
       (l.compat_year_from || l.compat_year_to)
         ? (l.compat_year_from && l.compat_year_to ? `${l.compat_year_from}–${l.compat_year_to}` : String(l.compat_year_from || l.compat_year_to))
         : ''
     ].filter(Boolean).join(' ');
+    const sellerCard = `
+      <span class="shop-thumb">${w.photo_url ? `<img src="${esc(w.photo_url)}" alt="" loading="lazy">` : '<svg class="ic" aria-hidden="true"><use href="#i-wrench"/></svg>'}</span>
+      <span class="shop-main">
+        <span class="shop-name">${esc(w.name || 'Workshop')}${w.is_verified ? '<svg class="ic" aria-hidden="true"><use href="#i-shield-check"/></svg>' : ''}</span>
+        <span class="shop-sub">${esc([w.area, w.district].filter(Boolean).join(', ') || 'Location not set')}</span>
+      </span>
+      ${isCustomer ? '<svg class="ic" style="margin:auto 0;color:var(--ink-2);width:18px;height:18px" aria-hidden="true"><use href="#i-chev-r"/></svg>' : ''}
+    `;
     el.innerHTML = `
       <div class="mld-hero" id="mld-main">${main ? `<img src="${esc(main)}" alt="Photo of ${esc(l.title)}">` : '<svg class="ic" style="width:40px;height:40px" aria-hidden="true"><use href="#i-box"/></svg>'}</div>
       ${imgs.length > 1 ? `<div class="thumbs">${imgs.map((u, i) =>
@@ -4222,6 +4531,7 @@ function screenMListing(id){
           <span class="${l.is_available ? 'stock-yes' : 'stock-no'}">${l.is_available ? 'In stock' : 'On request'}</span>
           <span>·</span><span>${esc(MK_CATS[l.category] || l.category || '')}</span>
         </div>
+        ${l.created_at ? `<p class="veh-odo" style="margin-top:6px;font-weight:600">Listed ${esc(fmtDate(l.created_at))}</p>` : ''}
       </div>
 
       ${l.description ? `<section class="home-sec"><p class="sec-label">About</p>
@@ -4234,20 +4544,15 @@ function screenMListing(id){
 
       <section class="home-sec">
         <p class="sec-label">Sold by</p>
-        <a class="card shop-card" href="#/shop/${esc(w.id || '')}">
-          <span class="shop-thumb">${w.photo_url ? `<img src="${esc(w.photo_url)}" alt="" loading="lazy">` : '<svg class="ic" aria-hidden="true"><use href="#i-wrench"/></svg>'}</span>
-          <span class="shop-main">
-            <span class="shop-name">${esc(w.name || 'Workshop')}${w.is_verified ? '<svg class="ic" aria-hidden="true"><use href="#i-shield-check"/></svg>' : ''}</span>
-            <span class="shop-sub">${esc([w.area, w.district].filter(Boolean).join(', ') || 'Location not set')}</span>
-          </span>
-          <svg class="ic" style="margin:auto 0;color:var(--ink-2);width:18px;height:18px" aria-hidden="true"><use href="#i-chev-r"/></svg>
-        </a>
+        ${isCustomer
+          ? `<a class="card shop-card" href="#/shop/${esc(w.id || '')}">${sellerCard}</a>`
+          : `<div class="card shop-card">${sellerCard}</div>`}
       </section>
 
       <div class="cta-block">
         ${w.phone
           ? `<a class="btn btn-primary btn-block" href="tel:${esc(w.phone)}"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>Contact workshop</a>`
-          : `<a class="btn btn-primary btn-block" href="#/shop/${esc(w.id || '')}"><svg class="ic" aria-hidden="true"><use href="#i-wrench"/></svg>Visit workshop page</a>`}
+          : (isCustomer ? `<a class="btn btn-primary btn-block" href="#/shop/${esc(w.id || '')}"><svg class="ic" aria-hidden="true"><use href="#i-wrench"/></svg>Visit workshop page</a>` : '')}
         <p class="trust-note"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>Arrangements and payment happen directly with the workshop — BHAT NETWORK doesn\u2019t take payments.</p>
       </div>`;
   };
@@ -4890,14 +5195,14 @@ function onBookingChange(payload){
 
 function deriveWCustomers(){
   const map = new Map();
-  const get = (id, name, phone) => {
-    if (!map.has(id)) map.set(id, { id, name: name || 'Customer', phone: phone || '', bookings: [], records: [], vehicles: new Map(), last: null });
+  const get = (id, name, phone, avatar) => {
+    if (!map.has(id)) map.set(id, { id, name: name || 'Customer', phone: phone || '', avatar: avatar || '', bookings: [], records: [], vehicles: new Map(), last: null });
     return map.get(id);
   };
   const touch = (c, t) => { if (t && (!c.last || t > c.last)) c.last = t; };
   S.wBookings.forEach(b => {
     if (!b.customer?.id) return;
-    const c = get(b.customer.id, b.customer.full_name, b.customer.phone);
+    const c = get(b.customer.id, b.customer.full_name, b.customer.phone, b.customer.avatar_url);
     c.bookings.push(b);
     if (b.vehicle?.id) c.vehicles.set(b.vehicle.id, b.vehicle);
     touch(c, b.created_at);
@@ -4905,7 +5210,7 @@ function deriveWCustomers(){
   S.wRecords.forEach(r => {
     const cid = r.customer?.id || r.customer_profile_id;
     if (!cid) return;
-    const c = get(cid, r.customer?.full_name, r.customer?.phone);
+    const c = get(cid, r.customer?.full_name, r.customer?.phone, r.customer?.avatar_url);
     c.records.push(r);
     if (r.vehicle?.id) c.vehicles.set(r.vehicle.id, r.vehicle);
     touch(c, r.created_at);
@@ -4923,6 +5228,92 @@ function deriveWVehicles(){
       map.set(r.vehicle.id, { v: r.vehicle, owner: r.customer || { full_name: 'Customer' } });
   });
   return [...map.values()];
+}
+
+function wCustomerStats(){
+  const map = new Map();
+  const get = id => { if (!map.has(id)) map.set(id, { bookings: 0, completed: 0, lastRecord: null }); return map.get(id); };
+  S.wBookings.forEach(b => { if (b.customer?.id) get(b.customer.id).bookings++; });
+  S.wRecords.forEach(r => {
+    const cid = r.customer?.id || r.customer_profile_id;
+    if (!cid) return;
+    const s = get(cid);
+    s.completed++;
+    const d = String(r.record_date || '');
+    if (d && (!s.lastRecord || d > s.lastRecord)) s.lastRecord = d;
+  });
+  return map;
+}
+
+function wServiceCardHTML(b, stats){
+  const isQuick = b.request_type === 'quick_service';
+  const title = isQuick ? (ISSUE_TYPES[b.issue_type] || 'Quick Service') : (b.service?.name || b.service_name || 'Service request');
+  const v = b.vehicle;
+  const c = b.customer || {};
+  const cid = c.id || '';
+  const st = cid ? (stats.get(cid) || { bookings: 0, completed: 0, lastRecord: null }) : { bookings: 0, completed: 0, lastRecord: null };
+  const when = b.scheduled_at
+    ? 'Appointment ' + fmtDateTime(b.scheduled_at)
+    : b.preferred_date ? 'Preferred ' + fmtDate(b.preferred_date) + (b.preferred_time ? ' · ' + fmtTime(b.preferred_time) : '') : 'Sent ' + fmtDate(b.created_at);
+  const phone = String(c.phone || '').trim();
+  const open = S.wHistOpen === b.id;
+  return `<article class="card svc2">
+    <div class="svc2-top">
+      <a class="svc2-who" href="#/wcustomer/${esc(cid)}">
+        <span class="home-avatar svc2-ava">${avatarInner(c.avatar_url, (c.full_name || 'C').charAt(0).toUpperCase())}</span>
+        <span class="svc2-id">
+          <strong>${esc(c.full_name || 'Customer')}</strong>
+          <span class="svc2-tel">${phone ? esc(phone) : 'No phone saved'}</span>
+        </span>
+      </a>
+      <span class="chip st-${esc(b.status)}">${esc(fmtStatus(b.status))}</span>
+    </div>
+    <div class="svc2-mid">
+      ${v ? `<span class="plate">${esc(v.plate)}</span>` : ''}
+      <span class="svc2-veh">${v ? esc(`${v.make} ${v.model}`) : 'Vehicle not specified'}</span>
+      <span class="svc2-srv">${esc(title)}</span>
+    </div>
+    <div class="svc2-meta">
+      <span><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg>${esc(when)}</span>
+      ${b.estimated_ready_at ? `<span><svg class="ic" aria-hidden="true"><use href="#i-history"/></svg>Est. ready ${esc(fmtDateTime(b.estimated_ready_at))}</span>` : ''}
+      ${st.lastRecord ? `<span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Last service ${esc(fmtDate(st.lastRecord))}</span>` : ''}
+      <span><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg>${st.bookings} booking${st.bookings === 1 ? '' : 's'} · ${st.completed} completed service${st.completed === 1 ? '' : 'es'} on record</span>
+    </div>
+    <div class="svc2-actions">
+      <a class="btn btn-primary" href="#/booking/${esc(b.id)}">Booking</a>
+      <a class="btn btn-ghost" href="#/wcustomer/${esc(cid)}">Customer</a>
+      <button type="button" class="btn btn-ghost" data-whist="${esc(b.id)}" aria-expanded="${String(open)}">${open ? 'Hide history' : 'History'}</button>
+      ${phone ? `<a class="btn btn-ghost" href="tel:${esc(phone)}">Call</a>
+      <button type="button" class="btn btn-ghost" data-wa="${esc(b.id)}">WhatsApp</button>` : ''}
+    </div>
+    ${open ? wHistHTML(b) : ''}
+  </article>`;
+}
+
+function wHistHTML(b){
+  const cid = b.customer?.id;
+  if (!cid) return `<div class="svc2-hist"><p class="muted small">No customer history available.</p></div>`;
+  const bookings = S.wBookings.filter(x => x.customer?.id === cid)
+    .sort((a, z) => new Date(z.created_at) - new Date(a.created_at));
+  const records = S.wRecords.filter(r => (r.customer?.id || r.customer_profile_id) === cid)
+    .sort((a, z) => String(z.record_date || '').localeCompare(String(a.record_date || '')));
+  const bRow = x => `<a class="svc2-hrow" href="#/booking/${esc(x.id)}">
+      <span class="chip st-${esc(x.status)}">${esc(fmtStatus(x.status))}</span>
+      <span class="svc2-hmain">${esc(x.service?.name || x.service_name || (x.request_type === 'quick_service' ? (ISSUE_TYPES[x.issue_type] || 'Quick Service') : 'Service request'))}</span>
+      <time>${esc(fmtDate(x.created_at))}</time></a>`;
+  const rRow = r => `<div class="svc2-hrow">
+      <svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>
+      <span class="svc2-hmain">${esc(r.service_name)}${r.cost != null ? ' · ₹' + Number(r.cost).toLocaleString('en-IN') : ''}${r.mileage_km != null ? ' · ' + esc(fmtKm(r.mileage_km)) : ''}</span>
+      <time>${esc(fmtDate(r.record_date))}</time></div>`;
+  return `<div class="svc2-hist">
+    <p class="sec-label" style="margin-bottom:2px">Bookings at your workshop (${bookings.length})</p>
+    ${bookings.length ? bookings.slice(0, 5).map(bRow).join('') : '<p class="muted small">No bookings yet.</p>'}
+    ${bookings.length > 5 ? `<p class="muted small">+ ${bookings.length - 5} earlier booking${bookings.length - 5 === 1 ? '' : 's'}</p>` : ''}
+    <p class="sec-label" style="margin:8px 0 2px">Completed services (${records.length})</p>
+    ${records.length ? records.slice(0, 5).map(rRow).join('') : '<p class="muted small">No completed services yet.</p>'}
+    ${records.length > 5 ? `<p class="muted small">+ ${records.length - 5} earlier service${records.length - 5 === 1 ? '' : 's'}</p>` : ''}
+    <a class="link-row" style="margin-top:6px" href="#/wcustomer/${esc(cid)}">Open full customer history <svg class="ic" aria-hidden="true"><use href="#i-chev-r"/></svg></a>
+  </div>`;
 }
 
 function wBookingCardHTML(b){
@@ -4951,6 +5342,7 @@ function screenDashboard(){
   const wrap = $('#dash-workshop');
   const statsSec = $('#dash-stats-sec');
   const reqEl = $('#dash-requests'), shopEl = $('#dash-inshop');
+  renderDashMarket();
   if (S.workshopLoading){ wrap.innerHTML = skelBlock; statsSec.hidden = true; reqEl.innerHTML = ''; shopEl.innerHTML = ''; return; }
   if (!S.workshop){
     statsSec.hidden = true;
@@ -5013,37 +5405,44 @@ function screenDashboard(){
 }
 
 function screenWBookings(){
-  const FILTERS = {
-    all: () => true,
-    requests: b => b.status === 'REQUESTED',
-    accepted: b => b.status === 'ACCEPTED',
-    scheduled: b => b.status === 'SCHEDULED',
-    today: b => b.scheduled_at && new Date(b.scheduled_at).toDateString() === new Date().toDateString()
-                && !['COMPLETED','CANCELLED','REJECTED'].includes(b.status),
-    inservice: b => ['VEHICLE_RECEIVED','IN_SERVICE','DISPATCHED','IN_PROGRESS'].includes(b.status),
-    ready: b => b.status === 'READY' || b.status === 'RESOLVED',
-    completed: b => b.status === 'COMPLETED',
-    closed: b => ['CANCELLED','REJECTED'].includes(b.status)
-  };
   $$('#wb-filters .fchip').forEach(c =>
     c.setAttribute('aria-pressed', String(c.dataset.bfilter === S.wBookingFilter)));
+  renderWBookingList();
+}
+
+function renderWBookingList(){
   const list = $('#wb-list');
+  if (!list) return;
   if (S.wBookingsLoading){ list.innerHTML = skelBlock; return; }
   if (!S.workshop){
     list.innerHTML = emptyStateHTML({ title: 'Add your workshop first', text: 'Bookings arrive once your workshop profile exists.' });
     return;
   }
-  const filtered = S.wBookings.filter(FILTERS[S.wBookingFilter] || FILTERS.all);
+  const q = S.wBookingQuery.trim().toLowerCase();
+  let filtered = S.wBookings.filter(WB_FILTERS[S.wBookingFilter] || WB_FILTERS.all);
+  if (q){
+    filtered = filtered.filter(b => [
+      b.customer?.full_name, b.customer?.phone,
+      b.vehicle?.plate, b.vehicle?.make, b.vehicle?.model,
+      b.service?.name, b.service_name,
+      b.request_type === 'quick_service' ? (ISSUE_TYPES[b.issue_type] || '') : ''
+    ].filter(Boolean).join(' ').toLowerCase().includes(q));
+  }
+  filtered.sort(WB_SORTS[S.wBookingSort] || WB_SORTS.recent);
+  if (S.wHistOpen && !S.wBookings.some(b => b.id === S.wHistOpen)) S.wHistOpen = null;
   if (!filtered.length){
     list.innerHTML = emptyStateHTML({
-      title: S.wBookingFilter === 'all' ? 'No bookings yet' : 'Nothing here yet',
-      text: S.wBookingFilter === 'all'
-        ? 'New customer booking requests will appear here as customers discover your workshop.'
-        : 'Bookings with this status will appear here.'
+      title: q ? 'No bookings match your search' : S.wBookingFilter === 'all' ? 'No bookings yet' : 'Nothing here yet',
+      text: q
+        ? 'Try a different customer name, phone, vehicle or service.'
+        : S.wBookingFilter === 'all'
+          ? 'New customer booking requests will appear here as customers discover your workshop.'
+          : 'Bookings with this status will appear here.'
     });
     return;
   }
-  list.innerHTML = filtered.map(wBookingCardHTML).join('');
+  const stats = wCustomerStats();
+  list.innerHTML = filtered.map(b => wServiceCardHTML(b, stats)).join('');
 }
 
 function intakeSectionHTML(b, intake){
@@ -5426,7 +5825,7 @@ async function onSubmitRecord(e){
 function custCardHTML(c){
   const nV = c.vehicles.size, nB = c.bookings.length, nR = c.records.length;
   return `<a class="card veh-card" href="#/wcustomer/${esc(c.id)}">
-    <span class="veh-ic"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg></span>
+    <span class="home-avatar svc2-ava">${avatarInner(c.avatar, (c.name || 'C').charAt(0).toUpperCase())}</span>
     <div class="veh-main">
       <h3 style="margin-top:2px">${esc(c.name)}</h3>
       <p class="veh-meta">${esc(c.phone || 'No phone shared')}</p>
@@ -5494,7 +5893,7 @@ function screenWCustomerDetail(id){
   const vehs = [...c.vehicles.values()];
   el.innerHTML = `
     <div class="card profile-card">
-      <span class="avatar" aria-hidden="true">${esc((c.name || 'C').charAt(0).toUpperCase())}</span>
+      <span class="avatar">${avatarInner(c.avatar, (c.name || 'C').charAt(0).toUpperCase())}</span>
       <div style="min-width:0">
         <h2>${esc(c.name)}</h2>
         <p class="muted" style="font-size:14px">${esc(c.phone || 'No phone shared')}</p>
@@ -5504,6 +5903,11 @@ function screenWCustomerDetail(id){
         </div>
       </div>
     </div>
+
+    ${c.phone ? `<div class="p-cta" style="margin-top:12px">
+      <a class="btn btn-primary" href="tel:${esc(c.phone)}"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg>Call customer</a>
+      <button type="button" class="btn btn-ghost" data-wa-cust="${esc(c.id)}"><svg class="ic" aria-hidden="true"><use href="#i-share"/></svg>WhatsApp</button>
+    </div>` : `<p class="hint" style="margin-top:10px">No phone number saved for this customer.</p>`}
 
     <section class="home-sec">
       <p class="sec-label">Vehicles</p>
@@ -5672,7 +6076,6 @@ async function removeWorkshopImage(){
     applyRoute();
   } catch (err){ toast(friendlyError(err), 'error'); }
 }
-
 async function onSubmitWorkshop(e){
   e.preventDefault(); if (!requireConfig()) return;
   const f = e.currentTarget; clearErrors(f);
@@ -5705,14 +6108,14 @@ async function onSubmitWorkshop(e){
       res = await DB.workshops.update(S.workshop.id, patch);
       if (res.error) throw res.error;
       S.workshop = { ...S.workshop, ...res.data };
-      form.dataset.loaded = '';
+      f.dataset.loaded = '';
       toast('Workshop details saved', 'success');
       applyRoute();
     } else {
       res = await DB.workshops.create({ owner_profile_id: S.user.id, ...patch });
       if (res.error) throw res.error;
       S.workshop = { ...res.data, services: [], hours: [] };
-      form.dataset.loaded = '';
+      f.dataset.loaded = '';
       toast('Your workshop is live on BHAT NETWORK', 'success');
       goHash('dashboard');
     }
@@ -5864,12 +6267,12 @@ function renderListingsPanel(){
     wrap.innerHTML = emptyStateHTML({ title: 'Add your workshop first', text: 'Listings belong to your workshop profile.' });
     return;
   }
-  const list = S.workshop.listings || [];
+  const list = S.workshop.listings;
   wrap.innerHTML = `
     <div style="display:flex;justify-content:flex-end;margin-bottom:14px">
       <button class="btn btn-primary" data-open-sheet="sheet-listing"><svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg>Add listing</button>
     </div>
-    ${list.length
+    ${Array.isArray(list) && list.length
       ? `<div class="card">${list.map(listManageHTML).join('')}</div>`
       : `<div class="empty">
           <svg class="empty-art" aria-hidden="true"><use href="#ridge-line"/></svg>
@@ -6024,6 +6427,9 @@ async function onSubmitListing(e){
     }
     for (const d of S.listImgDrafts) URL.revokeObjectURL(d.url);
     S.listImgDrafts = []; S.listUrlsWork = [];
+    S.mListings = null; S.mKey = '';
+    S.mDetail = null;
+    S.dashMarket = { list: null, loading: false, error: null };
     f.reset(); closeOverlay($('#sheet-listing'));
     applyRoute();
   } catch (err){ toast(friendlyError(err), 'error'); }
@@ -6048,6 +6454,9 @@ async function deleteListing(id){
       if (p) sb.storage.from('marketplace-photos').remove([p]).catch(() => {});
     }
     S.workshop.listings = (S.workshop.listings || []).filter(x => x.id !== id);
+    S.mListings = null; S.mKey = '';
+    S.mDetail = null;
+    S.dashMarket = { list: null, loading: false, error: null };
     toast('Listing removed', 'success');
     applyRoute();
   } catch (err){ toast(friendlyError(err), 'error'); }
@@ -6486,6 +6895,8 @@ async function onSubmitAdminAction(e){
     } else if (a.type === 'listing'){
       S.adminListings = null; S.adminLL = false;
       S.mListings = null; S.mKey = '';
+      S.mDetail = null;
+      S.dashMarket = { list: null, loading: false, error: null };
     } else if (a.type === 'member'){
       S.adminWsDetail = null; S.adminWsLoading = null;
     }
@@ -6511,8 +6922,8 @@ const ROUTES = {
   'quick':           { view: 'view-quick',         shell: 'customer', auth: true },
   'bookings':        { view: 'view-bookings',      shell: 'customer', auth: true },
   'cbooking':        { view: 'view-cbooking',      shell: 'customer', auth: true },
-  'market':          { view: 'view-market',        shell: 'customer', auth: true },
-  'mlisting':        { view: 'view-mlisting',      shell: 'customer', auth: true },
+  'market':          { view: 'view-market',        shell: 'both',     auth: true },
+  'mlisting':        { view: 'view-mlisting',      shell: 'both',     auth: true },
   'dashboard':       { view: 'view-dashboard',     shell: 'owner',    auth: true },
   'owner-bookings':  { view: 'view-wbookings',     shell: 'owner',    auth: true },
   'booking':         { view: 'view-booking',       shell: 'owner',    auth: true },
@@ -6638,6 +7049,8 @@ async function onGlobalClick(e){
       else if (k === 'al'){ S.adminListings = null; S.adminLL = false; applyRoute(); }
       else if (k === 'au'){ S.adminUsers = null; S.adminUL = false; applyRoute(); }
       else if (k === 'aa'){ S.adminAudit = null; S.adminAL = false; applyRoute(); }
+      else if (k === 'market'){ S.mError = null; loadMarket(true); applyRoute(); }
+      else if (k === 'dmkt'){ S.dashMarket = { list: null, loading: false, error: null }; if (parseHash().name === 'dashboard') renderDashMarket(); }
       else if (k.startsWith('awd:')){ S.adminWsDetail = null; S.adminWsLoading = null; applyRoute(); }
       return;
     }
@@ -6680,12 +7093,40 @@ async function onGlobalClick(e){
     if (dashSvc){ S.wTab = 'services'; goHash('workshop'); setTimeout(() => openServiceSheet(null), 260); return; }
     const dashHrs = e.target.closest('[data-dash-hours]');
     if (dashHrs){ S.wTab = 'hours'; goHash('workshop'); return; }
+    const dashLs = e.target.closest('[data-dash-listings]');
+    if (dashLs){ S.wTab = 'listings'; goHash('workshop'); return; }
     const bfilter = e.target.closest('[data-bfilter]');
-    if (bfilter){ S.wBookingFilter = bfilter.dataset.bfilter; applyRoute(); return; }
+    if (bfilter){ S.wBookingFilter = bfilter.dataset.bfilter; renderWBookingList(); return; }
     const whcat = e.target.closest('[data-whcat]');
     if (whcat){ S.whFilter.cat = whcat.dataset.whcat; renderHistoryPanel(); return; }
     const mkcat = e.target.closest('[data-mkcat]');
-    if (mkcat){ S.mFilter.cat = mkcat.dataset.mkcat; S.mListings = null; loadMarket(true); return; }
+    if (mkcat){ S.mFilter.cat = mkcat.dataset.mkcat; loadMarket(true); return; }
+    const mkReset = e.target.closest('[data-mk-reset]');
+    if (mkReset){
+      S.mFilter = { q: '', cat: '', minP: '', maxP: '', avail: '' };
+      S.mSort = 'recent';
+      const s = $('#mk-search'); if (s) s.value = '';
+      syncMarketInputs();
+      loadMarket(true);
+      return;
+    }
+    const mkMore = e.target.closest('[data-mk-more]');
+    if (mkMore){
+      if (S.mListingsLoading) return;
+      setBusy(mkMore, true);
+      loadMarket();
+      return;
+    }
+    const dmc = e.target.closest('[data-dmcat]');
+    if (dmc){
+      S.mFilter = { q: '', cat: dmc.dataset.dmcat || '', minP: '', maxP: '', avail: '' };
+      S.mSort = 'recent';
+      syncMarketInputs();
+      goHash('market');
+      return;
+    }
+    const dmq = e.target.closest('[data-dm-browse-q]');
+    if (dmq){ browseMarketFromDash(S.dmQuery); return; }
     const edit = e.target.closest('[data-edit-vehicle]');
     if (edit){ openVehicleSheet(edit.dataset.editVehicle); return; }
     const prim = e.target.closest('[data-primary-vehicle]');
@@ -6749,6 +7190,26 @@ async function onGlobalClick(e){
     }
     if (e.target.closest('[data-img-remove]')){ removeWorkshopImage(); return; }
     if (e.target.closest('[data-intake-skip]')){ skipIntake(); return; }
+
+    const histBtn = e.target.closest('[data-whist]');
+    if (histBtn){
+      const id = histBtn.dataset.whist;
+      S.wHistOpen = S.wHistOpen === id ? null : id;
+      renderWBookingList();
+      return;
+    }
+    const waBtn = e.target.closest('[data-wa]');
+    if (waBtn){
+      const b = getBookingById(waBtn.dataset.wa);
+      openWhatsAppFor(b ? (b.customer || {}) : null);
+      return;
+    }
+    const waCust = e.target.closest('[data-wa-cust]');
+    if (waCust){
+      const cust = deriveWCustomers().find(x => x.id === waCust.dataset.waCust);
+      openWhatsAppFor(cust ? { phone: cust.phone, full_name: cust.name } : null);
+      return;
+    }
 
     const extraNew = e.target.closest('[data-extra-new]');
     if (extraNew){
@@ -6908,6 +7369,11 @@ function onDocChange(e){
     const c = e.target.closest('[data-hour-close]');
     if (c){ ensureHoursBuf(); S.hoursBuf[c.dataset.hourClose].close_time = c.value; return; }
     if (e.target.id === 'wh-month'){ S.whFilter.month = e.target.value; renderHistoryResults(); return; }
+    if (e.target.id === 'wb-sort'){ S.wBookingSort = e.target.value || 'recent'; renderWBookingList(); return; }
+    if (e.target.id === 'mk-sort'){ S.mSort = e.target.value || 'recent'; loadMarket(true); return; }
+    if (e.target.id === 'mk-avail'){ S.mFilter.avail = e.target.value; loadMarket(true); return; }
+    if (e.target.id === 'mk-min'){ S.mFilter.minP = e.target.value.trim(); loadMarket(true); return; }
+    if (e.target.id === 'mk-max'){ S.mFilter.maxP = e.target.value.trim(); loadMarket(true); return; }
     const mr = e.target.closest('[data-mrole]');
     if (mr){
       const mid = mr.dataset.mrole;
@@ -7003,6 +7469,7 @@ function bind(){
   on('#form-profile','submit',onSubmitProfile);
   on('#form-edit-booking','submit',onSubmitBookingEdit);
   on('#form-complete','submit',onSubmitComplete);
+  on('#form-wa','submit',onSubmitWa);
   on('#hours-save','click',saveHours);
   on('#file-wsimg','change',onPickImage);
   on('#file-limgs','change',onPickListingImages);
@@ -7022,9 +7489,20 @@ function bind(){
     clearTimeout(searchTimer);
     searchTimer = setTimeout(() => { S.wq.term = e.target.value; loadWorkshops(); }, 350);
   });
+  on('#wb-search','input',e => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => { S.wBookingQuery = e.target.value; renderWBookingList(); }, 250);
+  });
   on('#mk-search','input',e => {
     clearTimeout(searchTimer);
-    searchTimer = setTimeout(() => { S.mFilter.q = e.target.value; S.mListings = null; loadMarket(true); }, 350);
+    searchTimer = setTimeout(() => { S.mFilter.q = e.target.value; loadMarket(true); }, 350);
+  });
+  on('#dm-search','input',e => {
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => { S.dmQuery = e.target.value; renderDashMarket(); }, 250);
+  });
+  on('#dm-search','keydown',e => {
+    if (e.key === 'Enter'){ e.preventDefault(); browseMarketFromDash(S.dmQuery); }
   });
   on('#cust-search','input',e => {
     clearTimeout(searchTimer);
@@ -7181,4 +7659,4 @@ boot();
 })();
 </script>
 </body>
-  </html>
+                                                </html>
