@@ -558,6 +558,17 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
 @keyframes toastIn{from{opacity:0;transform:translateY(8px)}}
 @media(min-width:960px){#toasts{bottom:26px}}
 
+.qr-card{display:flex;flex-direction:column;gap:14px;align-items:center;padding:4px 0 2px}
+.qr-frame{width:min(264px,72vw);aspect-ratio:1/1;background:#FFF;border:1px solid var(--line);border-radius:20px;display:grid;place-items:center;overflow:hidden;box-shadow:var(--shadow)}
+.qr-frame img{width:100%;height:100%;display:block}
+.qr-msg{padding:26px 22px;text-align:center;font:600 13.5px/1.55 var(--f-body);color:var(--ink-2)}
+.qr-msg .btn{margin-top:14px}
+.qr-title{font:600 17px var(--f-display);color:var(--navy);text-align:center;overflow-wrap:anywhere}
+.qr-sub{font-size:13px;font-weight:600;color:var(--ink-2);text-align:center}
+.qr-url{font:600 11.5px var(--f-body);color:var(--ink-2);text-align:center;word-break:break-all;background:var(--surface-2);border-radius:12px;padding:9px 12px;width:100%}
+.qr-actions{display:flex;gap:10px;flex-wrap:wrap;width:100%}
+.qr-actions .btn{flex:1;min-width:124px;min-height:48px;font-size:14.5px}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
 }
@@ -1098,6 +1109,12 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
     </div>
   </section>
 
+  <section class="view" id="view-srecord">
+    <div class="page">
+      <div id="srecord-body" class="stack"></div>
+    </div>
+  </section>
+
   <section class="view" id="view-nearby">
     <div class="page">
       <header class="page-head">
@@ -1129,7 +1146,7 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   <section class="view" id="view-shop">
     <div class="page">
       <div class="backrow">
-        <a class="icon-btn" href="#/nearby" aria-label="Back to nearby"><svg class="ic" aria-hidden="true"><use href="#i-arrow-left"/></svg></a>
+        <a class="icon-btn" id="shop-back" href="#/nearby" aria-label="Back to nearby"><svg class="ic" aria-hidden="true"><use href="#i-arrow-left"/></svg></a>
         <h1>Workshop</h1>
       </div>
       <div id="shop-body" class="stack"></div>
@@ -1518,6 +1535,7 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
       </div>
 
       <div id="tab-details">
+        <div id="ws-qr-wrap"></div>
         <form id="form-workshop" novalidate>
           <div class="card" style="padding:24px;border-radius:24px">
             <input type="file" id="file-wsimg" accept="image/*" hidden>
@@ -2335,6 +2353,19 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
   </div>
 </div>
 
+<div class="overlay" id="sheet-qr" hidden>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheet-qr-title">
+    <div class="sheet-grab" aria-hidden="true"></div>
+    <header class="sheet-head">
+      <h2 id="sheet-qr-title">QR code</h2>
+      <button class="icon-btn" data-close aria-label="Close">
+        <svg class="ic" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </header>
+    <div id="qr-body" class="qr-card"></div>
+  </div>
+</div>
+
 <div class="overlay" id="dialog-confirm" hidden>
   <div class="dialog-panel" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
     <h2 id="confirm-title"></h2>
@@ -2349,6 +2380,7 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
 <div id="toasts" role="status" aria-live="polite"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script>
 (() => {
 'use strict';
@@ -2356,7 +2388,7 @@ body:not([data-shell="public"]) #app{padding-bottom:calc(104px + env(safe-area-i
 const SUPABASE_URL = 'https://dsjjhzikpnaofzjrrvyd.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzampoemlrcG5hb2Z6anJydnlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE0NDgxMzksImV4cCI6MjEwNzAyNDEzOX0.zmP6eCD5oLA3W72_Y8E3ObNpKdlnMJcEbIXbmp7QgC0';
 const APP_LOGO = 'https://res.cloudinary.com/prjgzqvy/image/upload/v1791482355/file_000000004eb861f79937c93d00e0ffe8_zyxoxf.png';
-const APP_VERSION = 'v0.11.0';
+const APP_VERSION = 'v0.12.0';
 
 const sb = window.supabase
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
@@ -2387,6 +2419,7 @@ const S = {
   dashMarket: { list: null, loading: false, error: null },
   dmQuery: '',
   mDetail: null, mDetailLoading: null, mMainImg: '',
+  pubRecord: null, pubRecordLoading: null,
   listEditId: null, listImgDrafts: [], listUrlsWork: [],
   passportPub: null, passportPubLoading: null,
   recDetail: null, recDetailLoading: null,
@@ -2400,7 +2433,7 @@ const S = {
   adminWsDetail: null, adminWsLoading: null,
   admAction: null,
   workshops: null, workshopsLoading: false, workshopsKey: '',
-  shopDetail: null,
+  shopDetail: null, shopAnon: null, shopAnonLoading: null,
   wq: { term: '', cat: '', verified: false, openNow: false },
   location: null, locState: 'idle',
   qIssue: '', qVehicle: '', qShop: '',
@@ -2421,6 +2454,7 @@ let rtChannel = null;
 let rtUserId = null;
 let rtOk = false;
 const selfWrites = new Map();
+const QR_LIB = { status: 'idle', promise: null };
 
 const $  = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -2615,11 +2649,19 @@ function nextActionFor(b){
   }
   return NEXT_ACTION[b.status] || null;
 }
-function passportLink(token){
-  const base = location.origin.startsWith('http')
+function appBase(){
+  return location.origin.startsWith('http')
     ? location.origin + location.pathname
     : location.href.split('#')[0];
-  return base + '#/passport/' + token;
+}
+function passportLink(token){
+  return appBase() + '#/passport/' + token;
+}
+function recordLink(token){
+  return appBase() + '#/s/' + token;
+}
+function workshopLink(id){
+  return appBase() + '#/shop/' + id;
 }
 function storagePathFromUrl(url, bucket){
   try {
@@ -2666,6 +2708,119 @@ function onSubmitWa(e){
   const msg = $('#wa-msg').value;
   closeOverlay($('#sheet-wa'));
   window.open('https://wa.me/' + d + '?text=' + encodeURIComponent(msg || ''), '_blank', 'noopener');
+}
+
+function ensureQRLib(){
+  if (window.QRCode && typeof window.QRCode.toDataURL === 'function'){
+    QR_LIB.status = 'ready';
+    return Promise.resolve();
+  }
+  if (QR_LIB.status === 'failed') return Promise.reject(new Error('QR library unavailable'));
+  if (QR_LIB.promise) return QR_LIB.promise;
+  QR_LIB.status = 'loading';
+  QR_LIB.promise = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js';
+    s.async = true;
+    s.onload = () => {
+      if (window.QRCode && typeof window.QRCode.toDataURL === 'function'){ QR_LIB.status = 'ready'; resolve(); }
+      else { QR_LIB.status = 'failed'; QR_LIB.promise = null; reject(new Error('QR library failed to initialise')); }
+    };
+    s.onerror = () => { QR_LIB.status = 'failed'; QR_LIB.promise = null; reject(new Error('QR library could not be loaded')); };
+    document.head.appendChild(s);
+  });
+  return QR_LIB.promise;
+}
+
+async function shareLink(url, title){
+  if (navigator.share){
+    try { await navigator.share({ title: title || 'BHAT NETWORK', url }); return 'shared'; } catch {}
+  }
+  try {
+    await navigator.clipboard.writeText(url);
+    return 'copied';
+  } catch {
+    toast('Copy this link: ' + url, 'info', 6000);
+    return 'manual';
+  }
+}
+
+let qrData = null;
+function openQRSheet({ url, title, sub, kind, note }){
+  qrData = { url, title, sub: sub || '', kind, note: note || '' };
+  $('#sheet-qr-title').textContent = title || 'QR code';
+  renderQRSheet();
+  openOverlay($('#sheet-qr'));
+}
+
+function renderQRSheet(){
+  const el = $('#qr-body');
+  if (!el || !qrData) return;
+  el.innerHTML = `
+    <div class="qr-frame" id="qr-frame"><div class="qr-msg" id="qr-msg">Generating QR code…</div></div>
+    <div>
+      <p class="qr-title">${esc(qrData.title)}</p>
+      ${qrData.sub ? `<p class="qr-sub">${esc(qrData.sub)}</p>` : ''}
+    </div>
+    <div class="qr-actions">
+      <button type="button" class="btn btn-ghost" data-qr-copy>Copy link</button>
+      <button type="button" class="btn btn-ghost" data-qr-share>Share</button>
+      <button type="button" class="btn btn-primary" data-qr-download>Download PNG</button>
+    </div>
+    ${qrData.note ? `<p class="hint" style="text-align:center">${esc(qrData.note)}</p>` : ''}`;
+  generateQR();
+}
+
+async function generateQR(){
+  if (!qrData) return;
+  const frame = $('#qr-frame');
+  if (!frame) return;
+  try {
+    await ensureQRLib();
+    const dataUrl = await window.QRCode.toDataURL(qrData.url, {
+      width: 720, margin: 2, errorCorrectionLevel: 'M',
+      color: { dark: '#092C35', light: '#FFFFFF' }
+    });
+    if (!qrData || $('#sheet-qr').hidden) return;
+    frame.innerHTML = `<img src="${esc(dataUrl)}" alt="QR code linking to ${esc(qrData.title)}">`;
+    qrData.png = dataUrl;
+  } catch (err){
+    console.warn('[BHAT] QR generation failed:', err);
+    frame.innerHTML = `<div class="qr-msg">
+      <p style="font-weight:700;color:var(--ink)">The QR image couldn\u2019t be generated${!navigator.onLine ? ' — you appear to be offline' : ''}.</p>
+      <p style="margin-top:6px">Copy and share the link below — it opens the same page.</p>
+      <button type="button" class="btn btn-primary" data-qr-retry>Try again</button>
+    </div>`;
+  }
+}
+
+function qrFileName(){
+  const safe = (qrData?.title || 'bhat-network')
+    .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'bhat-network';
+  return `bhat-${qrData?.kind || 'qr'}-${safe}.png`;
+}
+
+async function downloadQR(){
+  if (!qrData) return;
+  if (!qrData.png){
+    await generateQR();
+    if (!qrData?.png){
+      toast('The QR image isn\u2019t ready yet. Try again in a moment.', 'info');
+      return;
+    }
+  }
+  try {
+    const a = document.createElement('a');
+    a.href = qrData.png;
+    a.download = qrFileName();
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    toast('QR image downloaded', 'success');
+  } catch (err){
+    console.warn('[BHAT] QR download failed:', err);
+    toast('Couldn\u2019t download the QR image on this browser.', 'error');
+  }
 }
 
 function classifyError(err){
@@ -2768,6 +2923,7 @@ function closeOverlay(el){
     if (S.admAction?.revert) S.admAction.revert();
     S.admAction = null;
   }
+  if (el.id === 'sheet-qr') qrData = null;
   setTimeout(() => { if (!el.classList.contains('is-open')) el.hidden = true; }, 220);
   if (!openOverlays.length && lastFocus && lastFocus.focus){
     try { lastFocus.focus(); } catch {}
@@ -3003,7 +3159,7 @@ const DB = {
       .order('record_date', { ascending: false })
       .limit(30),
     get: id => sb.from('service_records')
-      .select('*, booking_id, workshop:workshops(id,name,area,district), member:profiles!service_records_member_profile_id_fkey(id,full_name)')
+      .select('*, public_token, booking_id, workshop:workshops(id,name,area,district), member:profiles!service_records_member_profile_id_fkey(id,full_name)')
       .eq('id', id)
       .maybeSingle(),
     create: row => sb.from('service_records').insert(row).select().single(),
@@ -3019,6 +3175,10 @@ const DB = {
   },
   passport: {
     public: token => sb.rpc('public_passport', { p_token: token }),
+  },
+  publicApi: {
+    serviceRecord: token => sb.rpc('public_service_record', { p_token: token }),
+    workshop: id => sb.rpc('public_workshop', { p_id: id }),
   },
   listings: {
     async list({ q = '', cat = '', minP = null, maxP = null, avail = '', sort = 'recent', page = 0, pageSize = MK_PAGE } = {}){
@@ -3287,6 +3447,7 @@ function resetState(){
   S.dashMarket = { list: null, loading: false, error: null };
   S.dmQuery = '';
   S.mDetail = null; S.mDetailLoading = null; S.mMainImg = '';
+  S.pubRecord = null; S.pubRecordLoading = null;
   S.listEditId = null; S.listImgDrafts = []; S.listUrlsWork = [];
   S.passportPub = null; S.passportPubLoading = null;
   S.recDetail = null; S.recDetailLoading = null;
@@ -3300,7 +3461,7 @@ function resetState(){
   S.adminWsDetail = null; S.adminWsLoading = null;
   S.admAction = null;
   S.workshops = null; S.workshopsLoading = false; S.workshopsKey = '';
-  S.shopDetail = null;
+  S.shopDetail = null; S.shopAnon = null; S.shopAnonLoading = null;
   S.location = null; S.locState = 'idle';
   S.wq = { term: '', cat: '', verified: false, openNow: false };
   S.qIssue = ''; S.qVehicle = ''; S.qShop = ''; S.bookShopW = null;
@@ -3666,7 +3827,10 @@ function screenVehicleDetail(id){
     <a class="btn btn-primary btn-block" style="margin-top:16px" href="#/passport/${esc(v.passport_token)}">
       <svg class="ic" aria-hidden="true"><use href="#i-shield-check"/></svg>Vehicle Passport
     </a>
-    <p class="hint" style="text-align:center;margin-top:8px">The verified identity and service history of this vehicle — shareable by link.</p>`
+    <div class="p-cta" style="margin-top:10px">
+      <button class="btn btn-ghost" data-qr-vehicle="${esc(v.passport_token)}" data-qr-name="${esc(v.nickname || `${v.make} ${v.model}`)}"><svg class="ic" aria-hidden="true"><use href="#i-share"/></svg>Share / QR code</button>
+    </div>
+    <p class="hint" style="text-align:center;margin-top:8px">The verified identity and service history of this vehicle — shareable by link or QR.</p>`
     : `<div class="card quiet" style="margin-top:16px">
         <div><h3>BHAT Vehicle Passport</h3><p>Enable the latest database update to activate this vehicle&rsquo;s passport.</p></div>
         <span class="chip">Soon</span>
@@ -3858,6 +4022,7 @@ function passportTimelineHTML(list, owner){
 
 function passportOwnerHTML(v, records){
   const last = records[0];
+  const vName = v.nickname || `${v.make} ${v.model}`;
   return `
     <article class="p-doc">
       <svg class="feat-ridge" aria-hidden="true"><use href="#ridge-line"/></svg>
@@ -3866,7 +4031,7 @@ function passportOwnerHTML(v, records){
         ${v.is_primary ? '<span class="chip chip-glass">Primary vehicle</span>' : ''}
         <span class="chip chip-glass">BHAT Passport</span>
       </div>
-      <h3>${esc(v.nickname || `${v.make} ${v.model}`)}</h3>
+      <h3>${esc(vName)}</h3>
       <p class="feat-meta">${esc(`${v.make} ${v.model}`)}${v.year ? ' · ' + esc(String(v.year)) : ''} · ${esc(VEHICLE_TYPES[v.vehicle_type] || v.vehicle_type || '')}${v.fuel_type ? ' · ' + esc(FUEL_TYPES[v.fuel_type] || v.fuel_type) : ''}</p>
       <p class="feat-meta">${v.odometer_km != null ? esc(fmtKm(v.odometer_km)) + ' on the odometer' : 'Odometer not recorded'}</p>
     </article>
@@ -3877,12 +4042,12 @@ function passportOwnerHTML(v, records){
     </div>
 
     <div class="p-cta">
-      <button class="btn btn-primary" data-share-passport="${esc(v.passport_token)}">
-        <svg class="ic" aria-hidden="true"><use href="#i-share"/></svg>Share passport
+      <button class="btn btn-primary" data-qr-vehicle="${esc(v.passport_token)}" data-qr-name="${esc(vName)}">
+        <svg class="ic" aria-hidden="true"><use href="#i-share"/></svg>Share / QR code
       </button>
       <a class="btn btn-ghost" href="#/vehicles">My vehicles</a>
     </div>
-    <p class="hint">Sharing shares this passport link only — your name, phone and location are never included.</p>
+    <p class="hint">Sharing or the QR opens this passport link only — your name, phone and location are never included.</p>
 
     ${records.length
       ? passportTimelineHTML(records, true)
@@ -3894,8 +4059,8 @@ function passportOwnerHTML(v, records){
 
     <section class="home-sec">
       <div class="card quiet">
-        <div><h3>Physical QR tag</h3><p>A permanent QR code for this passport arrives in a future update.</p></div>
-        <span class="chip">Next</span>
+        <div><h3>Physical QR tag</h3><p>Print the QR above or paste it anywhere — anyone who scans it opens this passport.</p></div>
+        <span class="chip">Live</span>
       </div>
     </section>`;
 }
@@ -3981,15 +4146,8 @@ async function sharePassport(token){
   const url = passportLink(token);
   const v = S.vehicles.find(x => x.passport_token === token);
   const title = 'Vehicle Passport — ' + (v ? `${v.make} ${v.model}` : 'BHAT NETWORK');
-  if (navigator.share){
-    try { await navigator.share({ title, url }); return; } catch {}
-  }
-  try {
-    await navigator.clipboard.writeText(url);
-    toast('Passport link copied', 'success');
-  } catch {
-    toast('Copy this link: ' + url, 'info', 6000);
-  }
+  const how = await shareLink(url, title);
+  if (how === 'copied') toast('Passport link copied', 'success');
 }
 
 function screenRecord(id){
@@ -4023,7 +4181,13 @@ function screenRecord(id){
             <p>Recorded ${esc(fmtDateTime(r.created_at))}<small>Timestamp</small></p></div>
         </div>
       </section>
-      <p class="trust-note"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>Verified records come from real bookings completed by workshops on BHAT NETWORK and can\u2019t be edited afterwards.</p>`;
+      ${r.public_token ? `<div class="p-cta" style="margin-top:18px">
+        <button class="btn btn-primary" data-qr-record="${esc(r.public_token)}" data-qr-name="${esc(r.service_name)}">
+          <svg class="ic" aria-hidden="true"><use href="#i-share"/></svg>Share / QR code
+        </button>
+      </div>
+      <p class="hint" style="margin-top:8px;text-align:center">Anyone who scans or opens the link sees only this record\u2019s public details.</p>` : ''}
+      <p class="trust-note" style="margin-top:16px"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>Verified records come from real bookings completed by workshops on BHAT NETWORK and can\u2019t be edited afterwards.</p>`;
   };
   if (S.recDetail && S.recDetail.id === id){ render(S.recDetail); return; }
   if (S.recDetailLoading !== id){
@@ -4040,6 +4204,66 @@ function screenRecord(id){
     });
   } else {
     el.innerHTML = skelBlock;
+  }
+}
+
+function screenPublicRecord(token){
+  const el = $('#srecord-body');
+  const render = d => {
+    const home = `<div class="empty">
+      <svg class="empty-art" aria-hidden="true"><use href="#ridge-line"/></svg>
+      <h2>Record unavailable</h2>
+      <p>This service record doesn\u2019t exist or is no longer available.</p>
+      <a class="btn btn-primary" href="#/">Go to BHAT NETWORK</a>
+    </div>`;
+    if (!d){ el.innerHTML = home; return; }
+    el.innerHTML = `
+    <div class="page" style="padding-top:26px">
+      <article class="card" style="padding:22px">
+        <div class="req-top">
+          <div><h3 style="font:600 19px var(--f-display);color:var(--navy)">${esc(d.service_name || 'Service record')}</h3>
+            <p class="shop-sub">${esc(d.workshop || 'BHAT NETWORK workshop')}${d.record_date ? ' · ' + esc(fmtDate(d.record_date)) : ''}</p></div>
+          ${d.verified ? verifiedChip : ''}
+        </div>
+      </article>
+      <section class="home-sec">
+        <p class="sec-label">Service details</p>
+        <div class="card info-list">
+          <div class="info-row"><svg class="ic" aria-hidden="true"><use href="#i-wrench"/></svg>
+            <p>${esc(d.service_name || 'Service')}<small>Service</small></p></div>
+          ${d.category ? `<div class="info-row"><svg class="ic" aria-hidden="true"><use href="#i-box"/></svg>
+            <p>${esc(SVC_CATS[d.category] || d.category)}<small>Category</small></p></div>` : ''}
+          ${d.record_date ? `<div class="info-row"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg>
+            <p>${esc(fmtDate(d.record_date))}<small>Completed on</small></p></div>` : ''}
+          ${d.workshop ? `<div class="info-row"><svg class="ic" aria-hidden="true"><use href="#i-wrench"/></svg>
+            <p>${esc(d.workshop)}${[d.area, d.district].filter(Boolean).length ? '<small>' + esc([d.area, d.district].filter(Boolean).join(', ')) + '</small>' : ''}<small>Workshop</small></p></div>` : ''}
+        </div>
+      </section>
+      <p class="trust-note"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>${d.verified
+        ? 'This is a verified service record completed by a workshop on BHAT NETWORK. Customer and vehicle details stay private.'
+        : 'This service record was created by a workshop on BHAT NETWORK. Customer and vehicle details stay private.'}</p>
+      <section class="home-sec">
+        <a class="btn btn-primary btn-block" href="#/">BHAT NETWORK — Your vehicle. Your workshop. One network.</a>
+      </section>
+    </div>`;
+  };
+  if (S.pubRecord && S.pubRecord.token === token){
+    render(S.pubRecord.data);
+    return;
+  }
+  if (S.pubRecordLoading !== token){
+    S.pubRecordLoading = token;
+    el.innerHTML = `<div class="page">${skelBlock}</div>`;
+    DB.publicApi.serviceRecord(token).then(res => {
+      S.pubRecordLoading = null;
+      if (res.error){
+        console.warn('[BHAT] public record', res.error);
+        S.pubRecord = { token, data: null };
+      } else S.pubRecord = { token, data: res.data || null };
+      if (parseHash().name === 'srecord' && parseHash().param === token) applyRoute();
+    });
+  } else {
+    el.innerHTML = `<div class="page">${skelBlock}</div>`;
   }
 }
 
@@ -4166,12 +4390,12 @@ function screenNearby(){
 function screenShopDetail(id){
   const el = $('#shop-body');
   if (!id){ el.innerHTML = emptyStateHTML({ title: 'Workshop not found', text: 'Check the link and try again.' }); return; }
-  if (!S.shopDetail || S.shopDetail.id !== id){
+  const w = S.shopDetail && S.shopDetail.id === id ? S.shopDetail : null;
+  if (!w){
     el.innerHTML = skelBlock;
     loadShopDetail(id);
     return;
   }
-  const w = S.shopDetail;
   if (w.missing){
     el.innerHTML = emptyStateHTML({ title: 'Workshop not found', text: 'This workshop isn\u2019t available on the network right now.' });
     return;
@@ -4180,6 +4404,7 @@ function screenShopDetail(id){
   const on = openNow(w);
   const svcs = activeServices(w);
   const suspended = w.verification_status === 'SUSPENDED';
+  const canBook = !suspended && !!(S.profile?.role === 'customer');
   el.innerHTML = `
     <div class="detail-hero">
       ${w.photo_url ? `<img src="${esc(w.photo_url)}" alt="Photo of ${esc(w.name)}">` : '<svg class="scene" aria-hidden="true"><use href="#scene-mountain"/></svg>'}
@@ -4232,22 +4457,36 @@ function screenShopDetail(id){
       ${suspended
         ? `<button class="btn btn-primary btn-block" disabled>Book a service</button>
            <p class="hint" style="text-align:center">This workshop is suspended and can\u2019t accept new requests.</p>`
-        : S.vehicles.length
-          ? `<button class="btn btn-primary btn-block" data-book-shop="${esc(w.id)}"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg>Book a service</button>`
-          : `<button class="btn btn-primary btn-block" disabled>Book a service</button>
-             <p class="hint" style="text-align:center">Add a vehicle first to book a service.</p>`}
+        : canBook
+          ? (S.vehicles.length
+              ? `<button class="btn btn-primary btn-block" data-book-shop="${esc(w.id)}"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg>Book a service</button>`
+              : `<button class="btn btn-primary btn-block" disabled>Book a service</button>
+                 <p class="hint" style="text-align:center">Add a vehicle first to book a service.</p>`)
+          : `<p class="hint" style="text-align:center">Create a customer account to book a service at this workshop.</p>`}
       <p class="trust-note"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg>Only workshops on the BHAT NETWORK appear here. Your request goes directly to this workshop.</p>
     </div>`;
 }
 
 async function loadShopDetail(id){
-  const res = await DB.workshops.get(id);
+  let res;
+  if (S.user){
+    res = await DB.workshops.get(id);
+    if (res.error || !res.data){
+      if (res.error) console.error('[BHAT] shop', res.error);
+      S.shopDetail = { id, missing: true };
+    } else {
+      S.shopDetail = res.data;
+      if (S.location) S.shopDetail.dist = haversine(S.location, S.shopDetail);
+    }
+    applyRoute();
+    return;
+  }
+  res = await DB.publicApi.workshop(id);
   if (res.error || !res.data){
-    if (res.error) console.error('[BHAT] shop', res.error);
+    if (res.error) console.warn('[BHAT] public shop', res.error);
     S.shopDetail = { id, missing: true };
   } else {
-    S.shopDetail = res.data;
-    if (S.location) S.shopDetail.dist = haversine(S.location, S.shopDetail);
+    S.shopDetail = { ...res.data, id, services: res.data.services || [], hours: res.data.hours || [] };
   }
   applyRoute();
 }
@@ -4387,6 +4626,7 @@ function screenMarket(){
       : more ? `<button type="button" class="btn btn-ghost btn-block" data-mk-more style="margin-top:12px">Load more listings</button>` : ''}`;
 }
 
+let mktSeq = 0;
 async function loadMarket(force = false){
   if (!sb || !S.user) return;
   const key = JSON.stringify([S.mFilter, S.mSort]);
@@ -4394,16 +4634,16 @@ async function loadMarket(force = false){
     S.mKey = key;
     S.mListings = null; S.mTotal = 0; S.mLoaded = 0; S.mMore = false; S.mError = null;
   }
-  if (S.mListingsLoading) return;
   if (S.mListings !== null && !S.mMore) return;
+  const seq = ++mktSeq;
   S.mListingsLoading = true;
+  if (S.mListings === null) applyRoute();
   const page = S.mLoaded;
   const minP = S.mFilter.minP !== '' && Number.isFinite(Number(S.mFilter.minP)) ? Number(S.mFilter.minP) : null;
   const maxP = S.mFilter.maxP !== '' && Number.isFinite(Number(S.mFilter.maxP)) ? Number(S.mFilter.maxP) : null;
   const res = await DB.listings.list({ q: S.mFilter.q, cat: S.mFilter.cat, minP, maxP, avail: S.mFilter.avail, sort: S.mSort, page });
+  if (seq !== mktSeq) return;
   S.mListingsLoading = false;
-  const nowKey = JSON.stringify([S.mFilter, S.mSort]);
-  if (nowKey !== S.mKey){ loadMarket(true); return; }
   if (res.error){
     S.mError = classifyError(res.error);
     if (S.mListings === null) S.mListings = [];
@@ -5945,8 +6185,36 @@ function screenWorkshop(){
   screenWorkshopForm();
 }
 
+let wsFormSig = '';
+let wsFormUser = null;
+
+function wsSignature(w){
+  if (!w) return 'new';
+  return [
+    w.id, w.name, w.description, w.phone, w.district, w.city, w.area,
+    w.postal_code, w.address_text, w.state, w.latitude, w.longitude
+  ].map(v => v ?? '').join('\u0001');
+}
+
+function renderWsQRPanel(){
+  const el = $('#ws-qr-wrap');
+  if (!el) return;
+  if (!S.workshop){
+    el.innerHTML = '';
+    return;
+  }
+  el.innerHTML = `<div class="card quiet">
+    <div><h3>Your workshop QR</h3><p>Customers who scan it open your public workshop profile — your services, hours and contact details.</p></div>
+    <button type="button" class="btn btn-primary" data-qr-shop="${esc(S.workshop.id)}" data-qr-name="${esc(S.workshop.name || '')}"><svg class="ic" aria-hidden="true"><use href="#i-share"/></svg>View QR</button>
+  </div>`;
+}
+
 function screenWorkshopForm(){
-  const form = $('#form-workshop');
+  if (S.user?.id !== wsFormUser){
+    wsFormUser = S.user?.id || null;
+    wsFormSig = '';
+  }
+  const sig = wsSignature(S.workshop);
   if (S.workshop){
     const w = S.workshop;
     $('#ws-heading').textContent = 'Workshop profile';
@@ -5956,7 +6224,7 @@ function screenWorkshopForm(){
         ? '<span class="chip chip-verified"><svg class="ic" aria-hidden="true"><use href="#i-shield-check"/></svg>Verified workshop</span>'
         : '<span class="chip">Not verified yet</span><span class="hint" style="margin-left:10px">Verification is reviewed by BHAT NETWORK.</span>';
     $('#ws-submit').textContent = 'Save workshop details';
-    if (form.dataset.loaded !== '1'){
+    if (wsFormSig !== sig){
       $('#ws-name').value = w.name || '';
       $('#ws-desc').value = w.description || '';
       $('#ws-phone').value = w.phone || '';
@@ -5968,19 +6236,20 @@ function screenWorkshopForm(){
       $('#ws-state').value = w.state || '';
       $('#ws-lat').value = w.latitude ?? '';
       $('#ws-lng').value = w.longitude ?? '';
-      form.dataset.loaded = '1';
+      wsFormSig = sig;
     }
   } else {
     $('#ws-heading').textContent = 'Add your workshop';
     $('#ws-verify-row').innerHTML = '';
     $('#ws-submit').textContent = 'Add my workshop';
-    if (form.dataset.loaded !== '1'){
+    if (wsFormSig !== sig){
       $('#ws-district').value = S.profile?.district || '';
       $('#ws-area').value = S.profile?.area || '';
       $('#ws-phone').value = S.profile?.phone || '';
-      form.dataset.loaded = '1';
+      wsFormSig = sig;
     }
   }
+  renderWsQRPanel();
   renderImgBlock();
 }
 
@@ -6076,6 +6345,7 @@ async function removeWorkshopImage(){
     applyRoute();
   } catch (err){ toast(friendlyError(err), 'error'); }
 }
+
 async function onSubmitWorkshop(e){
   e.preventDefault(); if (!requireConfig()) return;
   const f = e.currentTarget; clearErrors(f);
@@ -6108,14 +6378,19 @@ async function onSubmitWorkshop(e){
       res = await DB.workshops.update(S.workshop.id, patch);
       if (res.error) throw res.error;
       S.workshop = { ...S.workshop, ...res.data };
-      f.dataset.loaded = '';
-      toast('Workshop details saved', 'success');
+      wsFormSig = '';
+      const savedName = res.data?.name;
+      if (typeof savedName === 'string' && savedName.trim() !== name){
+        toast('Saved, but the workshop name came back different — a database rule may be overriding it. Check the protect-verification trigger (see the SQL note with this update).', 'error', 8000);
+      } else {
+        toast('Workshop details saved', 'success');
+      }
       applyRoute();
     } else {
       res = await DB.workshops.create({ owner_profile_id: S.user.id, ...patch });
       if (res.error) throw res.error;
       S.workshop = { ...res.data, services: [], hours: [] };
-      f.dataset.loaded = '';
+      wsFormSig = '';
       toast('Your workshop is live on BHAT NETWORK', 'success');
       goHash('dashboard');
     }
@@ -6917,8 +7192,9 @@ const ROUTES = {
   'vehicle':         { view: 'view-vehicle-detail',shell: 'customer', auth: true },
   'passport':        { view: 'view-passport',      shell: 'public', allowAuthed: true },
   'record':          { view: 'view-record',        shell: 'customer', auth: true },
+  's':               { view: 'view-srecord',       shell: 'public' },
   'nearby':          { view: 'view-nearby',        shell: 'customer', auth: true },
-  'shop':            { view: 'view-shop',          shell: 'customer', auth: true },
+  'shop':            { view: 'view-shop',          shell: 'public', allowAuthed: true },
   'quick':           { view: 'view-quick',         shell: 'customer', auth: true },
   'bookings':        { view: 'view-bookings',      shell: 'customer', auth: true },
   'cbooking':        { view: 'view-cbooking',      shell: 'customer', auth: true },
@@ -6942,7 +7218,7 @@ const ROUTES = {
 };
 const SCREENS = {
   home: screenHome, vehicles: screenVehicles, vehicle: screenVehicleDetail,
-  passport: screenPassport, record: screenRecord,
+  passport: screenPassport, record: screenRecord, s: screenPublicRecord,
   nearby: screenNearby, shop: screenShopDetail, quick: screenQuick,
   bookings: screenBookings, cbooking: screenCBookingDetail, profile: screenProfile,
   market: () => screenMarket(), mlisting: screenMListing,
@@ -7010,6 +7286,8 @@ function applyRoute(){
     if (activeTab && t.dataset.route === activeTab) t.setAttribute('aria-current', 'page');
     else t.removeAttribute('aria-current');
   });
+  const back = $('#shop-back');
+  if (back) back.href = S.user ? (S.profile?.role === 'workshop_owner' ? '#/dashboard' : '#/nearby') : '#/';
   try { (SCREENS[name] || (() => {}))(param); }
   catch (err){ console.error('[BHAT] screen render failed:', err); }
 
@@ -7054,6 +7332,58 @@ async function onGlobalClick(e){
       else if (k.startsWith('awd:')){ S.adminWsDetail = null; S.adminWsLoading = null; applyRoute(); }
       return;
     }
+    const qrV = e.target.closest('[data-qr-vehicle]');
+    if (qrV){
+      const v = S.vehicles.find(x => x.passport_token === qrV.dataset.qrVehicle);
+      const name = qrV.dataset.qrName || (v ? `${v.make} ${v.model}` : 'Vehicle Passport');
+      openQRSheet({
+        url: passportLink(qrV.dataset.qrVehicle),
+        title: name,
+        sub: v ? `Vehicle Passport · ${v.plate}` : 'Vehicle Passport',
+        kind: 'vehicle',
+        note: 'Anyone who scans or opens this link sees the vehicle\u2019s public service history only — never your personal details.'
+      });
+      return;
+    }
+    const qrR = e.target.closest('[data-qr-record]');
+    if (qrR){
+      openQRSheet({
+        url: recordLink(qrR.dataset.qrRecord),
+        title: qrR.dataset.qrName || 'Service record',
+        sub: 'Verified completed service',
+        kind: 'record',
+        note: 'Anyone who scans or opens this link sees this record\u2019s public details only.'
+      });
+      return;
+    }
+    const qrS = e.target.closest('[data-qr-shop]');
+    if (qrS){
+      openQRSheet({
+        url: workshopLink(qrS.dataset.qrShop),
+        title: qrS.dataset.qrName || 'Your workshop',
+        sub: 'Public workshop profile',
+        kind: 'workshop',
+        note: 'Customers who scan this open your public profile — your services, hours and contact details.'
+      });
+      return;
+    }
+    if (e.target.closest('[data-qr-copy]')){
+      if (!qrData?.url) return;
+      navigator.clipboard.writeText(qrData.url).then(
+        () => toast('Link copied', 'success'),
+        () => toast('Copy this link: ' + qrData.url, 'info', 6000)
+      );
+      return;
+    }
+    if (e.target.closest('[data-qr-share]')){
+      if (!qrData?.url) return;
+      shareLink(qrData.url, qrData.title).then(how => {
+        if (how === 'copied') toast('No native share on this browser — link copied instead', 'info');
+      });
+      return;
+    }
+    if (e.target.closest('[data-qr-download]')){ downloadQR(); return; }
+    if (e.target.closest('[data-qr-retry]')){ generateQR(); return; }
     const av = e.target.closest('[data-av]');
     if (av){
       openAdminSheet({
@@ -7415,7 +7745,7 @@ function bind(){
   window.addEventListener('hashchange', () => {
     if (S.booted){ applyRoute(); return; }
     const r = ROUTES[parseHash().name];
-    if (r && !r.auth) applyRoute();
+    if (r && (r.auth || r.allowAuthed || r.shell === 'public')) applyRoute();
   });
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState !== 'visible' || !S.user || !sb || !navigator.onLine) return;
@@ -7659,4 +7989,4 @@ boot();
 })();
 </script>
 </body>
-                                                </html>
+                    </html>
